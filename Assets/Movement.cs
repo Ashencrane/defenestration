@@ -48,8 +48,6 @@ public class Movement : MonoBehaviour
     bool actionable = true;
     int direction;
     
-    
-    
 
 
     // Start is called before the first frame update
