@@ -256,12 +256,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2648360653202308246}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2961b4c220976964493450c07164d237, type: 3}
+  m_Script: {fileID: 11500000, guid: 091161b9386c42247858d01863f55d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   P1: 0
   health: 0
   currentAttack: 0
+  animationManager: {fileID: 6416585544630002370}
 --- !u!1 &2648360654182630041
 GameObject:
   m_ObjectHideFlags: 0

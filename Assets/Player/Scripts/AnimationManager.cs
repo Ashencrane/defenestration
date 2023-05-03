@@ -24,4 +24,20 @@ public class AnimationManager : MonoBehaviour
     {
         
     }
+
+    public void LightAttack()
+    {
+        animator.ResetTrigger("LightAttack");
+        animator.SetTrigger("LightAttack");
+    }
+
+    public void HeavyAttack()
+    {
+
+    }
+
+    public void Block()
+    {
+
+    }
 }
