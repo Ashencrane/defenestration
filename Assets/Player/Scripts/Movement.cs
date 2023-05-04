@@ -6,7 +6,7 @@ using TMPro;
 public class Movement : MonoBehaviour
 {
 
-    GameObject sword;
+    //GameObject sword;
     Rigidbody2D rb2d;
     TMP_Text healthDisplay;
     Movement otherMoveScript;
@@ -46,6 +46,7 @@ public class Movement : MonoBehaviour
 
 
     bool actionable = true;
+    bool inHitstun = false;
     int direction;
 
     [SerializeField]
@@ -65,7 +66,7 @@ public class Movement : MonoBehaviour
         if (P1) 
         {
             healthDisplay = GameObject.Find("/Canvas/P1Health").GetComponent<TMP_Text>();
-            sword = GameObject.Find("/Player1/P1Sword");
+            //sword = GameObject.Find("/Player1/P1Sword");
             direction = 1;
             otherMoveScript = GameObject.Find("Player2").GetComponent<Movement>();
             
@@ -73,7 +74,7 @@ public class Movement : MonoBehaviour
         else 
         {
             healthDisplay = GameObject.Find("/Canvas/P2Health").GetComponent<TMP_Text>();
-            sword = GameObject.Find("/Player2/P2Sword");
+            //sword = GameObject.Find("/Player2/P2Sword");
             direction = -1;
             otherMoveScript = GameObject.Find("Player1").GetComponent<Movement>();
         }
@@ -154,11 +155,11 @@ public class Movement : MonoBehaviour
         currentAttack = Attack.Light;
         actionable = false;
         yield return new WaitForSeconds(LIGHT_ATTACK_STARTUP);
-        sword.transform.Translate(new Vector2(LIGHT_ATTACK_DISTANCE * direction, 0)); //stab extend
+        //sword.transform.Translate(new Vector2(LIGHT_ATTACK_DISTANCE * direction, 0)); //stab extend
         spr.color = new Color(0.7f, 0.7f, 0.7f);
 
         yield return new WaitForSeconds(LIGHT_ATTACK_ACTIVE);
-        sword.transform.Translate(new Vector2(-LIGHT_ATTACK_DISTANCE * direction, 0));
+        //sword.transform.Translate(new Vector2(-LIGHT_ATTACK_DISTANCE * direction, 0));
 
         yield return new WaitForSeconds(LIGHT_ATTACK_RECOVERY);
         spr.color = new Color(200, 200, 200);
@@ -176,11 +177,11 @@ public class Movement : MonoBehaviour
         spr.color = new Color(0.3f, 0.3f, 1f);
 
         yield return new WaitForSeconds(HEAVY_ATTACK_STARTUP);
-        sword.transform.Translate(new Vector2(HEAVY_ATTACK_DISTANCE * direction, 0)); //stab extend
+        //sword.transform.Translate(new Vector2(HEAVY_ATTACK_DISTANCE * direction, 0)); //stab extend
         spr.color = new Color(0.7f, 0.7f, 0.7f);
 
         yield return new WaitForSeconds(HEAVY_ATTACK_ACTIVE);
-        sword.transform.Translate(new Vector2(-HEAVY_ATTACK_DISTANCE * direction, 0));
+        //sword.transform.Translate(new Vector2(-HEAVY_ATTACK_DISTANCE * direction, 0));
 
         yield return new WaitForSeconds(HEAVY_ATTACK_RECOVERY * direction);
         spr.color = new Color(200, 200, 200);
@@ -192,9 +193,29 @@ public class Movement : MonoBehaviour
         yield return null;
     }
 
+    public void OnHit(Hitbox hitbox, Hitbox colHitbox)
+    {
+        UnityEngine.Debug.Log("2");
+        if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun)
+        {
+            if (colHitbox.attackType == Hitbox.AttackType.Light)
+            {
+                StartCoroutine("HitByLight");
+            }
+            else if (colHitbox.attackType == Hitbox.AttackType.Heavy)
+            {
+                StartCoroutine("HitByHeavy");
+            }
+            else
+            {
+                StartCoroutine("HitByNone");
+            }
+        }
+    }
+    /*
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(P1 && col.name == "P2Sword" || !P1 && col.name == "P1Sword") 
+        if(P1 && col.tag == "HitboxP2" || !P1 && col.tag == "HitboxP1") 
         {
             Debug.Log(otherMoveScript.currentAttack);
             if(otherMoveScript.currentAttack == Attack.Light)
@@ -213,9 +234,11 @@ public class Movement : MonoBehaviour
         }
 
     }
+    */
 
     IEnumerator HitByLight()
     {
+        inHitstun = true;
         actionable = false;
         health -= 1;
         healthDisplay.text = "Health: " + health.ToString();
@@ -225,12 +248,14 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
         spr.color = new Color(200, 200, 200);
 
+        inHitstun = false;
         actionable = true;
         yield return null;
     }
 
     IEnumerator HitByHeavy()
     {
+        inHitstun = true;
         actionable = false;
         health -= 2;
         healthDisplay.text = "Health: " + health.ToString();
@@ -240,19 +265,22 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(HEAVY_ATTACK_STUN);
         spr.color = new Color(200, 200, 200);
 
+        inHitstun = false;
         actionable = true;
         yield return null;
     }
     IEnumerator HitByNone()
     {
+        inHitstun = true;
         actionable = false;
-        health -= 1;
+        health -= 0;
         rb2d.AddForce(new Vector2(-NONE_ATTACK_KNOCKBACK * direction, 0));
         spr.color = new Color(255, 0, 0);
 
         yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
         spr.color = new Color(200, 200, 200);
 
+        inHitstun = false;
         actionable = true;
         yield return null;
     }
