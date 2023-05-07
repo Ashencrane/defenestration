@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
+
+
 
 public class Movement : MonoBehaviour
 {
 
     //GameObject sword;
     Rigidbody2D rb2d;
-    TMP_Text healthDisplay;
+    Slider healthDisplay;
     Movement otherMoveScript;
     SpriteRenderer spr;
+    GameController gameController;
     double backDashSec = 0;
 
     public bool P1;
     public int health;
 
-
+    const int MAX_HEALTH = 8;
     const float MOVE_SPEED = 4.5f;
+
+    const float STARTING_DISTANCE = 6f;
 
     const float NONE_ATTACK_KNOCKBACK = 30f;
 
@@ -57,15 +62,13 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentAttack = Attack.None;
-        health = 8;
-        
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         spr = gameObject.GetComponent<SpriteRenderer>();
 
         if (P1) 
         {
-            healthDisplay = GameObject.Find("/Canvas/P1Health").GetComponent<TMP_Text>();
+            healthDisplay = GameObject.Find("/Canvas/P1Health/P1HealthOutline").GetComponent<Slider>();
             //sword = GameObject.Find("/Player1/P1Sword");
             direction = 1;
             otherMoveScript = GameObject.Find("Player2").GetComponent<Movement>();
@@ -73,12 +76,12 @@ public class Movement : MonoBehaviour
         } 
         else 
         {
-            healthDisplay = GameObject.Find("/Canvas/P2Health").GetComponent<TMP_Text>();
+            healthDisplay = GameObject.Find("/Canvas/P2Health/P2HealthOutline").GetComponent<Slider>();
             //sword = GameObject.Find("/Player2/P2Sword");
             direction = -1;
             otherMoveScript = GameObject.Find("Player1").GetComponent<Movement>();
         }
-        healthDisplay.text = "Health: " + health.ToString();
+        NewRound();
     }
     //move forward
     //move backward
@@ -136,6 +139,13 @@ public class Movement : MonoBehaviour
 
         }
     }
+    public void NewRound()
+    {
+        transform.position = new Vector3(STARTING_DISTANCE * -direction, 0, 0);
+        health = MAX_HEALTH;
+        currentAttack = Attack.None;
+    }
+
 
     IEnumerator Backdash()
     {
@@ -235,13 +245,25 @@ public class Movement : MonoBehaviour
 
     }
     */
-
+    IEnumerator Die()
+    {
+        gameController.RoundEnd(!P1);
+        yield return null;
+    }
     IEnumerator HitByLight()
     {
+
         inHitstun = true;
         actionable = false;
         health -= 1;
-        healthDisplay.text = "Health: " + health.ToString();
+        healthDisplay.value = (float)health / MAX_HEALTH;
+
+        if (health <= 0)
+        {
+            StartCoroutine("Die");
+            yield return null;
+        }
+
         rb2d.AddForce(new Vector2(-LIGHT_ATTACK_KNOCKBACK * direction, 0));
         spr.color = new Color(255, 0, 0);
 
@@ -255,10 +277,18 @@ public class Movement : MonoBehaviour
 
     IEnumerator HitByHeavy()
     {
+
         inHitstun = true;
         actionable = false;
         health -= 2;
-        healthDisplay.text = "Health: " + health.ToString();
+        healthDisplay.value = (float)health / MAX_HEALTH;
+
+        if (health <= 0)
+        {
+            StartCoroutine("Die");
+            yield return null;
+        }
+
         rb2d.AddForce(new Vector2(-HEAVY_ATTACK_KNOCKBACK * direction, 0));
         spr.color = new Color(255, 0, 0);
 
