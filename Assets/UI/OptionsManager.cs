@@ -47,17 +47,20 @@ public class OptionsManager : MonoBehaviour
 
     private void SetupDropdown()
     {
+        // get all resolutions, clear default dropdown options, and save current refresh rate
         _resolutions = Screen.resolutions;
         _filteredResolutions = new List<Resolution>();
         resolutionDropdown.ClearOptions();
         OptionSettings.ScreenRefreshRate = Screen.currentResolution.refreshRate;
 
+        // filter resolutions by those that match current refresh rate
         for (int i = 0; i < _resolutions.Length; ++i)
         {
             if (_resolutions[i].refreshRate == OptionSettings.ScreenRefreshRate) 
                 _filteredResolutions.Add(_resolutions[i]);
         }
 
+        // create dropdown options based on filter resolutions and save current resolution settings
         List<string> resolutionOptions = new List<string>();
         for (int i = 0; i < _filteredResolutions.Count; ++i)
         {
@@ -71,6 +74,7 @@ public class OptionsManager : MonoBehaviour
             }
         }
         
+        // populate dropdown and set default option to current resolution
         resolutionDropdown.AddOptions(resolutionOptions);
         resolutionDropdown.value = _currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
