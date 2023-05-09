@@ -10,6 +10,8 @@ public class AnimationManager : MonoBehaviour
     Animator animator;
     [SerializeField]
     BoxCollider2D swordHitBox;
+    [SerializeField]
+    Movement movementScript;
 
     public bool isSwordActive;
 
@@ -36,8 +38,29 @@ public class AnimationManager : MonoBehaviour
 
     }
 
+    public void StartHitstun()
+    {
+        animator.SetBool("Hitstun", true);
+    }
+
+    public void EndHitstun()
+    {
+        animator.SetBool("Hitstun", false);
+    }
+
     public void Block()
     {
 
+    }
+
+    public void MakeUnactionable()
+    {
+        movementScript.actionable = false;
+    }
+
+    public void MakeActionable()
+    {
+        movementScript.actionable = true;
+        movementScript.currentAttack = Movement.Attack.None;
     }
 }

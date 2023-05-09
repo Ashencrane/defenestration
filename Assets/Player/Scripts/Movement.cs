@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour
     public Attack currentAttack;
 
 
-    bool actionable = true;
+    public bool actionable = true;
     bool inHitstun = false;
     int direction;
 
@@ -101,7 +101,7 @@ public class Movement : MonoBehaviour
         if (actionable)
         {
             //backdash code
-
+            
             if (Input.GetKeyDown(KeyCode.A) && P1 || Input.GetKeyDown(KeyCode.RightArrow) && !P1) //scuffed but works
             {
                 if (backDashSec > 0)
@@ -163,6 +163,7 @@ public class Movement : MonoBehaviour
     {
         animationManager.LightAttack();
         currentAttack = Attack.Light;
+        /*
         actionable = false;
         yield return new WaitForSeconds(LIGHT_ATTACK_STARTUP);
         //sword.transform.Translate(new Vector2(LIGHT_ATTACK_DISTANCE * direction, 0)); //stab extend
@@ -174,10 +175,11 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(LIGHT_ATTACK_RECOVERY);
         spr.color = new Color(200, 200, 200);
 
-        currentAttack = Attack.None;
+        currentAttack = Attack.None; 
         actionable = true;
-
+        */
         yield return null;
+        
     }
 
     IEnumerator HeavyAttack()
@@ -252,7 +254,7 @@ public class Movement : MonoBehaviour
     }
     IEnumerator HitByLight()
     {
-
+        animationManager.StartHitstun();
         inHitstun = true;
         actionable = false;
         health -= 1;
@@ -270,6 +272,7 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
         spr.color = new Color(200, 200, 200);
 
+        animationManager.EndHitstun();
         inHitstun = false;
         actionable = true;
         yield return null;
