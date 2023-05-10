@@ -9,7 +9,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField]
     Animator animator;
     [SerializeField]
-    BoxCollider2D swordHitBox;
+    Hitbox swordHitBox;
     [SerializeField]
     Movement movementScript;
 
@@ -29,13 +29,21 @@ public class AnimationManager : MonoBehaviour
 
     public void LightAttack()
     {
+        swordHitBox.attackType = Hitbox.AttackType.Light;
         animator.ResetTrigger("LightAttack");
         animator.SetTrigger("LightAttack");
     }
 
     public void HeavyAttack()
     {
+        swordHitBox.attackType = Hitbox.AttackType.Heavy;
+        animator.ResetTrigger("HeavyAttack");
+        animator.SetTrigger("HeavyAttack");
+    }
 
+    public void HeavyAttackLunge()
+    {
+        movementScript.Lunge();
     }
 
     public void StartHitstun()

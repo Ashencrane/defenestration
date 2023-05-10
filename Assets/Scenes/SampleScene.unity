@@ -781,6 +781,7 @@ MonoBehaviour:
   P1: 1
   health: 0
   currentAttack: 0
+  actionable: 1
   animationManager: {fileID: 0}
 --- !u!50 &1028139453
 Rigidbody2D:
@@ -843,6 +844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxType: 1
   parentMovement: {fileID: 1028139452}
+  sprite: {fileID: 0}
   P1: 0
   attackType: 2
   isActive: 1
@@ -1977,6 +1979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxType: 0
   parentMovement: {fileID: 1028139452}
+  sprite: {fileID: 0}
   P1: 0
   attackType: 2
   isActive: 0

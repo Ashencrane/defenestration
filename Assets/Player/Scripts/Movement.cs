@@ -43,6 +43,8 @@ public class Movement : MonoBehaviour
     const float BACKDASH_FORCE = 320f;
     const float BACKDASH_RECOVERY = 0.5f;
 
+    const float LUNGE_FORCE = 350f;
+
     public enum Attack
     {
         None, Light, Heavy
@@ -146,6 +148,11 @@ public class Movement : MonoBehaviour
         currentAttack = Attack.None;
     }
 
+    public void Lunge()
+    {
+        rb2d.AddForce(new Vector2(LUNGE_FORCE * direction, 0));
+    }
+
 
     IEnumerator Backdash()
     {
@@ -184,7 +191,9 @@ public class Movement : MonoBehaviour
 
     IEnumerator HeavyAttack()
     {
+        animationManager.HeavyAttack();
         currentAttack = Attack.Heavy;
+        /*
         actionable = false;
         spr.color = new Color(0.3f, 0.3f, 1f);
 
@@ -201,25 +210,28 @@ public class Movement : MonoBehaviour
 
         currentAttack = Attack.None;
         actionable = true;
-
+        */
         yield return null;
     }
 
     public void OnHit(Hitbox hitbox, Hitbox colHitbox)
     {
-        UnityEngine.Debug.Log("2");
-        if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun)
+        
+        if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun && colHitbox.isActive)
         {
             if (colHitbox.attackType == Hitbox.AttackType.Light)
             {
+                UnityEngine.Debug.Log("light");
                 StartCoroutine("HitByLight");
             }
             else if (colHitbox.attackType == Hitbox.AttackType.Heavy)
             {
+                UnityEngine.Debug.Log("heavy");
                 StartCoroutine("HitByHeavy");
             }
             else
             {
+                UnityEngine.Debug.Log("none");
                 StartCoroutine("HitByNone");
             }
         }
@@ -249,6 +261,7 @@ public class Movement : MonoBehaviour
     */
     IEnumerator Die()
     {
+        actionable = false;
         gameController.RoundEnd(!P1);
         yield return null;
     }
@@ -280,7 +293,7 @@ public class Movement : MonoBehaviour
 
     IEnumerator HitByHeavy()
     {
-
+        animationManager.StartHitstun();
         inHitstun = true;
         actionable = false;
         health -= 2;
@@ -298,6 +311,7 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(HEAVY_ATTACK_STUN);
         spr.color = new Color(200, 200, 200);
 
+        animationManager.EndHitstun();
         inHitstun = false;
         actionable = true;
         yield return null;

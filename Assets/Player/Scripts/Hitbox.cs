@@ -17,6 +17,8 @@ public class Hitbox : MonoBehaviour
     BoxType boxType = BoxType.Hurt;
     [SerializeField]
     Movement parentMovement;
+    [SerializeField]
+    SpriteRenderer sprite;
 
     public bool P1;
 
@@ -41,7 +43,18 @@ public class Hitbox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (boxType == BoxType.Hit)
+        {
+            if (isActive)
+            {
+                sprite.color = Color.red;
+            }
+            else
+            {
+                sprite.color = Color.green;
+            }
+        }
+
     }
 
     public BoxType GetBoxType()
@@ -49,7 +62,6 @@ public class Hitbox : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        UnityEngine.Debug.Log(col.gameObject.name);
         Hitbox colHitbox = col.GetComponent<Hitbox>();
         
         if (colHitbox != null && colHitbox.P1 != P1 && boxType == BoxType.Hurt)
