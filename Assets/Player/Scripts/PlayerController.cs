@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour
     }
     public void NewRound()
     {
+        animationManager.Reset();
         transform.position = new Vector3(STARTING_DISTANCE * -direction, 0, 0);
         health = MAX_HEALTH;
         currentAttack = Attack.None;
@@ -306,6 +307,7 @@ public class PlayerController : MonoBehaviour
     */
     IEnumerator Die()
     {
+        animationManager.Die();
         audioMan.PlaySound(AudioManager.SFX.FinalHit);
         actionable = false;
         gameController.RoundEnd(!P1);

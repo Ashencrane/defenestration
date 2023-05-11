@@ -56,6 +56,21 @@ public class AnimationManager : MonoBehaviour
         animator.SetBool("Hitstun", false);
     }
 
+    public void Die()
+    {
+        animator.ResetTrigger("Die");
+        animator.SetTrigger("Die");
+        animator.SetBool("Dead", true);
+        StartHitstun();
+    }
+
+    public void Reset()
+    {
+        animator.SetBool("Dead", false);
+        EndHitstun();
+        MakeActionable();
+    }
+
     public void Block()
     {
 
