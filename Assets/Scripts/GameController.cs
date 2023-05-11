@@ -12,6 +12,13 @@ public class GameController : MonoBehaviour
     public TMP_Text Display;
     public TMP_Text Display2;
 
+    [SerializeField]
+    GameObject pauseMenu;
+
+    [SerializeField]
+    GameObject victoryMenu;
+
+    int SCORE_TO_GET = 2;
     int P1Score;
     int P2Score;
     private IEnumerator coroutine;
@@ -41,8 +48,21 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            
+            if (!pauseMenu.activeInHierarchy)
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
     }
+
     IEnumerator WaitAndStartNext()
     {
         yield return new WaitForSeconds(2f);
@@ -55,15 +75,32 @@ public class GameController : MonoBehaviour
         if (P1winner)
         {
             P1Score += 1;
-            coroutine = DisplayText("P1 score: " + P1Score, 2f);
-            StartCoroutine(coroutine);
+            if(P1Score < SCORE_TO_GET)
+            {
+                coroutine = DisplayText("P1 score: " + P1Score, 2f);
+                StartCoroutine(coroutine);
+            }
+            else
+            {
+                victoryMenu.SetActive(true);
+            }
         }
         else
         {
             P2Score += 1;
-            coroutine = DisplayText("P2 score:" + P2Score, 2f);
-            StartCoroutine(coroutine);
+            if (P2Score < SCORE_TO_GET)
+            {
+                coroutine = DisplayText("P1 score: " + P1Score, 2f);
+                StartCoroutine(coroutine);
+            }
+            else
+            {
+                victoryMenu.SetActive(true);
+            }
+
         }
         StartCoroutine("WaitAndStartNext");
     }
+
+
 }

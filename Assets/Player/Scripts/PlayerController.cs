@@ -177,6 +177,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(STARTING_DISTANCE * -direction, 0, 0);
         health = MAX_HEALTH;
         currentAttack = Attack.None;
+        healthDisplay.value = (float)health / MAX_HEALTH;
     }
 
     public void Lunge()
@@ -265,17 +266,17 @@ public class PlayerController : MonoBehaviour
         {
             if (colHitbox.attackType == Hitbox.AttackType.Light)
             {
-                UnityEngine.Debug.Log("light");
+                //UnityEngine.Debug.Log("light");
                 StartCoroutine("HitByLight");
             }
             else if (colHitbox.attackType == Hitbox.AttackType.Heavy)
             {
-                UnityEngine.Debug.Log("heavy");
+                //UnityEngine.Debug.Log("heavy");
                 StartCoroutine("HitByHeavy");
             }
             else
             {
-                UnityEngine.Debug.Log("none");
+                //UnityEngine.Debug.Log("none");
                 StartCoroutine("HitByNone");
             }
         }
