@@ -332,7 +332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: < Resume >
+  m_text: < Restart >
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3462a06ff9b245c8bdbeb13d05a05d9, type: 2}
   m_sharedMaterial: {fileID: -2104694852001356624, guid: a3462a06ff9b245c8bdbeb13d05a05d9, type: 2}

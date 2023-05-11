@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
     public void Unpause()
     {
         // add unpause code here before the following line
+        Time.timeScale = 1;
         gameObject.SetActive(false);  // turn off pause menu
     }
     
