@@ -16,7 +16,7 @@ public class Hitbox : MonoBehaviour
     [SerializeField]
     BoxType boxType = BoxType.Hurt;
     [SerializeField]
-    Movement parentMovement;
+    PlayerController parentPlayerController;
     [SerializeField]
     SpriteRenderer sprite;
 
@@ -37,7 +37,7 @@ public class Hitbox : MonoBehaviour
         {
             isActive = true;
         }
-        P1 = parentMovement.P1;
+        P1 = parentPlayerController.P1;
     }
 
     // Update is called once per frame
@@ -67,7 +67,7 @@ public class Hitbox : MonoBehaviour
         if (colHitbox != null && colHitbox.P1 != P1 && boxType == BoxType.Hurt)
         {
             UnityEngine.Debug.Log("hit");
-            parentMovement.OnHit(this, colHitbox);
+            parentPlayerController.OnHit(this, colHitbox);
         }
         
     }

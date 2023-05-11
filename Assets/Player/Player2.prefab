@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxType: 1
-  parentMovement: {fileID: 2648360653202308249}
+  parentPlayerController: {fileID: 2648360653202308249}
   sprite: {fileID: 0}
   P1: 0
   attackType: 2
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxType: 0
-  parentMovement: {fileID: 2648360653202308249}
+  parentPlayerController: {fileID: 2648360653202308249}
   sprite: {fileID: 4579835575662593392}
   P1: 0
   attackType: 2
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxType: 1
-  parentMovement: {fileID: 2648360653202308249}
+  parentPlayerController: {fileID: 2648360653202308249}
   sprite: {fileID: 0}
   P1: 0
   attackType: 2
@@ -935,7 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxType: 1
-  parentMovement: {fileID: 2648360653202308249}
+  parentPlayerController: {fileID: 2648360653202308249}
   sprite: {fileID: 0}
   P1: 0
   attackType: 2
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxType: 1
-  parentMovement: {fileID: 2648360653202308249}
+  parentPlayerController: {fileID: 2648360653202308249}
   sprite: {fileID: 0}
   P1: 0
   attackType: 2

@@ -11,7 +11,7 @@ public class AnimationManager : MonoBehaviour
     [SerializeField]
     Hitbox swordHitBox;
     [SerializeField]
-    Movement movementScript;
+    PlayerController movementScript;
 
     public bool isSwordActive;
 
@@ -69,6 +69,6 @@ public class AnimationManager : MonoBehaviour
     public void MakeActionable()
     {
         movementScript.actionable = true;
-        movementScript.currentAttack = Movement.Attack.None;
+        movementScript.currentAttack = PlayerController.Attack.None;
     }
 }
