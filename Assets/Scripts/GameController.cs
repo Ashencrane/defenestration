@@ -82,6 +82,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
+                victoryMenu.GetComponent<VictoryMenu>().SetVictoryText("P1 Wins!");
                 victoryMenu.SetActive(true);
             }
         }
@@ -90,11 +91,12 @@ public class GameController : MonoBehaviour
             P2Score += 1;
             if (P2Score < SCORE_TO_GET)
             {
-                coroutine = DisplayText("P1 score: " + P1Score, 2f);
+                coroutine = DisplayText("P2 score: " + P2Score, 2f);
                 StartCoroutine(coroutine);
             }
             else
             {
+                victoryMenu.GetComponent<VictoryMenu>().SetVictoryText("P2 Wins!");
                 victoryMenu.SetActive(true);
             }
 

@@ -7,7 +7,7 @@ public class VictoryMenu : MonoBehaviour
     [SerializeField] private string mainMenuScene = "MainMenu";
     [SerializeField] private TMP_Text victoryText;
 
-    public void SetVictoryText(string text = "P1 Wins!")
+    public void SetVictoryText(string text)
     {
         victoryText.text = text;
     }
