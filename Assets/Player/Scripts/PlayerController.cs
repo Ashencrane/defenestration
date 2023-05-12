@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
             direction = -1;
             otherPlayerController = GameObject.Find("Player1").GetComponent<PlayerController>();
         }
-        NewRound();
+
     }
     //move forward
     //move backward
@@ -175,11 +175,13 @@ public class PlayerController : MonoBehaviour
     public void NewRound()
     {
         animationManager.Reset();
-        transform.position = new Vector3(STARTING_DISTANCE * -direction, 0, 0);
+        transform.position = new Vector3(STARTING_DISTANCE * -direction, -1.5f, 0);
         health = MAX_HEALTH;
         currentAttack = Attack.None;
         healthDisplay.value = (float)health / MAX_HEALTH;
+        actionable = false;
     }
+    
 
     public void Lunge()
     {

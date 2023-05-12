@@ -9,6 +9,10 @@ public class GameController : MonoBehaviour
     public GameObject P2;
     PlayerController P1m;
     PlayerController P2m;
+    
+    [SerializeField]
+    TimerManager tm;
+
     public TMP_Text Display;
     public TMP_Text Display2;
 
@@ -34,6 +38,10 @@ public class GameController : MonoBehaviour
         Display2.text = "";
         P1Score = 0;
         P2Score = 0;
+
+        P1m.NewRound();
+        P2m.NewRound();
+        StartCoroutine("Countdown");
     }
     IEnumerator DisplayText(string text, float time)
     {
@@ -63,11 +71,34 @@ public class GameController : MonoBehaviour
         }
     }
 
-    IEnumerator WaitAndStartNext()
+    IEnumerator WaitAndStartNext() //called after someones dies
     {
         yield return new WaitForSeconds(2f);
         P1m.NewRound();
         P2m.NewRound();
+
+        StartCoroutine("Countdown");
+
+    }
+
+    IEnumerator Countdown()
+    {
+        coroutine = DisplayText("3", 0.7f);
+        StartCoroutine(coroutine);
+        yield return new WaitForSeconds(0.8f);
+
+        coroutine = DisplayText("2", 0.7f);
+        StartCoroutine(coroutine);
+        yield return new WaitForSeconds(0.8f);
+
+        coroutine = DisplayText("1", 0.7f);
+        StartCoroutine(coroutine);
+        yield return new WaitForSeconds(0.8f);
+
+        P1m.actionable = true;
+        P2m.actionable = true;
+        coroutine = DisplayText("GO", 0.7f);
+        StartCoroutine(coroutine);
     }
 
     public void RoundEnd(bool P1winner) //true = P1 won, false = P2 won

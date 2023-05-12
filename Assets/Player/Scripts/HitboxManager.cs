@@ -8,7 +8,7 @@ public class HitboxManager : MonoBehaviour
     List<SpriteRenderer> hitboxSpriteRenderers;
 
 
-    bool hitboxesToggled = true;
+    bool hitboxesToggled = false;
     // Start is called before the first frame update
     private void Start()
     {
