@@ -44,13 +44,13 @@ public class PlayerController : MonoBehaviour
     const float HEAVY_ATTACK_STUN = 0.45f;
     const float HEAVY_ATTACK_KNOCKBACK = 280f;
 
-    const float FORWARDASH_SPEED = 7f;
-    const float FORWARDASH_ACTIVE = 0.2f;
-    const float FORWARDASH_RECOVERY = 0.5f;
+    const float FORWARDASH_SPEED = 8f;
+    const float FORWARDASH_ACTIVE = 0.25f;
+    const float FORWARDASH_RECOVERY = 0.10f;
 
-    const float BACKDASH_SPEED = 7f;
-    const float BACKDASH_ACTIVE = 0.2f;
-    const float BACKDASH_RECOVERY = 0.5f;
+    const float BACKDASH_SPEED = 8f;
+    const float BACKDASH_ACTIVE = 0.25f;
+    const float BACKDASH_RECOVERY = 0.15f;
 
     const float LUNGE_FORCE = 350f;
 
@@ -190,12 +190,19 @@ public class PlayerController : MonoBehaviour
     IEnumerator Backdash()
     {
         actionable = false;
-
-        rb2d.velocity = new Vector3(BACKDASH_SPEED * -direction, 0, 0);
         spr.color = new Color(0.7f, 0.7f, 0.7f);
+        rb2d.drag = 0;
+        rb2d.velocity = new Vector3(BACKDASH_SPEED * -direction, 0, 0);
+
+        yield return new WaitForSeconds(BACKDASH_ACTIVE);
+        rb2d.velocity = new Vector3(0, 0, 0);
+        rb2d.drag = 0.05f;
+
         yield return new WaitForSeconds(BACKDASH_RECOVERY);
+        
         spr.color = new Color(200, 200, 200);
         actionable = true;
+        
 
         yield return null;
     }
@@ -203,9 +210,17 @@ public class PlayerController : MonoBehaviour
     IEnumerator Forwardash()
     {
         actionable = false;
-        rb2d.velocity = new Vector3(FORWARDASH_SPEED * direction, 0, 0);
         spr.color = new Color(0.7f, 0.7f, 0.7f);
+        rb2d.velocity = new Vector3(FORWARDASH_SPEED * direction, 0, 0);
+        rb2d.drag = 0;
+        
+        
+        yield return new WaitForSeconds(FORWARDASH_ACTIVE);
+        rb2d.drag = 0.05f;
+        rb2d.velocity = new Vector3(0, 0, 0);
+
         yield return new WaitForSeconds(FORWARDASH_RECOVERY);
+
         spr.color = new Color(200, 200, 200);
         actionable = true;
 
@@ -315,6 +330,7 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator HitByLight()
     {
+        audioMan.PlaySound(AudioManager.SFX.LightHit);
         animationManager.StartHitstun();
         inHitstun = true;
         actionable = false;
@@ -341,6 +357,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HitByHeavy()
     {
+        audioMan.PlaySound(AudioManager.SFX.HeavyHit);
         animationManager.StartHitstun();
         inHitstun = true;
         actionable = false;

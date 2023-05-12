@@ -14,6 +14,7 @@ public class VictoryMenu : MonoBehaviour
     
     public void ReplayLevel()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

@@ -33,5 +33,13 @@ public class AudioManager : MonoBehaviour
         {
             sfxSource.PlayOneShot(finalHit);
         }
+        if (sfx == SFX.LightHit)
+        {
+            sfxSource.PlayOneShot(finalHit);
+        }
+        if (sfx == SFX.HeavyHit)
+        {
+            sfxSource.PlayOneShot(finalHit);
+        }
     }
 }
