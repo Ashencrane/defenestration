@@ -67,40 +67,30 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     AnimationManager animationManager;
-    
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         spr = gameObject.GetComponent<SpriteRenderer>();
         audioMan = GameObject.Find("Main Camera").GetComponent<AudioManager>();
 
-        if (P1) 
+        if (P1)
         {
             healthDisplay = GameObject.Find("/Canvas/P1Health/P1HealthOutline").GetComponent<Slider>();
             //sword = GameObject.Find("/Player1/P1Sword");
             direction = 1;
             otherPlayerController = GameObject.Find("Player2").GetComponent<PlayerController>();
-            
-        } 
-        else 
+
+        }
+        else
         {
             healthDisplay = GameObject.Find("/Canvas/P2Health/P2HealthOutline").GetComponent<Slider>();
             //sword = GameObject.Find("/Player2/P2Sword");
             direction = -1;
             otherPlayerController = GameObject.Find("Player1").GetComponent<PlayerController>();
         }
-
     }
-    //move forward
-    //move backward
-    //light attack
-    //heavy attack
-    //shield
 
     // Update is called once per frame
     void Update()

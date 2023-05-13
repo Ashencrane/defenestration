@@ -28,12 +28,16 @@ public class GameController : MonoBehaviour
     private IEnumerator coroutine;
 
 
+    private void Awake()
+    {
+        P1m = P1.GetComponent<PlayerController>();
+        P2m = P2.GetComponent<PlayerController>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        P1m = P1.GetComponent<PlayerController>();
-        P2m = P2.GetComponent<PlayerController>();
+
         Display.text = "";
         Display2.text = "";
         P1Score = 0;
