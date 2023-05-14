@@ -5,25 +5,38 @@ using TMPro;
 
 public class TimerManager : MonoBehaviour
 {
-    //int MAX_TIME = 60;
-    int time;
-    TMP_Text text;
-    // Start is called before the first frame update
+    int MAX_TIME;
+    float time;
+    TMP_Text textDisplay;
+    bool paused;
+
+    private void Awake()
+    {
+        textDisplay = gameObject.GetComponent<TMP_Text>();
+    }
     void Start()
     {
-        //MAX_TIME = 60;
+        MAX_TIME = 60;
+        paused = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!paused)
+        {
+            time -= Time.deltaTime;
+            textDisplay.text = ((int)time).ToString();
+        }
+        
         
     }
-    IEnumerator TickDown()
+    public void ResetTimer()
     {
-
-        yield return new WaitForSeconds(1f);
-        time -= 1;
-        text.text = time.ToString();
+        time = MAX_TIME;
+    }
+    public void ToggleTimer(bool play)
+    {
+        paused = !play;
     }
 }

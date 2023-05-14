@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
 
     public bool actionable = true;
+    bool atCameraEdge;
     bool inHitstun = false;
     int direction;
 
@@ -92,9 +93,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    //Maps player input to their abilities and movements
     void Update()
     {
+        atCameraEdge = Vector3.Distance(transform.position, otherPlayerController.transform.position) > 17;
+
         if (backDashSec > 0)
         {
             backDashSec -= Time.deltaTime;
@@ -111,7 +114,7 @@ public class PlayerController : MonoBehaviour
             
             if (Input.GetKeyDown(KeyCode.A) && P1 || Input.GetKeyDown(KeyCode.RightArrow) && !P1) //scuffed but works
             {
-                if (backDashSec > 0)
+                if (backDashSec > 0 && !atCameraEdge)
                 {
                     StartCoroutine("Backdash");
                     backDashSec = 0;
@@ -140,11 +143,11 @@ public class PlayerController : MonoBehaviour
             int leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
 
 
-            if (leftright == -1)
+            if (leftright == -1 && !(P1 && atCameraEdge))
             {
                 gameObject.transform.Translate(new Vector2(-MOVE_SPEED, 0) * Time.deltaTime);
             }
-            else if (leftright == 1)
+            else if (leftright == 1 && !(!P1 && atCameraEdge))
             {
                 gameObject.transform.Translate(new Vector2(MOVE_SPEED, 0) * Time.deltaTime);
             }
@@ -223,21 +226,7 @@ public class PlayerController : MonoBehaviour
     {
         animationManager.LightAttack();
         currentAttack = Attack.Light;
-        /*
-        actionable = false;
-        yield return new WaitForSeconds(LIGHT_ATTACK_STARTUP);
-        //sword.transform.Translate(new Vector2(LIGHT_ATTACK_DISTANCE * direction, 0)); //stab extend
-        spr.color = new Color(0.7f, 0.7f, 0.7f);
 
-        yield return new WaitForSeconds(LIGHT_ATTACK_ACTIVE);
-        //sword.transform.Translate(new Vector2(-LIGHT_ATTACK_DISTANCE * direction, 0));
-
-        yield return new WaitForSeconds(LIGHT_ATTACK_RECOVERY);
-        spr.color = new Color(200, 200, 200);
-
-        currentAttack = Attack.None; 
-        actionable = true;
-        */
         yield return null;
         
     }
@@ -246,24 +235,7 @@ public class PlayerController : MonoBehaviour
     {
         animationManager.HeavyAttack();
         currentAttack = Attack.Heavy;
-        /*
-        actionable = false;
-        spr.color = new Color(0.3f, 0.3f, 1f);
 
-        yield return new WaitForSeconds(HEAVY_ATTACK_STARTUP);
-        //sword.transform.Translate(new Vector2(HEAVY_ATTACK_DISTANCE * direction, 0)); //stab extend
-        spr.color = new Color(0.7f, 0.7f, 0.7f);
-
-        yield return new WaitForSeconds(HEAVY_ATTACK_ACTIVE);
-        //sword.transform.Translate(new Vector2(-HEAVY_ATTACK_DISTANCE * direction, 0));
-
-        yield return new WaitForSeconds(HEAVY_ATTACK_RECOVERY * direction);
-        spr.color = new Color(200, 200, 200);
-
-
-        currentAttack = Attack.None;
-        actionable = true;
-        */
         yield return null;
     }
 
@@ -289,29 +261,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    /*
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if(P1 && col.tag == "HitboxP2" || !P1 && col.tag == "HitboxP1") 
-        {
-            Debug.Log(otherPlayerController.currentAttack);
-            if(otherPlayerController.currentAttack == Attack.Light)
-            {
-                StartCoroutine("HitByLight");
-            }
-            else if(otherPlayerController.currentAttack == Attack.Heavy)
-            {
-                StartCoroutine("HitByHeavy");
-            }
-            else
-            {
-                StartCoroutine("HitByNone");
-            }
 
-        }
-
-    }
-    */
     IEnumerator Die()
     {
         animationManager.Die();

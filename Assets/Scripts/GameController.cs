@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     GameObject victoryMenu;
 
+    [SerializeField]
+    TimerManager timer;
+
     int SCORE_TO_GET = 2;
     int P1Score;
     int P2Score;
@@ -64,11 +67,13 @@ public class GameController : MonoBehaviour
             
             if (!pauseMenu.activeInHierarchy)
             {
+                timer.ToggleTimer(false);
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0;
             }
             else
             {
+                timer.ToggleTimer(true);
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1;
             }
@@ -85,8 +90,10 @@ public class GameController : MonoBehaviour
 
     }
 
+
     IEnumerator Countdown()
     {
+        timer.ResetTimer();
         coroutine = DisplayText("3", 0.7f);
         StartCoroutine(coroutine);
         yield return new WaitForSeconds(0.8f);
@@ -101,12 +108,17 @@ public class GameController : MonoBehaviour
 
         P1m.actionable = true;
         P2m.actionable = true;
+        timer.ToggleTimer(true);
+
         coroutine = DisplayText("GO", 0.7f);
         StartCoroutine(coroutine);
+        
     }
 
+    //Called whenever round ends. Updates score according to who won, displays text, and calls WaitAndStartNext()
     public void RoundEnd(bool P1winner) //true = P1 won, false = P2 won
     {
+        timer.ToggleTimer(false);
         if (P1winner)
         {
             P1Score += 1;

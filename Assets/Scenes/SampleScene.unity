@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 519420033}
   - component: {fileID: 519420035}
   - component: {fileID: 519420036}
+  - component: {fileID: 519420037}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -607,7 +608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.29, z: -10}
+  m_LocalPosition: {x: -9, y: 1.29, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -825,6 +826,18 @@ MonoBehaviour:
   lightHit: {fileID: 8300000, guid: fce5a6a0c0e0f654c8fbf2078fb25216, type: 3}
   heavyHit: {fileID: 8300000, guid: fce5a6a0c0e0f654c8fbf2078fb25216, type: 3}
   finalHit: {fileID: 8300000, guid: fce5a6a0c0e0f654c8fbf2078fb25216, type: 3}
+--- !u!114 &519420037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fdeeff16de59a4ba179962fcbca27f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &529360637 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8987301674466517215, guid: 2b0480d8d6af142c49512eb2070b8df4, type: 3}
@@ -1651,6 +1664,7 @@ GameObject:
   - component: {fileID: 1497483647}
   - component: {fileID: 1497483649}
   - component: {fileID: 1497483648}
+  - component: {fileID: 1497483650}
   m_Layer: 5
   m_Name: TimeDisplay
   m_TagString: Untagged
@@ -1775,6 +1789,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497483646}
   m_CullTransparentMesh: 1
+--- !u!114 &1497483650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497483646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce495c25cb7e7084eafca25078549ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1506071146
 GameObject:
   m_ObjectHideFlags: 0
@@ -2337,6 +2363,7 @@ MonoBehaviour:
   Display2: {fileID: 2086371736}
   pauseMenu: {fileID: 951183480}
   victoryMenu: {fileID: 529360637}
+  timer: {fileID: 1497483650}
 --- !u!114 &1845236870
 MonoBehaviour:
   m_ObjectHideFlags: 0
