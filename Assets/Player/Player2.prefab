@@ -412,6 +412,7 @@ MonoBehaviour:
   health: 0
   currentAttack: 0
   actionable: 1
+  isHit: 0
   animationManager: {fileID: 6416585544630002370}
   spriteArray:
   - {fileID: 6661033218106277982}
@@ -436,6 +437,7 @@ MonoBehaviour:
   - {fileID: 8965764043010779635}
   - {fileID: 8999321374387292342}
   - {fileID: 5864583716526886498}
+  - {fileID: 1807128570186837712}
 --- !u!50 &3754963524768209023
 Rigidbody2D:
   serializedVersion: 4
@@ -833,6 +835,7 @@ MonoBehaviour:
   swordHitBox: {fileID: 8466980580428445534}
   movementScript: {fileID: 2648360653202308249}
   isSwordActive: 0
+  frameTimeElapsed: 0
 --- !u!1 &6131858347302097025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1461,26 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.y
       value: 0.9330015
       objectReference: {fileID: 0}
+    - target: {fileID: -3446940416321587938, guid: e102bb356131a844eba9f5c18b057ece, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3446940416321587938, guid: e102bb356131a844eba9f5c18b057ece, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3446940416321587938, guid: e102bb356131a844eba9f5c18b057ece, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3446940416321587938, guid: e102bb356131a844eba9f5c18b057ece, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3446940416321587938, guid: e102bb356131a844eba9f5c18b057ece, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: -2832185291577186497, guid: e102bb356131a844eba9f5c18b057ece, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.74844295
@@ -2029,6 +2052,11 @@ SpriteRenderer:
 --- !u!212 &1401051848875296462 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: -4635675970916116950, guid: e102bb356131a844eba9f5c18b057ece, type: 3}
+  m_PrefabInstance: {fileID: 3232261236647710948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1807128570186837712 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3877451549585505844, guid: e102bb356131a844eba9f5c18b057ece, type: 3}
   m_PrefabInstance: {fileID: 3232261236647710948}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &2766066587378281765 stripped

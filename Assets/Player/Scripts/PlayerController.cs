@@ -29,12 +29,15 @@ public class PlayerController : MonoBehaviour
 
     const float NONE_ATTACK_KNOCKBACK = 30f;
 
+    const float FREEZE_FRAME_TIMESCALE = 0.2f;
+
     const float LIGHT_ATTACK_STARTUP = 0.1f;
     const float LIGHT_ATTACK_ACTIVE = 0.2f;
     const float LIGHT_ATTACK_RECOVERY = 0.15f;
     const float LIGHT_ATTACK_DISTANCE = 1.1f;
     const float LIGHT_ATTACK_STUN = 0.25f;
     const float LIGHT_ATTACK_KNOCKBACK = 5f;
+    const float LIGHT_ATTACK_FREEZE_TIME = 0.01f;
 
     const float HEAVY_ATTACK_STARTUP = 0.3f;
     const float HEAVY_ATTACK_ACTIVE = 0.3f;
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
     const float HEAVY_ATTACK_DISTANCE = 1.6f;
     const float HEAVY_ATTACK_STUN = 0.45f;
     const float HEAVY_ATTACK_KNOCKBACK = 280f;
+    const float HEAVY_ATTACK_FREEZE_TIME = 0.02f;
 
     const float FORWARDASH_SPEED = 8f;
     const float FORWARDASH_ACTIVE = 0.25f;
@@ -51,7 +55,12 @@ public class PlayerController : MonoBehaviour
     const float BACKDASH_ACTIVE = 0.25f;
     const float BACKDASH_RECOVERY = 0.15f;
 
-    const float CLASH_WINDOW = 0.01f;
+    const float CLASH_WINDOW = 0.02f;
+    const float CLASH_STUN = 0.25f;
+    const float CLASH_KNOCKBACK = 5f;
+    const float CLASH_FREEZE_TIME = 0.001f;
+
+    const float DEATH_FREEZE_TIME = 0.5f;
 
     const float LUNGE_FORCE = 350f;
 
@@ -176,6 +185,7 @@ public class PlayerController : MonoBehaviour
         currentAttack = Attack.None;
         healthDisplay.value = (float)health / MAX_HEALTH;
         actionable = false;
+        inHitstun = false;
     }
     
 
@@ -246,7 +256,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnHit(Hitbox hitbox, Hitbox colHitbox)
     {
-        isHit = true; 
+        isHit = true;
+        Debug.Log("collide");
         if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun && colHitbox.isActive) 
         {
             if (currentAttack != Attack.None && Mathf.Abs(animationManager.frameTimeElapsed - otherPlayerController.animationManager.frameTimeElapsed) < CLASH_WINDOW)
@@ -256,6 +267,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (currentAttack == Attack.None || animationManager.frameTimeElapsed < otherPlayerController.animationManager.frameTimeElapsed)
             {
+                Debug.Log("hit");
                 if (colHitbox.attackType == Attack.Light)
                 {
                     //UnityEngine.Debug.Log("light");
@@ -277,26 +289,29 @@ public class PlayerController : MonoBehaviour
 
     public void StartClash()
     {
+        audioMan.PlaySound(AudioManager.SFX.Clash);
         StartCoroutine("Clash");
     }
 
     IEnumerator Die()
     {
-        animationManager.Die();
-        audioMan.PlaySound(AudioManager.SFX.FinalHit);
         actionable = false;
+        audioMan.PlaySound(AudioManager.SFX.FinalHit);
+        Time.timeScale = 0.2f;
+        animationManager.Die();
+        yield return new WaitForSeconds(DEATH_FREEZE_TIME);
+        Time.timeScale = 1;
         gameController.RoundEnd(!P1);
         yield return null;
     }
 
     IEnumerator Clash()
     {
-        Debug.Log("clash");
         animationManager.StartHitstun();
         actionable = false;
         inHitstun = true;
-        rb2d.velocity = new Vector2(-LIGHT_ATTACK_KNOCKBACK * direction, 0);
-        yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
+        rb2d.velocity = new Vector2(-CLASH_KNOCKBACK * direction, 0);
+        yield return new WaitForSeconds(CLASH_STUN);
 
         animationManager.EndHitstun();
         actionable = true;
@@ -308,35 +323,43 @@ public class PlayerController : MonoBehaviour
     {
         audioMan.PlaySound(AudioManager.SFX.LightHit);
         animationManager.StartHitstun();
+        animationManager.Hurt();
         inHitstun = true;
         actionable = false;
         health -= 1;
         healthDisplay.value = (float)health / MAX_HEALTH;
-
+        
         if (health <= 0)
         {
             StartCoroutine("Die");
             yield return null;
         }
-
-        rb2d.velocity = new Vector2(-LIGHT_ATTACK_KNOCKBACK * direction, 0);
-        //spr.color = new Color(255, 0, 0);
-        foreach (SpriteRenderer spr in spriteArray)
+        else
         {
-            spr.color = new Color(255, 0, 0);
-        }
+            foreach (SpriteRenderer spr in spriteArray)
+            {
+                spr.color = new Color(255, 0, 0);
+            }
 
-        yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
-        //spr.color = new Color(200, 200, 200);
-        foreach (SpriteRenderer spr in spriteArray)
-        {
-            spr.color = new Color(255, 255, 255);
-        }
+            Time.timeScale = FREEZE_FRAME_TIMESCALE;
+            yield return new WaitForSeconds(LIGHT_ATTACK_FREEZE_TIME);
+            Time.timeScale = 1;
+            foreach (SpriteRenderer spr in spriteArray)
+            {
+                spr.color = new Color(255, 255, 255);
+            }
+            
+            rb2d.velocity = new Vector2(-LIGHT_ATTACK_KNOCKBACK * direction, 0);
+            //spr.color = new Color(255, 0, 0);
 
-        animationManager.EndHitstun();
-        inHitstun = false;
-        actionable = true;
-        isHit = false;
+            yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
+            //spr.color = new Color(200, 200, 200);
+
+            animationManager.EndHitstun();
+            inHitstun = false;
+            actionable = true;
+            isHit = false;
+        }
         yield return null;
     }
 
@@ -344,6 +367,7 @@ public class PlayerController : MonoBehaviour
     {
         audioMan.PlaySound(AudioManager.SFX.HeavyHit);
         animationManager.StartHitstun();
+        animationManager.Hurt();
         inHitstun = true;
         actionable = false;
         health -= 2;
@@ -354,25 +378,33 @@ public class PlayerController : MonoBehaviour
             StartCoroutine("Die");
             yield return null;
         }
-
-        rb2d.AddForce(new Vector2(-HEAVY_ATTACK_KNOCKBACK * direction, 0));
-        //spr.color = new Color(255, 0, 0);
-        foreach (SpriteRenderer spr in spriteArray)
+        else
         {
-            spr.color = new Color(255, 0, 0);
+            foreach (SpriteRenderer spr in spriteArray)
+            {
+                spr.color = new Color(255, 0, 0);
+            }
+
+            Time.timeScale = FREEZE_FRAME_TIMESCALE;
+            yield return new WaitForSeconds(HEAVY_ATTACK_FREEZE_TIME);
+            Time.timeScale = 1;
+            foreach (SpriteRenderer spr in spriteArray)
+            {
+                spr.color = new Color(255, 255, 255);
+            }
+
+            rb2d.AddForce(new Vector2(-HEAVY_ATTACK_KNOCKBACK * direction, 0));
+            //spr.color = new Color(255, 0, 0);
+
+            yield return new WaitForSeconds(HEAVY_ATTACK_STUN);
+            //spr.color = new Color(200, 200, 200);
+
+            animationManager.EndHitstun();
+            inHitstun = false;
+            actionable = true;
+            isHit = false;
         }
 
-        yield return new WaitForSeconds(HEAVY_ATTACK_STUN);
-        //spr.color = new Color(200, 200, 200);
-        foreach (SpriteRenderer spr in spriteArray)
-        {
-            spr.color = new Color(255, 255, 255);
-        }
-
-        animationManager.EndHitstun();
-        inHitstun = false;
-        actionable = true;
-        isHit = false;
         yield return null;
     }
     IEnumerator HitByNone()

@@ -12,9 +12,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip lightHit;
     public AudioClip heavyHit;
     public AudioClip finalHit;
+    public AudioClip clash;
     public enum SFX
     {
-        LightAtk, HeavyAtk, LightHit, HeavyHit, FinalHit
+        LightAtk, HeavyAtk, LightHit, HeavyHit, Clash, FinalHit
     }
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,10 @@ public class AudioManager : MonoBehaviour
         if (sfx == SFX.HeavyHit)
         {
             sfxSource.PlayOneShot(finalHit);
+        }
+        if (sfx == SFX.Clash)
+        {
+            sfxSource.PlayOneShot(clash);
         }
     }
 }

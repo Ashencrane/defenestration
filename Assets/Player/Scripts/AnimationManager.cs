@@ -56,6 +56,12 @@ public class AnimationManager : MonoBehaviour
         movementScript.Lunge();
     }
 
+    public void Hurt()
+    {
+        animator.ResetTrigger("Hurt");
+        animator.SetTrigger("Hurt");
+    }
+
     public void StartHitstun()
     {
         animator.SetBool("Hitstun", true);
@@ -72,7 +78,6 @@ public class AnimationManager : MonoBehaviour
         animator.ResetTrigger("Die");
         animator.SetTrigger("Die");
         animator.SetBool("Dead", true);
-        StartHitstun();
     }
 
     public void Reset()
