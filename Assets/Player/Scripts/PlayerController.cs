@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb2d;
     Slider healthDisplay;
     PlayerController otherPlayerController;
-    SpriteRenderer spr;
     GameController gameController;
     AudioManager audioMan;
 
@@ -35,7 +34,7 @@ public class PlayerController : MonoBehaviour
     const float LIGHT_ATTACK_RECOVERY = 0.15f;
     const float LIGHT_ATTACK_DISTANCE = 1.1f;
     const float LIGHT_ATTACK_STUN = 0.25f;
-    const float LIGHT_ATTACK_KNOCKBACK = 180f;
+    const float LIGHT_ATTACK_KNOCKBACK = 5f;
 
     const float HEAVY_ATTACK_STARTUP = 0.3f;
     const float HEAVY_ATTACK_ACTIVE = 0.3f;
@@ -52,6 +51,8 @@ public class PlayerController : MonoBehaviour
     const float BACKDASH_ACTIVE = 0.25f;
     const float BACKDASH_RECOVERY = 0.15f;
 
+    const float CLASH_WINDOW = 0.01f;
+
     const float LUNGE_FORCE = 350f;
 
     public enum Attack
@@ -65,15 +66,17 @@ public class PlayerController : MonoBehaviour
     bool atCameraEdge;
     bool inHitstun = false;
     int direction;
+    public bool isHit = false;
 
     [SerializeField]
-    AnimationManager animationManager;
+    public AnimationManager animationManager;
+    [SerializeField]
+    SpriteRenderer[] spriteArray;
 
     private void Awake()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        spr = gameObject.GetComponent<SpriteRenderer>();
         audioMan = GameObject.Find("Main Camera").GetComponent<AudioManager>();
 
         if (P1)
@@ -185,7 +188,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Backdash()
     {
         actionable = false;
-        spr.color = new Color(0.7f, 0.7f, 0.7f);
+        //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.drag = 0;
         rb2d.velocity = new Vector3(BACKDASH_SPEED * -direction, 0, 0);
 
@@ -195,8 +198,9 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(BACKDASH_RECOVERY);
         
-        spr.color = new Color(200, 200, 200);
+        //spr.color = new Color(200, 200, 200);
         actionable = true;
+        rb2d.drag = 2.0f;
         
 
         yield return null;
@@ -205,7 +209,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Forwardash()
     {
         actionable = false;
-        spr.color = new Color(0.7f, 0.7f, 0.7f);
+        //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.velocity = new Vector3(FORWARDASH_SPEED * direction, 0, 0);
         rb2d.drag = 0;
         
@@ -216,8 +220,9 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(FORWARDASH_RECOVERY);
 
-        spr.color = new Color(200, 200, 200);
+        //spr.color = new Color(200, 200, 200);
         actionable = true;
+        rb2d.drag = 2.0f;
 
         yield return null;
     }
@@ -225,7 +230,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator LightAttack()
     {
         animationManager.LightAttack();
-        currentAttack = Attack.Light;
+        //currentAttack = Attack.Light;
 
         yield return null;
         
@@ -234,32 +239,45 @@ public class PlayerController : MonoBehaviour
     IEnumerator HeavyAttack()
     {
         animationManager.HeavyAttack();
-        currentAttack = Attack.Heavy;
+        //currentAttack = Attack.Heavy;
 
         yield return null;
     }
 
     public void OnHit(Hitbox hitbox, Hitbox colHitbox)
     {
-        
-        if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun && colHitbox.isActive)
+        isHit = true; 
+        if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun && colHitbox.isActive) 
         {
-            if (colHitbox.attackType == Hitbox.AttackType.Light)
+            if (currentAttack != Attack.None && Mathf.Abs(animationManager.frameTimeElapsed - otherPlayerController.animationManager.frameTimeElapsed) < CLASH_WINDOW)
             {
-                //UnityEngine.Debug.Log("light");
-                StartCoroutine("HitByLight");
+                StartCoroutine("Clash");
+                otherPlayerController.StartClash();
             }
-            else if (colHitbox.attackType == Hitbox.AttackType.Heavy)
+            else if (currentAttack == Attack.None || animationManager.frameTimeElapsed < otherPlayerController.animationManager.frameTimeElapsed)
             {
-                //UnityEngine.Debug.Log("heavy");
-                StartCoroutine("HitByHeavy");
-            }
-            else
-            {
-                //UnityEngine.Debug.Log("none");
-                StartCoroutine("HitByNone");
+                if (colHitbox.attackType == Attack.Light)
+                {
+                    //UnityEngine.Debug.Log("light");
+                    StartCoroutine("HitByLight");
+                }
+                else if (colHitbox.attackType == Attack.Heavy)
+                {
+                    //UnityEngine.Debug.Log("heavy");
+                    StartCoroutine("HitByHeavy");
+                }
+                else
+                {
+                    //UnityEngine.Debug.Log("none");
+                    StartCoroutine("HitByNone");
+                }
             }
         }
+    }
+
+    public void StartClash()
+    {
+        StartCoroutine("Clash");
     }
 
     IEnumerator Die()
@@ -270,6 +288,22 @@ public class PlayerController : MonoBehaviour
         gameController.RoundEnd(!P1);
         yield return null;
     }
+
+    IEnumerator Clash()
+    {
+        Debug.Log("clash");
+        animationManager.StartHitstun();
+        actionable = false;
+        inHitstun = true;
+        rb2d.velocity = new Vector2(-LIGHT_ATTACK_KNOCKBACK * direction, 0);
+        yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
+
+        animationManager.EndHitstun();
+        actionable = true;
+        inHitstun = false;
+        yield return null;
+    }
+
     IEnumerator HitByLight()
     {
         audioMan.PlaySound(AudioManager.SFX.LightHit);
@@ -285,15 +319,24 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        rb2d.AddForce(new Vector2(-LIGHT_ATTACK_KNOCKBACK * direction, 0));
-        spr.color = new Color(255, 0, 0);
+        rb2d.velocity = new Vector2(-LIGHT_ATTACK_KNOCKBACK * direction, 0);
+        //spr.color = new Color(255, 0, 0);
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(255, 0, 0);
+        }
 
         yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
-        spr.color = new Color(200, 200, 200);
+        //spr.color = new Color(200, 200, 200);
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(255, 255, 255);
+        }
 
         animationManager.EndHitstun();
         inHitstun = false;
         actionable = true;
+        isHit = false;
         yield return null;
     }
 
@@ -313,14 +356,23 @@ public class PlayerController : MonoBehaviour
         }
 
         rb2d.AddForce(new Vector2(-HEAVY_ATTACK_KNOCKBACK * direction, 0));
-        spr.color = new Color(255, 0, 0);
+        //spr.color = new Color(255, 0, 0);
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(255, 0, 0);
+        }
 
         yield return new WaitForSeconds(HEAVY_ATTACK_STUN);
-        spr.color = new Color(200, 200, 200);
+        //spr.color = new Color(200, 200, 200);
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(255, 255, 255);
+        }
 
         animationManager.EndHitstun();
         inHitstun = false;
         actionable = true;
+        isHit = false;
         yield return null;
     }
     IEnumerator HitByNone()
@@ -329,13 +381,14 @@ public class PlayerController : MonoBehaviour
         actionable = false;
         health -= 0;
         rb2d.AddForce(new Vector2(-NONE_ATTACK_KNOCKBACK * direction, 0));
-        spr.color = new Color(255, 0, 0);
+        //spr.color = new Color(255, 0, 0);
 
         yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
-        spr.color = new Color(200, 200, 200);
+        //spr.color = new Color(200, 200, 200);
 
         inHitstun = false;
         actionable = true;
+        isHit = false;
         yield return null;
     }
 

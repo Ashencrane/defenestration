@@ -14,6 +14,7 @@ public class AnimationManager : MonoBehaviour
     PlayerController movementScript;
 
     public bool isSwordActive;
+    public float frameTimeElapsed;
 
     // Start is called before the first frame update
     void Start()
@@ -24,19 +25,28 @@ public class AnimationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (movementScript.currentAttack != PlayerController.Attack.None)
+        {
+            frameTimeElapsed += Time.deltaTime;
+        }
+        else { frameTimeElapsed = 0; }
+    }
+
+    public void ResetTime()
+    {
+        frameTimeElapsed = 0;
     }
 
     public void LightAttack()
     {
-        swordHitBox.attackType = Hitbox.AttackType.Light;
+        swordHitBox.attackType = PlayerController.Attack.Light;
         animator.ResetTrigger("LightAttack");
         animator.SetTrigger("LightAttack");
     }
 
     public void HeavyAttack()
     {
-        swordHitBox.attackType = Hitbox.AttackType.Heavy;
+        swordHitBox.attackType = PlayerController.Attack.Heavy;
         animator.ResetTrigger("HeavyAttack");
         animator.SetTrigger("HeavyAttack");
     }
@@ -49,6 +59,7 @@ public class AnimationManager : MonoBehaviour
     public void StartHitstun()
     {
         animator.SetBool("Hitstun", true);
+        movementScript.currentAttack = PlayerController.Attack.None;
     }
 
     public void EndHitstun()

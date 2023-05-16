@@ -8,10 +8,6 @@ public class Hitbox : MonoBehaviour
     {
         Hit, Hurt, Stop
     }
-    public enum AttackType
-    {
-        Light, Heavy, None
-    }
 
     [SerializeField]
     BoxType boxType = BoxType.Hurt;
@@ -22,7 +18,7 @@ public class Hitbox : MonoBehaviour
 
     public bool P1;
 
-    public AttackType attackType;
+    public PlayerController.Attack attackType;
 
     public bool isActive;
 
@@ -45,6 +41,7 @@ public class Hitbox : MonoBehaviour
     {
         if (boxType == BoxType.Hit)
         {
+            parentPlayerController.currentAttack = attackType;
             if (isActive)
             {
                 sprite.color = Color.red;
@@ -60,13 +57,14 @@ public class Hitbox : MonoBehaviour
     public BoxType GetBoxType()
     { return boxType; }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         Hitbox colHitbox = col.GetComponent<Hitbox>();
+
         
         if (colHitbox != null && colHitbox.P1 != P1 && boxType == BoxType.Hurt)
         {
-            UnityEngine.Debug.Log("hit");
+            parentPlayerController.isHit = true;
             parentPlayerController.OnHit(this, colHitbox);
         }
         
