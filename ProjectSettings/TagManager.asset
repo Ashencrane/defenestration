@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HitboxP1
   - HitboxP2
+  - DefenestrationZone
   layers:
   - Default
   - TransparentFX

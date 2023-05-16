@@ -61,12 +61,24 @@ public class Hitbox : MonoBehaviour
     {
         Hitbox colHitbox = col.GetComponent<Hitbox>();
 
-        
+        // check if collided object is a hitbox, check if it's the opposing player, and check if it's colliding with a hurtbox
         if (colHitbox != null && colHitbox.P1 != P1 && boxType == BoxType.Hurt)
         {
             parentPlayerController.isHit = true;
             parentPlayerController.OnHit(this, colHitbox);
         }
+        if (col.tag == "DefenestrationZone") // if player is on edge of stage, they become defenestratable
+        {
+            parentPlayerController.isDefenestratable = true;
+        }
         
+    }
+    
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag == "DefenestrationZone")
+        {
+            parentPlayerController.isDefenestratable = false;
+        }
     }
 }

@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     const float LIGHT_ATTACK_DISTANCE = 1.1f;
     const float LIGHT_ATTACK_STUN = 0.25f;
     const float LIGHT_ATTACK_KNOCKBACK = 5f;
+    const float LIGHT_ATTACK_BLOCK_KNOCKBACK = 10f;
     const float LIGHT_ATTACK_FREEZE_TIME = 0.01f;
 
     const float HEAVY_ATTACK_STARTUP = 0.3f;
@@ -44,7 +45,8 @@ public class PlayerController : MonoBehaviour
     const float HEAVY_ATTACK_RECOVERY = 0.7f;
     const float HEAVY_ATTACK_DISTANCE = 1.6f;
     const float HEAVY_ATTACK_STUN = 0.45f;
-    const float HEAVY_ATTACK_KNOCKBACK = 280f;
+    const float HEAVY_ATTACK_KNOCKBACK = 10f;
+    const float HEAVY_ATTACK_BLOCK_KNOCKBACK = 20f;
     const float HEAVY_ATTACK_FREEZE_TIME = 0.02f;
 
     const float FORWARDASH_SPEED = 8f;
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     const float DEATH_FREEZE_TIME = 0.5f;
 
-    const float LUNGE_FORCE = 350f;
+    const float LUNGE_FORCE = 10f;
 
     public enum Attack
     {
@@ -76,6 +78,8 @@ public class PlayerController : MonoBehaviour
     bool inHitstun = false;
     int direction;
     public bool isHit = false;
+    public bool isDefenestratable = false;
+    public bool isBlocking = false;
 
     [SerializeField]
     public AnimationManager animationManager;
@@ -122,6 +126,7 @@ public class PlayerController : MonoBehaviour
 
         if (actionable)
         {
+            rb2d.velocity = new Vector2(0f, 0f);
             //backdash code
             
             if (Input.GetKeyDown(KeyCode.A) && P1 || Input.GetKeyDown(KeyCode.RightArrow) && !P1) //scuffed but works
@@ -153,7 +158,16 @@ public class PlayerController : MonoBehaviour
             }
 
             int leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
-
+            
+            if (P1 ? leftright == -1 : leftright == 1)
+            {
+                isBlocking = true;
+                Debug.Log("Blocking");
+            }
+            else
+            {
+                isBlocking = false;
+            }
 
             if (leftright == -1 && !(P1 && atCameraEdge))
             {
@@ -191,7 +205,7 @@ public class PlayerController : MonoBehaviour
 
     public void Lunge()
     {
-        rb2d.AddForce(new Vector2(LUNGE_FORCE * direction, 0));
+        rb2d.velocity = new Vector2(LUNGE_FORCE * direction, 0);
     }
 
 
@@ -201,10 +215,18 @@ public class PlayerController : MonoBehaviour
         //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.drag = 0;
         rb2d.velocity = new Vector3(BACKDASH_SPEED * -direction, 0, 0);
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(0.7f, 0.8f, 1.0f);
+        }
 
         yield return new WaitForSeconds(BACKDASH_ACTIVE);
         rb2d.velocity = new Vector3(0, 0, 0);
         rb2d.drag = 0.05f;
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(255, 255, 255);
+        }
 
         yield return new WaitForSeconds(BACKDASH_RECOVERY);
         
@@ -222,11 +244,19 @@ public class PlayerController : MonoBehaviour
         //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.velocity = new Vector3(FORWARDASH_SPEED * direction, 0, 0);
         rb2d.drag = 0;
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(0.7f, 0.8f, 1.0f);
+        }
         
         
         yield return new WaitForSeconds(FORWARDASH_ACTIVE);
         rb2d.drag = 0.05f;
         rb2d.velocity = new Vector3(0, 0, 0);
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(255, 255, 255);
+        }
 
         yield return new WaitForSeconds(FORWARDASH_RECOVERY);
 
@@ -268,15 +298,34 @@ public class PlayerController : MonoBehaviour
             else if (currentAttack == Attack.None || animationManager.frameTimeElapsed < otherPlayerController.animationManager.frameTimeElapsed)
             {
                 Debug.Log("hit");
-                if (colHitbox.attackType == Attack.Light)
+                if (isDefenestratable)
+                {
+                    health = 0;
+                    StartCoroutine("HitByHeavy");
+                }
+                else if (colHitbox.attackType == Attack.Light)
                 {
                     //UnityEngine.Debug.Log("light");
-                    StartCoroutine("HitByLight");
+                    if (isBlocking)
+                    {
+                        StartCoroutine("BlockLight");
+                    }
+                    else
+                    {
+                        StartCoroutine("HitByLight");
+                    }
                 }
                 else if (colHitbox.attackType == Attack.Heavy)
                 {
                     //UnityEngine.Debug.Log("heavy");
-                    StartCoroutine("HitByHeavy");
+                    if (isBlocking)
+                    {
+                        StartCoroutine("BlockHeavy");
+                    }
+                    else
+                    {
+                        StartCoroutine("HitByHeavy");
+                    }
                 }
                 else
                 {
@@ -296,8 +345,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator Die()
     {
         actionable = false;
+        otherPlayerController.actionable = false;
         audioMan.PlaySound(AudioManager.SFX.FinalHit);
-        Time.timeScale = 0.2f;
+        Time.timeScale = 0.01f;
+        gameController.SetTextKO();
+        yield return new WaitForSeconds(0.03f);
+        Time.timeScale = 0.15f;
         animationManager.Die();
         yield return new WaitForSeconds(DEATH_FREEZE_TIME);
         Time.timeScale = 1;
@@ -305,9 +358,16 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator Defenestrate()
+    {
+        // do the same thing as Die() but with a different animation, different UI text displayed
+        yield return null;
+    }
+
     IEnumerator Clash()
     {
         animationManager.StartHitstun();
+        animationManager.Hurt();
         actionable = false;
         inHitstun = true;
         rb2d.velocity = new Vector2(-CLASH_KNOCKBACK * direction, 0);
@@ -393,7 +453,7 @@ public class PlayerController : MonoBehaviour
                 spr.color = new Color(255, 255, 255);
             }
 
-            rb2d.AddForce(new Vector2(-HEAVY_ATTACK_KNOCKBACK * direction, 0));
+            rb2d.velocity = new Vector2(-HEAVY_ATTACK_KNOCKBACK * direction, 0);
             //spr.color = new Color(255, 0, 0);
 
             yield return new WaitForSeconds(HEAVY_ATTACK_STUN);
@@ -424,5 +484,75 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator BlockLight()
+    {
+        //audioMan.PlaySound(AudioManager.SFX.LightHit);
+        animationManager.StartHitstun();
+        animationManager.Block();
+        inHitstun = true;
+        actionable = false;
+        
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(0.5f, 0.5f, 1.0f);
+        }
+
+        Time.timeScale = FREEZE_FRAME_TIMESCALE;
+        yield return new WaitForSeconds(LIGHT_ATTACK_FREEZE_TIME);
+        Time.timeScale = 1;
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(255, 255, 255);
+        }
+        
+        rb2d.velocity = new Vector2(-LIGHT_ATTACK_BLOCK_KNOCKBACK * direction, 0);
+        //spr.color = new Color(255, 0, 0);
+
+        yield return new WaitForSeconds(LIGHT_ATTACK_STUN);
+        //spr.color = new Color(200, 200, 200);
+
+        animationManager.EndHitstun();
+        inHitstun = false;
+        actionable = true;
+        isHit = false;
+
+        yield return null;
+
+    }
+
+    IEnumerator BlockHeavy()
+    {
+        animationManager.StartHitstun();
+        animationManager.Block();
+        inHitstun = true;
+        actionable = false;
+        
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(0.5f, 0.5f, 1.0f);
+        }
+
+        Time.timeScale = FREEZE_FRAME_TIMESCALE;
+        yield return new WaitForSeconds(HEAVY_ATTACK_FREEZE_TIME);
+        Time.timeScale = 1;
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(255, 255, 255);
+        }
+        
+        rb2d.velocity = new Vector2(-HEAVY_ATTACK_BLOCK_KNOCKBACK * direction, 0);
+        //spr.color = new Color(255, 0, 0);
+
+        yield return new WaitForSeconds(HEAVY_ATTACK_STUN);
+        //spr.color = new Color(200, 200, 200);
+
+        animationManager.EndHitstun();
+        inHitstun = false;
+        actionable = true;
+        isHit = false;
+
+        yield return null;
+
+    }
 
 }

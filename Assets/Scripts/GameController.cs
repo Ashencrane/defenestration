@@ -115,6 +115,12 @@ public class GameController : MonoBehaviour
         
     }
 
+    public void SetTextKO()
+    {
+        coroutine = DisplayText("K.O.", 0.03f);
+        StartCoroutine(coroutine);
+    }
+
     //Called whenever round ends. Updates score according to who won, displays text, and calls WaitAndStartNext()
     public void RoundEnd(bool P1winner) //true = P1 won, false = P2 won
     {

@@ -89,7 +89,8 @@ public class AnimationManager : MonoBehaviour
 
     public void Block()
     {
-
+        animator.ResetTrigger("Block");
+        animator.SetTrigger("Block");
     }
 
     public void MakeUnactionable()
