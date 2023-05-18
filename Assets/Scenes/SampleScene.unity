@@ -825,10 +825,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 519420033}
   sfxSource: {fileID: 519420035}
-  lightAttack: {fileID: 0}
+  lightAttack: {fileID: 8300000, guid: 11eadcc0410417b4bbbbd278da5cc641, type: 3}
   heavyAttack: {fileID: 0}
-  lightHit: {fileID: 8300000, guid: fce5a6a0c0e0f654c8fbf2078fb25216, type: 3}
-  heavyHit: {fileID: 8300000, guid: fce5a6a0c0e0f654c8fbf2078fb25216, type: 3}
+  lightHit: {fileID: 8300000, guid: e0313298ffe970348af56b06ac767597, type: 3}
+  heavyHit: {fileID: 8300000, guid: e0313298ffe970348af56b06ac767597, type: 3}
   finalHit: {fileID: 8300000, guid: fce5a6a0c0e0f654c8fbf2078fb25216, type: 3}
   clash: {fileID: 8300000, guid: 01d816e283fa241429d6700dcaef59ca, type: 3}
 --- !u!114 &519420037

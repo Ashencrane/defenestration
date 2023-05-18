@@ -269,6 +269,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator LightAttack()
     {
+        audioMan.PlaySound(AudioManager.SFX.LightAtk);
         animationManager.LightAttack();
         //currentAttack = Attack.Light;
 
@@ -278,6 +279,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HeavyAttack()
     {
+        audioMan.PlaySound(AudioManager.SFX.HeavyAtk);
         animationManager.HeavyAttack();
         //currentAttack = Attack.Heavy;
 

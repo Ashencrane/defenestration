@@ -34,17 +34,26 @@ public class AudioManager : MonoBehaviour
         {
             sfxSource.PlayOneShot(finalHit);
         }
-        if (sfx == SFX.LightHit)
+        else if (sfx == SFX.LightHit)
         {
-            sfxSource.PlayOneShot(finalHit);
+            sfxSource.PlayOneShot(lightHit);
         }
-        if (sfx == SFX.HeavyHit)
+        else if (sfx == SFX.HeavyHit)
         {
-            sfxSource.PlayOneShot(finalHit);
+            sfxSource.PlayOneShot(heavyHit);
         }
-        if (sfx == SFX.Clash)
+        else if (sfx == SFX.Clash)
         {
             sfxSource.PlayOneShot(clash);
         }
+        else if (sfx == SFX.LightAtk)
+        {
+            sfxSource.PlayOneShot(lightAttack);
+        }
+        else if (sfx == SFX.HeavyAtk)
+        {
+            sfxSource.PlayOneShot(heavyAttack);
+        }
+
     }
 }
