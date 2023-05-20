@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     int P1Score;
     int P2Score;
     private IEnumerator coroutine;
+    bool gameLive = false;
 
 
     private void Awake()
@@ -48,6 +49,7 @@ public class GameController : MonoBehaviour
 
         P1m.NewRound();
         P2m.NewRound();
+        Time.timeScale = 1;
         StartCoroutine("Countdown");
     }
     IEnumerator DisplayText(string text, float time)
@@ -63,7 +65,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyDown(KeyCode.Escape) && gameLive){
             
             if (!pauseMenu.activeInHierarchy)
             {
@@ -85,6 +87,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         P1m.NewRound();
         P2m.NewRound();
+        
 
         StartCoroutine("Countdown");
 
@@ -109,6 +112,7 @@ public class GameController : MonoBehaviour
         P1m.actionable = true;
         P2m.actionable = true;
         timer.ToggleTimer(true);
+        gameLive = true;
 
         coroutine = DisplayText("GO", 0.7f);
         StartCoroutine(coroutine);
@@ -124,6 +128,7 @@ public class GameController : MonoBehaviour
     //Called whenever round ends. Updates score according to who won, displays text, and calls WaitAndStartNext()
     public void RoundEnd(bool P1winner) //true = P1 won, false = P2 won
     {
+        gameLive = false;
         timer.ToggleTimer(false);
         if (P1winner)
         {
@@ -157,6 +162,10 @@ public class GameController : MonoBehaviour
 
         }
         StartCoroutine("WaitAndStartNext");
+    }
+    public void SetGameLive(bool b)
+    {
+        gameLive = b;
     }
 
 
