@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
     public bool isHit = false;
     public bool isDefenestratable = false;
     public bool isBlocking = false;
+    public bool isDead = false;
 
     [SerializeField]
     public AnimationManager animationManager;
@@ -124,11 +125,11 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (actionable)
+        if (actionable && !isDead)
         {
             rb2d.velocity = new Vector2(0f, 0f);
             //backdash code
-            
+
             if (Input.GetKeyDown(KeyCode.A) && P1 || Input.GetKeyDown(KeyCode.RightArrow) && !P1) //scuffed but works
             {
                 if (backDashSec > 0 && !atCameraEdge)
@@ -141,10 +142,8 @@ public class PlayerController : MonoBehaviour
                     backDashSec = 0.25f;
                 }
             }
-
             //forwardash code
-
-            if (Input.GetKeyDown(KeyCode.D) && P1 || Input.GetKeyDown(KeyCode.LeftArrow) && !P1) //scuffed but works
+            else if (Input.GetKeyDown(KeyCode.D) && P1 || Input.GetKeyDown(KeyCode.LeftArrow) && !P1) //scuffed but works
             {
                 if (forwarDashSec > 0)
                 {
@@ -156,38 +155,39 @@ public class PlayerController : MonoBehaviour
                     forwarDashSec = 0.25f;
                 }
             }
-
-            int leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
-            
-            if (P1 ? leftright == -1 : leftright == 1)
-            {
-                isBlocking = true;
-                Debug.Log("Blocking");
-            }
             else
             {
-                isBlocking = false;
-            }
+                int leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
 
-            if (leftright == -1 && !(P1 && atCameraEdge))
-            {
-                gameObject.transform.Translate(new Vector2(-MOVE_SPEED, 0) * Time.deltaTime);
-            }
-            else if (leftright == 1 && !(!P1 && atCameraEdge))
-            {
-                gameObject.transform.Translate(new Vector2(MOVE_SPEED, 0) * Time.deltaTime);
-            }
+                if (P1 ? leftright == -1 : leftright == 1)
+                {
+                    isBlocking = true;
+                    Debug.Log("Blocking");
+                }
+                else
+                {
+                    isBlocking = false;
+                }
 
-            if (P1 ? (int)Input.GetAxisRaw("LightP1") == 1 : (int)Input.GetAxisRaw("LightP2") == 1)
-            {
-                StartCoroutine("LightAttack");
-            }
+                if (leftright == -1 && !(P1 && atCameraEdge))
+                {
+                    gameObject.transform.Translate(new Vector2(-MOVE_SPEED, 0) * Time.deltaTime);
+                }
+                else if (leftright == 1 && !(!P1 && atCameraEdge))
+                {
+                    gameObject.transform.Translate(new Vector2(MOVE_SPEED, 0) * Time.deltaTime);
+                }
 
-            if (P1 ? (int)Input.GetAxisRaw("HeavyP1") == 1 : (int)Input.GetAxisRaw("HeavyP2") == 1)
-            {
-                StartCoroutine("HeavyAttack");
-            }
+                if (P1 ? (int)Input.GetAxisRaw("LightP1") == 1 : (int)Input.GetAxisRaw("LightP2") == 1)
+                {
+                    StartCoroutine("LightAttack");
+                }
 
+                if (P1 ? (int)Input.GetAxisRaw("HeavyP1") == 1 : (int)Input.GetAxisRaw("HeavyP2") == 1)
+                {
+                    StartCoroutine("HeavyAttack");
+                }
+            }
 
         }
     }
@@ -200,6 +200,7 @@ public class PlayerController : MonoBehaviour
         healthDisplay.value = (float)health / MAX_HEALTH;
         actionable = false;
         inHitstun = false;
+        isDead = false;
     }
     
 
@@ -346,6 +347,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Die()
     {
+        isDead = true;
         actionable = false;
         otherPlayerController.actionable = false;
         audioMan.PlaySound(AudioManager.SFX.FinalHit);
