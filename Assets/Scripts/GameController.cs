@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class GameController : MonoBehaviour
     int SCORE_TO_GET = 2;
     int P1Score;
     int P2Score;
+    [SerializeField] private RawImage[] scoreGemsP1;
+    [SerializeField] private RawImage[] scoreGemsP2;
     private IEnumerator coroutine;
     bool gameLive = false;
 
@@ -133,6 +136,8 @@ public class GameController : MonoBehaviour
         if (P1winner)
         {
             P1Score += 1;
+            // -1 for 0-indexing, white color resets the increased default darkness on the gem
+            scoreGemsP1[P1Score - 1].color = Color.white;
             if(P1Score < SCORE_TO_GET)
             {
                 coroutine = DisplayText("P1 score: " + P1Score, 2f);
@@ -148,6 +153,8 @@ public class GameController : MonoBehaviour
         else
         {
             P2Score += 1;
+            // -1 for 0-indexing, white color resets the increased default darkness on the gem
+            scoreGemsP1[P2Score - 1].color = Color.white;
             if (P2Score < SCORE_TO_GET)
             {
                 coroutine = DisplayText("P2 score: " + P2Score, 2f);
