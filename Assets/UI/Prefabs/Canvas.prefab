@@ -770,7 +770,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.6, y: 1.5}
-  m_SizeDelta: {x: 200, y: 51.29}
+  m_SizeDelta: {x: 300, y: 51.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8624012171442261031
 CanvasRenderer:
@@ -802,8 +802,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SAMPLE TEXT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 87de9dc7fb647432985d4e81866d666a, type: 2}
-  m_sharedMaterial: {fileID: 9101771230024912901, guid: 87de9dc7fb647432985d4e81866d666a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2b6230305c7769c4db380b47c5d58ddc, type: 2}
+  m_sharedMaterial: {fileID: -3966306578694809577, guid: 2b6230305c7769c4db380b47c5d58ddc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -982,7 +982,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1, y: 100.4}
-  m_SizeDelta: {x: 200, y: 51.29}
+  m_SizeDelta: {x: 300, y: 51.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8624012171611516511
 CanvasRenderer:
@@ -1014,8 +1014,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SAMPLE TEXT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 87de9dc7fb647432985d4e81866d666a, type: 2}
-  m_sharedMaterial: {fileID: 9101771230024912901, guid: 87de9dc7fb647432985d4e81866d666a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2b6230305c7769c4db380b47c5d58ddc, type: 2}
+  m_sharedMaterial: {fileID: -3966306578694809577, guid: 2b6230305c7769c4db380b47c5d58ddc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1264,8 +1264,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.41}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: -2}
+  m_SizeDelta: {x: 75, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8624012172028822591
 CanvasRenderer:
@@ -1322,8 +1322,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.1
-  m_fontSizeBase: 54.1
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1358,7 +1358,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -5.1170692, y: 3.9800072, z: -4.5485153, w: 14.779138}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
