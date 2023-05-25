@@ -154,7 +154,7 @@ public class GameController : MonoBehaviour
         {
             P2Score += 1;
             // -1 for 0-indexing, white color resets the increased default darkness on the gem
-            scoreGemsP1[P2Score - 1].color = Color.white;
+            scoreGemsP2[P2Score - 1].color = Color.white;
             if (P2Score < SCORE_TO_GET)
             {
                 coroutine = DisplayText("P2 score: " + P2Score, 2f);
