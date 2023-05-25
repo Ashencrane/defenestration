@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7c6b7025de47b56449a2997b64e38b2c
+guid: e102bb356131a844eba9f5c18b057ece
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11804,8 +11804,8 @@ ScriptedImporter:
     - name: left leg
       guid: c08f07e2f17c79148a62fd1655d23235
       position: {x: 230.48262, y: 0.00006336781, z: 0}
-      rotation: {x: 0, y: 0, z: -0.12549946, w: 0.9920937}
-      length: 389.6351
+      rotation: {x: 0, y: 0, z: -0.12549935, w: 0.99209374}
+      length: 389.63504
       parentId: 1
       color:
         serializedVersion: 2
@@ -12335,17 +12335,17 @@ ScriptedImporter:
     - name: left leg
       guid: c08f07e2f17c79148a62fd1655d23235
       position: {x: 230.48282, y: 0.00006183893, z: 0}
-      rotation: {x: 0, y: 0, z: -0.1254995, w: 0.99209374}
-      length: 389.6352
+      rotation: {x: 0, y: 0, z: -0.12549938, w: 0.99209374}
+      length: 389.63513
       parentId: 0
       color:
         serializedVersion: 2
         rgba: 4286578943
     - name: left foot
       guid: b316e12413a710d42b6940bcb4c94bfd
-      position: {x: 389.63504, y: 0.00008596662, z: 0}
-      rotation: {x: 0, y: 0, z: 0.19531985, w: 0.9807396}
-      length: 87.29959
+      position: {x: 389.63507, y: 0.0000483353, z: 0}
+      rotation: {x: 0, y: 0, z: 0.19531973, w: 0.98073965}
+      length: 87.29961
       parentId: 1
       color:
         serializedVersion: 2
@@ -13000,17 +13000,17 @@ ScriptedImporter:
     - name: left leg
       guid: c08f07e2f17c79148a62fd1655d23235
       position: {x: -137.9989, y: 437.7329, z: 0}
-      rotation: {x: 0, y: 0, z: -0.50152534, w: 0.865143}
-      length: 389.6352
+      rotation: {x: 0, y: 0, z: -0.5015252, w: 0.865143}
+      length: 389.63516
       parentId: -1
       color:
         serializedVersion: 2
         rgba: 4286578943
     - name: left foot
       guid: b316e12413a710d42b6940bcb4c94bfd
-      position: {x: 389.63504, y: 0.000102469436, z: 0}
-      rotation: {x: 0, y: 0, z: 0.19531985, w: 0.98073965}
-      length: 87.299614
+      position: {x: 389.63522, y: -0.000012761146, z: 0}
+      rotation: {x: 0, y: 0, z: 0.19531971, w: 0.9807396}
+      length: 87.29961
       parentId: 0
       color:
         serializedVersion: 2
@@ -13623,8 +13623,8 @@ ScriptedImporter:
     - name: right leg
       guid: 6e36668f2ad7dc54489bd2322690795b
       position: {x: 201.90373, y: 0.000062204585, z: 0}
-      rotation: {x: 0, y: 0, z: 0.44248158, w: 0.8967776}
-      length: 380.74338
+      rotation: {x: 0, y: 0, z: 0.44248155, w: 0.89677763}
+      length: 380.74326
       parentId: 1
       color:
         serializedVersion: 2
@@ -14164,17 +14164,17 @@ ScriptedImporter:
     - name: right leg
       guid: 6e36668f2ad7dc54489bd2322690795b
       position: {x: 201.90361, y: 0.00006643147, z: 0}
-      rotation: {x: 0, y: 0, z: 0.44248155, w: 0.8967776}
-      length: 380.74338
+      rotation: {x: 0, y: 0, z: 0.44248155, w: 0.89677763}
+      length: 380.74323
       parentId: 0
       color:
         serializedVersion: 2
         rgba: 4294967040
     - name: right foot
       guid: 99bd6a25f78d05f47a2d17c16657d0dd
-      position: {x: 380.74316, y: -0.00003244468, z: 0}
+      position: {x: 380.74304, y: -0.000046463476, z: 0}
       rotation: {x: 0, y: 0, z: -0.6631993, w: 0.74844295}
-      length: 111.29878
+      length: 111.29877
       parentId: 1
       color:
         serializedVersion: 2
@@ -14789,17 +14789,17 @@ ScriptedImporter:
     - name: right leg
       guid: 6e36668f2ad7dc54489bd2322690795b
       position: {x: 182.60132, y: 428.9881, z: 0}
-      rotation: {x: 0, y: 0, z: 0.7136576, w: -0.70049477}
-      length: 380.7434
+      rotation: {x: 0, y: 0, z: 0.7136576, w: -0.7004947}
+      length: 380.74332
       parentId: -1
       color:
         serializedVersion: 2
         rgba: 4294967040
     - name: right foot
       guid: 99bd6a25f78d05f47a2d17c16657d0dd
-      position: {x: 380.74332, y: 0.00008014701, z: 0}
-      rotation: {x: 0, y: 0, z: -0.6631993, w: 0.74844295}
-      length: 111.298775
+      position: {x: 380.7432, y: 0.000044666736, z: 0}
+      rotation: {x: 0, y: 0, z: -0.66319925, w: 0.74844295}
+      length: 111.29879
       parentId: 0
       color:
         serializedVersion: 2
@@ -16507,16 +16507,16 @@ ScriptedImporter:
     - name: left leg
       guid: c08f07e2f17c79148a62fd1655d23235
       position: {x: 230.48271, y: 0.0000497113, z: 0}
-      rotation: {x: 0, y: 0, z: -0.12549946, w: 0.9920937}
-      length: 389.6351
+      rotation: {x: 0, y: 0, z: -0.12549935, w: 0.99209374}
+      length: 389.63507
       parentId: 10
       color:
         serializedVersion: 2
         rgba: 4286578943
     - name: left foot
       guid: b316e12413a710d42b6940bcb4c94bfd
-      position: {x: 389.63504, y: 0.000054981414, z: 0}
-      rotation: {x: 0, y: 0, z: 0.1953198, w: 0.9807396}
+      position: {x: 389.6351, y: 0.000025184265, z: 0}
+      rotation: {x: 0, y: 0, z: 0.1953197, w: 0.98073965}
       length: 87.29959
       parentId: 11
       color:
@@ -16534,16 +16534,16 @@ ScriptedImporter:
     - name: right leg
       guid: 6e36668f2ad7dc54489bd2322690795b
       position: {x: 201.90366, y: 0.000017060105, z: 0}
-      rotation: {x: 0, y: 0, z: 0.44248155, w: 0.89677763}
-      length: 380.74338
+      rotation: {x: 0, y: 0, z: 0.44248152, w: 0.89677763}
+      length: 380.74326
       parentId: 13
       color:
         serializedVersion: 2
         rgba: 4294967040
     - name: right foot
       guid: 99bd6a25f78d05f47a2d17c16657d0dd
-      position: {x: 380.74332, y: -0.00008520568, z: 0}
-      rotation: {x: 0, y: 0, z: -0.6631993, w: 0.74844295}
+      position: {x: 380.7432, y: 0.000008537549, z: 0}
+      rotation: {x: 0, y: 0, z: -0.66319925, w: 0.74844295}
       length: 111.29878
       parentId: 14
       color:
@@ -16570,7 +16570,7 @@ ScriptedImporter:
     - name: head_3
       guid: 8f601dcf7518a0c4bae7b91558375bcf
       position: {x: 93.33454, y: -64.47814, z: 0}
-      rotation: {x: 0, y: -0, z: -0.9840932, w: 0.177653}
+      rotation: {x: 0, y: 0, z: -0.9840932, w: 0.177653}
       length: 4.1947055
       parentId: 3
       color:
