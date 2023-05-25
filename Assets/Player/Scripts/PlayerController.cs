@@ -213,6 +213,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Backdash()
     {
         actionable = false;
+        isBlocking = false;
         //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.drag = 0;
         rb2d.velocity = new Vector3(BACKDASH_SPEED * -direction, 0, 0);
@@ -242,6 +243,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Forwardash()
     {
         actionable = false;
+        isBlocking = false;
         //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.velocity = new Vector3(FORWARDASH_SPEED * direction, 0, 0);
         rb2d.drag = 0;
@@ -270,6 +272,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator LightAttack()
     {
+        isBlocking = false;
         audioMan.PlaySound(AudioManager.SFX.LightAtk);
         animationManager.LightAttack();
         //currentAttack = Attack.Light;
@@ -280,6 +283,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HeavyAttack()
     {
+        isBlocking = false;
         audioMan.PlaySound(AudioManager.SFX.HeavyAtk);
         animationManager.HeavyAttack();
         //currentAttack = Attack.Heavy;
