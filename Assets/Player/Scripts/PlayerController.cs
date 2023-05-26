@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
                 if (isDefenestratable)
                 {
                     health = 0;
-                    StartCoroutine("Defenestrate");
+                    StartCoroutine("HitByHeavy");
                 }
                 else if (colHitbox.attackType == Attack.Light)
                 {
