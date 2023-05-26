@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
     public bool isDefenestratable = false;
     public bool isBlocking = false;
     public bool isDead = false;
+    Color idleColor = new Color(1.0f, 1.0f, 1.0f);
 
     [SerializeField]
     public AnimationManager animationManager;
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         atCameraEdge = Vector3.Distance(transform.position, otherPlayerController.transform.position) > 17;
-
+        int leftright = 0;
         if (backDashSec > 0)
         {
             backDashSec -= Time.deltaTime;
@@ -128,7 +129,6 @@ public class PlayerController : MonoBehaviour
         {
             forwarDashSec -= Time.deltaTime;
         }
-
 
         if (actionable && !isDead)
         {
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                int leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
+                leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
 
                 if (P1 ? leftright == -1 : leftright == 1)
                 {
@@ -195,10 +195,12 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        animationManager.direction = P1 ? leftright : -leftright;
     }
     public void NewRound()
     {
         animationManager.Reset();
+        idleColor = new Color(1.0f, 1.0f, 1.0f);
         transform.position = new Vector3(STARTING_DISTANCE * -direction, -1.5f, 0);
         health = MAX_HEALTH;
         currentAttack = Attack.None;
@@ -214,6 +216,26 @@ public class PlayerController : MonoBehaviour
         rb2d.velocity = new Vector2(LUNGE_FORCE * direction, 0);
     }
 
+    public void EnterDefenestrationZone()
+    {
+        isDefenestratable = true;
+        idleColor = new Color(1.0f, 1.0f, 0);
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = idleColor;
+        }
+    }
+
+    public void ExitDefenestrationZone()
+    {
+        isDefenestratable = false;
+        idleColor = new Color(1.0f, 1.0f, 1.0f);
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = idleColor;
+        }
+    }
+
 
     IEnumerator Backdash()
     {
@@ -221,6 +243,7 @@ public class PlayerController : MonoBehaviour
         isBlocking = false;
         //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.drag = 0;
+        animationManager.DashBackward();
         rb2d.velocity = new Vector3(BACKDASH_SPEED * -direction, 0, 0);
         foreach (SpriteRenderer spr in spriteArray)
         {
@@ -230,9 +253,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(BACKDASH_ACTIVE);
         rb2d.velocity = new Vector3(0, 0, 0);
         rb2d.drag = 0.05f;
+        animationManager.StopDash();
         foreach (SpriteRenderer spr in spriteArray)
         {
-            spr.color = new Color(255, 255, 255);
+            spr.color = idleColor;
         }
 
         yield return new WaitForSeconds(BACKDASH_RECOVERY);
@@ -252,6 +276,7 @@ public class PlayerController : MonoBehaviour
         //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.velocity = new Vector3(FORWARDASH_SPEED * direction, 0, 0);
         rb2d.drag = 0;
+        animationManager.DashForward();
         foreach (SpriteRenderer spr in spriteArray)
         {
             spr.color = new Color(0.7f, 0.8f, 1.0f);
@@ -261,9 +286,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(FORWARDASH_ACTIVE);
         rb2d.drag = 0.05f;
         rb2d.velocity = new Vector3(0, 0, 0);
+        animationManager.StopDash();
         foreach (SpriteRenderer spr in spriteArray)
         {
-            spr.color = new Color(255, 255, 255);
+            spr.color = idleColor;
         }
 
         yield return new WaitForSeconds(FORWARDASH_RECOVERY);
@@ -313,7 +339,7 @@ public class PlayerController : MonoBehaviour
                 if (isDefenestratable)
                 {
                     health = 0;
-                    StartCoroutine("HitByHeavy");
+                    StartCoroutine("Defenestrate");
                 }
                 else if (colHitbox.attackType == Attack.Light)
                 {
@@ -381,6 +407,26 @@ public class PlayerController : MonoBehaviour
     IEnumerator Defenestrate()
     {
         // do the same thing as Die() but with a different animation, different UI text displayed
+        animationManager.StartHitstun();
+        animationManager.Hurt();
+        inHitstun = true;
+        actionable = false;
+        healthDisplay.value = (float)health / MAX_HEALTH;
+
+        isDead = true;
+        actionable = false;
+        otherPlayerController.actionable = false;
+        audioMan.PlaySound(AudioManager.SFX.FinalHit);
+        Time.timeScale = 0.01f;
+        gameController.SetTextKO();
+        yield return new WaitForSeconds(0.03f);
+        Time.timeScale = 0.15f;
+        animationManager.Defenestrate();
+        yield return new WaitForSeconds(DEATH_FREEZE_TIME);
+        Time.timeScale = 1;
+        gameController.SetTextDefenestration();
+        yield return new WaitForSeconds(2.0f);
+        gameController.RoundEnd(!P1);
         yield return null;
     }
 
@@ -422,7 +468,7 @@ public class PlayerController : MonoBehaviour
 
             foreach (SpriteRenderer spr in spriteArray)
             {
-                spr.color = new Color(255, 0, 0);
+                spr.color = new Color(1.0f, 0, 0);
             }
 
             Time.timeScale = FREEZE_FRAME_TIMESCALE;
@@ -430,7 +476,7 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 1;
             foreach (SpriteRenderer spr in spriteArray)
             {
-                spr.color = new Color(255, 255, 255);
+                spr.color = idleColor;
             }
             
             rb2d.velocity = new Vector2(-LIGHT_ATTACK_KNOCKBACK * direction, 0);
@@ -475,7 +521,7 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = 1;
             foreach (SpriteRenderer spr in spriteArray)
             {
-                spr.color = new Color(255, 255, 255);
+                spr.color = idleColor;
             }
 
             rb2d.velocity = new Vector2(-HEAVY_ATTACK_KNOCKBACK * direction, 0);
