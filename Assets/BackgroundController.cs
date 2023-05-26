@@ -22,16 +22,6 @@ public class BackgroundController : MonoBehaviour
     Array[] layers;
     [SerializeField]
     GameObject[] rotatables; // sprites that span multiple layers must be rotated because daisy stinks
-    /*
-    [SerializeField]
-    GameObject[] layer1;
-    [SerializeField]
-    GameObject[] layer2;
-    [SerializeField]
-    GameObject[] layer3;
-    [SerializeField]
-    GameObject[] layer4;
-    */
     [SerializeField]
     float[] layerOffsets; // offset coefficients to be multiplied by the offset
     // layerOffsets.length = layers.length

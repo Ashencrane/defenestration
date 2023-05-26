@@ -345,6 +345,7 @@ public class PlayerController : MonoBehaviour
 
     public void StartClash()
     {
+        //inHitstun = true;
         audioMan.PlaySound(AudioManager.SFX.Clash);
         StartCoroutine("Clash");
     }
@@ -374,10 +375,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Clash()
     {
+        inHitstun = true;
         animationManager.StartHitstun();
         animationManager.Hurt();
         actionable = false;
-        inHitstun = true;
         rb2d.velocity = new Vector2(-CLASH_KNOCKBACK * direction, 0);
         yield return new WaitForSeconds(CLASH_STUN);
 
