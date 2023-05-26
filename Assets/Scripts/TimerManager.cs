@@ -10,6 +10,9 @@ public class TimerManager : MonoBehaviour
     TMP_Text textDisplay;
     bool paused;
 
+    [SerializeField]
+    GameController gameController;
+
     private void Awake()
     {
         textDisplay = gameObject.GetComponent<TMP_Text>();
@@ -27,6 +30,11 @@ public class TimerManager : MonoBehaviour
         {
             time -= Time.deltaTime;
             textDisplay.text = ((int)time).ToString();
+            if (time <= 0)
+            {
+                paused = true;
+                gameController.TimeOut();
+            }
         }
         
         

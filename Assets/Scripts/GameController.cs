@@ -128,11 +128,40 @@ public class GameController : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
+    IEnumerator TimeOutDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        if (P1m.health > P2m.health)
+        {
+            RoundEnd(true);
+        }
+        else if (P1m.health < P2m.health)
+        {
+            RoundEnd(false);
+        }
+        else
+        {
+            Debug.Log(P1.transform.position.x + P2.transform.position.x);
+            RoundEnd(P1.transform.position.x + P2.transform.position.x > 0);
+        }
+    }
+
+    public void TimeOut()
+    {
+        P1m.actionable = false;
+        P2m.actionable = false;
+        coroutine = DisplayText("TIME OUT", 2f);
+        StartCoroutine(coroutine);
+        StartCoroutine("TimeOutDelay");
+    }
+
     //Called whenever round ends. Updates score according to who won, displays text, and calls WaitAndStartNext()
     public void RoundEnd(bool P1winner) //true = P1 won, false = P2 won
     {
         gameLive = false;
         timer.ToggleTimer(false);
+        P1m.actionable = false;
+        P2m.actionable = false;
         if (P1winner)
         {
             P1Score += 1;
