@@ -80,6 +80,13 @@ public class AnimationManager : MonoBehaviour
         animator.SetBool("Dead", true);
     }
 
+    public void Defenestrate()
+    {
+        animator.ResetTrigger("Defenestrate");
+        animator.SetTrigger("Defenestrate");
+        animator.SetBool("Dead", true);
+    }
+
     public void Reset()
     {
         animator.SetBool("Dead", false);

@@ -83,6 +83,11 @@ public class GameController : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
+        if (!gameLive)
+        {
+            P1m.actionable = false;
+            P2m.actionable = false;
+        }
     }
 
     IEnumerator WaitAndStartNext() //called after someones dies
@@ -128,6 +133,12 @@ public class GameController : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
+    public void SetTextDefenestration()
+    {
+        coroutine = DisplayText("Defenestration", 2.0f);
+        StartCoroutine(coroutine);
+    }
+
     IEnumerator TimeOutDelay()
     {
         yield return new WaitForSeconds(2f);
@@ -148,8 +159,7 @@ public class GameController : MonoBehaviour
 
     public void TimeOut()
     {
-        P1m.actionable = false;
-        P2m.actionable = false;
+        gameLive = false;
         coroutine = DisplayText("TIME OUT", 2f);
         StartCoroutine(coroutine);
         StartCoroutine("TimeOutDelay");
@@ -160,8 +170,6 @@ public class GameController : MonoBehaviour
     {
         gameLive = false;
         timer.ToggleTimer(false);
-        P1m.actionable = false;
-        P2m.actionable = false;
         if (P1winner)
         {
             P1Score += 1;
