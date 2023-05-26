@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         atCameraEdge = Vector3.Distance(transform.position, otherPlayerController.transform.position) > 17;
-
+        int leftright = 0;
         if (backDashSec > 0)
         {
             backDashSec -= Time.deltaTime;
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                int leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
+                leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
 
                 if (P1 ? leftright == -1 : leftright == 1)
                 {
@@ -190,6 +190,7 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        animationManager.direction = P1 ? leftright : -leftright;
     }
     public void NewRound()
     {
@@ -237,6 +238,7 @@ public class PlayerController : MonoBehaviour
         isBlocking = false;
         //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.drag = 0;
+        animationManager.DashBackward();
         rb2d.velocity = new Vector3(BACKDASH_SPEED * -direction, 0, 0);
         foreach (SpriteRenderer spr in spriteArray)
         {
@@ -246,6 +248,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(BACKDASH_ACTIVE);
         rb2d.velocity = new Vector3(0, 0, 0);
         rb2d.drag = 0.05f;
+        animationManager.StopDash();
         foreach (SpriteRenderer spr in spriteArray)
         {
             spr.color = idleColor;
@@ -268,6 +271,7 @@ public class PlayerController : MonoBehaviour
         //spr.color = new Color(0.7f, 0.7f, 0.7f);
         rb2d.velocity = new Vector3(FORWARDASH_SPEED * direction, 0, 0);
         rb2d.drag = 0;
+        animationManager.DashForward();
         foreach (SpriteRenderer spr in spriteArray)
         {
             spr.color = new Color(0.7f, 0.8f, 1.0f);
@@ -277,6 +281,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(FORWARDASH_ACTIVE);
         rb2d.drag = 0.05f;
         rb2d.velocity = new Vector3(0, 0, 0);
+        animationManager.StopDash();
         foreach (SpriteRenderer spr in spriteArray)
         {
             spr.color = idleColor;
