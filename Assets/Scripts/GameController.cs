@@ -87,7 +87,8 @@ public class GameController : MonoBehaviour
 
     IEnumerator WaitAndStartNext() //called after someones dies
     {
-        yield return new WaitForSeconds(2f);
+        
+        yield return new WaitForSeconds(0.5f);
         P1m.NewRound();
         P2m.NewRound();
         
@@ -124,7 +125,7 @@ public class GameController : MonoBehaviour
 
     public void SetTextKO()
     {
-        coroutine = DisplayText("K.O.", 0.03f);
+        coroutine = DisplayText("K.O.", 2f);
         StartCoroutine(coroutine);
     }
 
@@ -169,7 +170,7 @@ public class GameController : MonoBehaviour
             scoreGemsP1[P1Score - 1].color = Color.white;
             if(P1Score < SCORE_TO_GET)
             {
-                coroutine = DisplayText("P1 score: " + P1Score, 2f);
+                //coroutine = DisplayText("K.O.", 2f);
                 StartCoroutine(coroutine);
             }
             else
@@ -186,7 +187,7 @@ public class GameController : MonoBehaviour
             scoreGemsP2[P2Score - 1].color = Color.white;
             if (P2Score < SCORE_TO_GET)
             {
-                coroutine = DisplayText("P2 score: " + P2Score, 2f);
+                //coroutine = DisplayText("K.O.", 2f);
                 StartCoroutine(coroutine);
             }
             else

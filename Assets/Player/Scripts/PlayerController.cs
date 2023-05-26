@@ -62,9 +62,10 @@ public class PlayerController : MonoBehaviour
     const float CLASH_KNOCKBACK = 5f;
     const float CLASH_FREEZE_TIME = 0.001f;
 
-    const float DEATH_FREEZE_TIME = 0.5f;
+    const float DEATH_FREEZE_TIME = 0.75f;
 
     const float LUNGE_FORCE = 10f;
+    
 
     public enum Attack
     {
@@ -86,6 +87,10 @@ public class PlayerController : MonoBehaviour
     public AnimationManager animationManager;
     [SerializeField]
     SpriteRenderer[] spriteArray;
+    [SerializeField]
+    private GameObject bloodFX;
+    [SerializeField]
+    private GameObject strbloodFX;
 
     private void Awake()
     {
@@ -357,11 +362,17 @@ public class PlayerController : MonoBehaviour
         otherPlayerController.actionable = false;
         audioMan.PlaySound(AudioManager.SFX.FinalHit);
         Time.timeScale = 0.01f;
-        gameController.SetTextKO();
-        yield return new WaitForSeconds(0.03f);
-        Time.timeScale = 0.15f;
+        
+        yield return new WaitForSeconds(0.001f);
+        Time.timeScale = 0.25f;
+        
         animationManager.Die();
-        yield return new WaitForSeconds(DEATH_FREEZE_TIME);
+
+        float KODELAY = 0.25f;
+
+        yield return new WaitForSeconds(KODELAY);
+        gameController.SetTextKO();
+        yield return new WaitForSeconds(DEATH_FREEZE_TIME - KODELAY);
         Time.timeScale = 1;
         gameController.RoundEnd(!P1);
         yield return null;
@@ -390,6 +401,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator HitByLight()
     {
+        
         audioMan.PlaySound(AudioManager.SFX.LightHit);
         animationManager.StartHitstun();
         animationManager.Hurt();
@@ -405,6 +417,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            GameObject bfx = Instantiate(bloodFX, new Vector3(transform.position.x + 1 * -direction, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, -direction * 90, 0));
+
+
             foreach (SpriteRenderer spr in spriteArray)
             {
                 spr.color = new Color(255, 0, 0);
@@ -449,6 +464,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            GameObject bfx = Instantiate(strbloodFX, new Vector3(transform.position.x + 1 * -direction, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, -direction * 90, 0));
             foreach (SpriteRenderer spr in spriteArray)
             {
                 spr.color = new Color(255, 0, 0);
