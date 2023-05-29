@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class GameController : MonoBehaviour
 {
@@ -25,6 +26,13 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     TimerManager timer;
+
+    [SerializeField]
+    AudioMixer sfxMixer;
+
+    [SerializeField]
+    AudioMixer musicMixer;
+    
 
     int SCORE_TO_GET = 2;
     int P1Score;
@@ -49,6 +57,9 @@ public class GameController : MonoBehaviour
         Display2.text = "";
         P1Score = 0;
         P2Score = 0;
+        SetMusicVol();
+        SetSFXVol();
+
 
         P1m.NewRound();
         P2m.NewRound();
@@ -211,6 +222,19 @@ public class GameController : MonoBehaviour
     public void SetGameLive(bool b)
     {
         gameLive = b;
+    }
+    private float convertToDb(float val)
+    {
+        return ((Mathf.Log10(val * 20) - 0.5f) * 10f);
+    }
+
+    public void SetMusicVol()
+    {
+        musicMixer.SetFloat("Music_Vol", convertToDb(OptionSettings.MusicSetting));
+    }
+    public void SetSFXVol()
+    {
+        sfxMixer.SetFloat("SFX_Vol", convertToDb(OptionSettings.SfxSetting));
     }
 
 

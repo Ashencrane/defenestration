@@ -3097,6 +3097,8 @@ MonoBehaviour:
   volumeSlider: {fileID: 8421437309663311490}
   resolutionDropdown: {fileID: 8421437308690542838}
   fullscreenToggle: {fileID: 8421437310157608097}
+  musicMixer: {fileID: 24100000, guid: e8c085bbb39342d419bf3a0f399dce85, type: 2}
+  sfxMixer: {fileID: 24100000, guid: efc0b2595c5e8a3428620aadb6b494fa, type: 2}
 --- !u!1 &8421437309423317370
 GameObject:
   m_ObjectHideFlags: 0
@@ -3833,7 +3835,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 8421437308801595008}
   m_HandleRect: {fileID: 8421437309681344503}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -5393,7 +5395,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 8421437310150796898}
   m_HandleRect: {fileID: 8421437309210735051}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1

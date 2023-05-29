@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     Slider healthDisplay;
     PlayerController otherPlayerController;
     GameController gameController;
-    AudioManager audioMan;
 
 
     double forwarDashSec = 0;
@@ -92,12 +91,14 @@ public class PlayerController : MonoBehaviour
     private GameObject bloodFX;
     [SerializeField]
     private GameObject strbloodFX;
+    [SerializeField]
+    private AudioManager audioMan;
 
     private void Awake()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        audioMan = GameObject.Find("Main Camera").GetComponent<AudioManager>();
+        
 
         if (P1)
         {
