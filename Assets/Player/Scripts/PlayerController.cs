@@ -226,6 +226,7 @@ public class PlayerController : MonoBehaviour
         animationManager.Reset();
         idleColor = new Color(1.0f, 1.0f, 1.0f);
         transform.position = new Vector3(STARTING_DISTANCE * -direction, -1.5f, 0);
+        rb2d.velocity = Vector2.zero;
         health = MAX_HEALTH;
         currentAttack = Attack.None;
         healthDisplay.value = (float)health / MAX_HEALTH;

@@ -1098,7 +1098,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Up - Heavy Attack
+  m_text: (X) | [Up] - Heavy Attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
   m_sharedMaterial: {fileID: 7672946031397039270, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Left/Right - Move Left/Right
+  m_text: (L Stick) | [Left/Right] - Move Left/Right
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
   m_sharedMaterial: {fileID: 7672946031397039270, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
@@ -2016,7 +2016,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Space - Light Attack
+  m_text: (A) | [`] - Light Attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
   m_sharedMaterial: {fileID: 7672946031397039270, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
@@ -2906,7 +2906,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Right Shift - Light Attack
+  m_text: (A) | Right Shift - Light Attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
   m_sharedMaterial: {fileID: 7672946031397039270, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
@@ -4367,7 +4367,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: W - Heavy Attack
+  m_text: (X) | [W] - Heavy Attack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
   m_sharedMaterial: {fileID: 7672946031397039270, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
@@ -5568,7 +5568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A/D - Move Left/Right
+  m_text: (L Stick) | [A/D] - Move Left/Right
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}
   m_sharedMaterial: {fileID: 7672946031397039270, guid: e6558b521a9277845ad4d49af2ee3164, type: 2}

@@ -40,7 +40,7 @@ public class BackgroundController : MonoBehaviour
     void Start()
     {
         initialOffsets = new List<List<float>>();
-        Debug.Log(layers.Length);
+        //Debug.Log(layers.Length);
         for (int i = 0; i < layers.Length; ++i)
         {
             List<float> offsetRow = new List<float>();
