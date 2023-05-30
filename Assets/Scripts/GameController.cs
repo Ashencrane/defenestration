@@ -83,13 +83,13 @@ public class GameController : MonoBehaviour
             
             if (!pauseMenu.activeInHierarchy)
             {
-                timer.ToggleTimer(false);
+                //timer.ToggleTimer(false);
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0;
             }
             else
             {
-                timer.ToggleTimer(true);
+                //timer.ToggleTimer(true);
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1;
             }
