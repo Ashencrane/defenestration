@@ -4,11 +4,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 
 public struct OptionSettings
 {
-    public static float MusicSetting = 1;
-    public static float SfxSetting = 1;
+    public static float MusicSetting = 0.75f;
+    public static float SfxSetting = 0.75f;
     public static Resolution ScreenResolution;
     public static int ScreenRefreshRate = 60;
     public static bool Fullscreen = true;
@@ -20,12 +21,13 @@ public class OptionsManager : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private AudioMixer musicMixer;
+    [SerializeField] private AudioMixer sfxMixer;
 
     private Resolution[] _resolutions;
     private List<Resolution> _filteredResolutions;
     private int _currentResolutionIndex;
-    
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,7 @@ public class OptionsManager : MonoBehaviour
 
     private void SetupSliders()
     {
+  
         musicSlider.value = OptionSettings.MusicSetting;
         volumeSlider.value = OptionSettings.SfxSetting;
     }
@@ -92,16 +95,25 @@ public class OptionsManager : MonoBehaviour
         OptionSettings.Fullscreen = val;
         Screen.fullScreen = val;
     }
+
+    //takes in a float from 0.001-1 and converts it to db
+    private float convertToDb(float val)
+    {
+        return ((Mathf.Log10(val * 20) - 0.5f) * 10f);
+    }
     
     public void UpdateMusicSetting(float val)
     {
         OptionSettings.MusicSetting = val;
+        musicMixer.SetFloat("Music_Vol", convertToDb(val));
         Debug.Log("New music volume: " + OptionSettings.MusicSetting);
     }
-
+    
     public void UpdateSfxSetting(float val)
     {
         OptionSettings.SfxSetting = val;
+        sfxMixer.SetFloat("SFX_Vol", convertToDb(val));
+        
         Debug.Log("New sfx volume: " + OptionSettings.SfxSetting);
     }
 }

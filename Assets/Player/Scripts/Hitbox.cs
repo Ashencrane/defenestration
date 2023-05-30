@@ -69,7 +69,7 @@ public class Hitbox : MonoBehaviour
         }
         if (col.tag == "DefenestrationZone" && boxType == BoxType.Hurt) // if player is on edge of stage, they become defenestratable
         {
-            parentPlayerController.isDefenestratable = true;
+            parentPlayerController.EnterDefenestrationZone();
         }
         
     }
@@ -78,7 +78,7 @@ public class Hitbox : MonoBehaviour
     {
         if (col.tag == "DefenestrationZone")
         {
-            parentPlayerController.isDefenestratable = false;
+            parentPlayerController.ExitDefenestrationZone();
         }
     }
 }

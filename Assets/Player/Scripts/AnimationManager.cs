@@ -16,6 +16,8 @@ public class AnimationManager : MonoBehaviour
     public bool isSwordActive;
     public float frameTimeElapsed;
 
+    public int direction; // 1 = forward, 0 = idle, -1 = backward
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class AnimationManager : MonoBehaviour
             frameTimeElapsed += Time.deltaTime;
         }
         else { frameTimeElapsed = 0; }
+        animator.SetInteger("Direction", direction);
     }
 
     public void ResetTime()
@@ -80,6 +83,13 @@ public class AnimationManager : MonoBehaviour
         animator.SetBool("Dead", true);
     }
 
+    public void Defenestrate()
+    {
+        animator.ResetTrigger("Defenestrate");
+        animator.SetTrigger("Defenestrate");
+        animator.SetBool("Dead", true);
+    }
+
     public void Reset()
     {
         animator.SetBool("Dead", false);
@@ -91,6 +101,39 @@ public class AnimationManager : MonoBehaviour
     {
         animator.ResetTrigger("Block");
         animator.SetTrigger("Block");
+    }
+
+    public void Parry()
+    {
+        animator.ResetTrigger("Parry");
+        animator.SetTrigger("Parry");
+    }
+    public void StartParryDelay()
+    {
+        animator.SetBool("IsParrying", true);
+    }
+    public void EndParryDelay()
+    {
+        animator.SetBool("IsParrying", false);
+    }
+
+    public void DashForward()
+    {
+        animator.ResetTrigger("DashForward");
+        animator.SetTrigger("DashForward");
+        animator.SetBool("InDash", true);
+    }
+
+    public void DashBackward()
+    {
+        animator.ResetTrigger("DashBackward");
+        animator.SetTrigger("DashBackward");
+        animator.SetBool("InDash", true);
+    }
+
+    public void StopDash()
+    {
+        animator.SetBool("InDash", false);
     }
 
     public void MakeUnactionable()
