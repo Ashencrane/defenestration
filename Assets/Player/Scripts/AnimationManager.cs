@@ -103,6 +103,20 @@ public class AnimationManager : MonoBehaviour
         animator.SetTrigger("Block");
     }
 
+    public void Parry()
+    {
+        animator.ResetTrigger("Parry");
+        animator.SetTrigger("Parry");
+    }
+    public void StartParryDelay()
+    {
+        animator.SetBool("IsParrying", true);
+    }
+    public void EndParryDelay()
+    {
+        animator.SetBool("IsParrying", false);
+    }
+
     public void DashForward()
     {
         animator.ResetTrigger("DashForward");

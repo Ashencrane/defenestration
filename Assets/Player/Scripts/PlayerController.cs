@@ -64,6 +64,11 @@ public class PlayerController : MonoBehaviour
     const float DEATH_FREEZE_TIME = 0.75f;
 
     const float LUNGE_FORCE = 10f;
+
+    const float PARRY_WINDOW = 0.1f;
+    const float PARRY_FREEZE_TIME = 0.04f;
+    const float PARRY_DURATION = 0.4f;
+    const float PARRY_COOLDOWN = 0.25f;
     
 
     public enum Attack
@@ -74,14 +79,18 @@ public class PlayerController : MonoBehaviour
 
 
     public bool actionable = true;
+    public bool movable = true;
     bool atCameraEdge;
     bool inHitstun = false;
     int direction;
     public bool isHit = false;
     public bool isDefenestratable = false;
     public bool isBlocking = false;
+    public bool isParrying = false;
     public bool isDead = false;
     Color idleColor = new Color(1.0f, 1.0f, 1.0f);
+    float parryCooldownTimer;
+    public bool parryingAttack = false;
 
     [SerializeField]
     public AnimationManager animationManager;
@@ -130,6 +139,10 @@ public class PlayerController : MonoBehaviour
         {
             forwarDashSec -= Time.deltaTime;
         }
+        if (parryCooldownTimer > 0)
+        {
+            parryCooldownTimer -= Time.deltaTime;
+        }
 
         if (actionable && !isDead)
         {
@@ -168,18 +181,28 @@ public class PlayerController : MonoBehaviour
                 if (P1 ? leftright == -1 : leftright == 1)
                 {
                     isBlocking = true;
+                    isParrying = false;
                     Debug.Log("Blocking");
+                }
+                else if (P1 ? leftright == 1 : leftright == -1)
+                {
+                    isBlocking = false;
+                    if (parryCooldownTimer <= 0)
+                    {
+                        StartCoroutine("ActivateParry");
+                    }
                 }
                 else
                 {
                     isBlocking = false;
+                    isParrying = false;
                 }
 
-                if (leftright == -1 && !(P1 && atCameraEdge))
+                if (leftright == -1 && !(P1 && atCameraEdge) && movable)
                 {
                     gameObject.transform.Translate(new Vector2(-MOVE_SPEED, 0) * Time.deltaTime);
                 }
-                else if (leftright == 1 && !(!P1 && atCameraEdge))
+                else if (leftright == 1 && !(!P1 && atCameraEdge) && movable)
                 {
                     gameObject.transform.Translate(new Vector2(MOVE_SPEED, 0) * Time.deltaTime);
                 }
@@ -236,6 +259,7 @@ public class PlayerController : MonoBehaviour
             spr.color = idleColor;
         }
     }
+
 
 
     IEnumerator Backdash()
@@ -327,14 +351,18 @@ public class PlayerController : MonoBehaviour
     {
         isHit = true;
         Debug.Log("collide");
-        if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun && colHitbox.isActive) 
+        if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun && colHitbox.isActive && !parryingAttack) 
         {
-            if (currentAttack != Attack.None && Mathf.Abs(animationManager.frameTimeElapsed - otherPlayerController.animationManager.frameTimeElapsed) < CLASH_WINDOW)
+            if (isParrying)
+            {
+                StartCoroutine("Parry");
+            }
+            else if (currentAttack != Attack.None && Mathf.Abs(animationManager.frameTimeElapsed - otherPlayerController.animationManager.frameTimeElapsed) < CLASH_WINDOW)
             {
                 StartCoroutine("Clash");
                 otherPlayerController.StartClash();
             }
-            else if (currentAttack == Attack.None || animationManager.frameTimeElapsed < otherPlayerController.animationManager.frameTimeElapsed)
+            else if (currentAttack == Attack.None || animationManager.frameTimeElapsed < otherPlayerController.animationManager.frameTimeElapsed || otherPlayerController.parryingAttack)
             {
                 Debug.Log("hit");
                 if (isDefenestratable)
@@ -443,6 +471,43 @@ public class PlayerController : MonoBehaviour
         animationManager.EndHitstun();
         actionable = true;
         inHitstun = false;
+        yield return null;
+    }
+    IEnumerator ActivateParry()
+    {
+        isParrying = true;
+        yield return new WaitForSeconds(PARRY_WINDOW);
+        isParrying = false;
+        parryCooldownTimer = PARRY_COOLDOWN;
+        yield return null;
+    }
+    IEnumerator Parry()
+    {
+        actionable = true;
+        movable = false;
+        animationManager.Parry();
+        animationManager.StartParryDelay();
+        parryingAttack = true;
+
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = new Color(0.5f, 0.5f, 1.0f);
+        }
+
+        Time.timeScale = FREEZE_FRAME_TIMESCALE;
+        yield return new WaitForSeconds(PARRY_FREEZE_TIME);
+        Time.timeScale = 1;
+
+        foreach (SpriteRenderer spr in spriteArray)
+        {
+            spr.color = idleColor;
+        }
+
+        yield return new WaitForSeconds(PARRY_DURATION);
+
+        animationManager.EndParryDelay();
+        parryingAttack = false;
+        movable = true;
         yield return null;
     }
 
@@ -574,7 +639,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         foreach (SpriteRenderer spr in spriteArray)
         {
-            spr.color = new Color(255, 255, 255);
+            spr.color = idleColor;
         }
         
         rb2d.velocity = new Vector2(-LIGHT_ATTACK_BLOCK_KNOCKBACK * direction, 0);
@@ -609,7 +674,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         foreach (SpriteRenderer spr in spriteArray)
         {
-            spr.color = new Color(255, 255, 255);
+            spr.color = idleColor;
         }
         
         rb2d.velocity = new Vector2(-HEAVY_ATTACK_BLOCK_KNOCKBACK * direction, 0);
