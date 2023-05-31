@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public int health;
 
     const int MAX_HEALTH = 8;
-    const float MOVE_SPEED = 4.5f;
+    const float MOVE_SPEED = 4.75f;
 
     const float STARTING_DISTANCE = 6f;
 
@@ -50,11 +50,11 @@ public class PlayerController : MonoBehaviour
 
     const float FORWARDASH_SPEED = 8f;
     const float FORWARDASH_ACTIVE = 0.25f;
-    const float FORWARDASH_RECOVERY = 0.10f;
+    const float FORWARDASH_RECOVERY = 0.08f;
 
     const float BACKDASH_SPEED = 8f;
     const float BACKDASH_ACTIVE = 0.25f;
-    const float BACKDASH_RECOVERY = 0.15f;
+    const float BACKDASH_RECOVERY = 0.08f;
 
     const float CLASH_WINDOW = 0.02f;
     const float CLASH_STUN = 0.25f;
@@ -147,9 +147,13 @@ public class PlayerController : MonoBehaviour
         if (actionable && !isDead)
         {
             rb2d.velocity = new Vector2(0f, 0f);
+            //temp fix for z3
+            //rewrite this code later
+            bool fdash = P1 ? Input.GetAxis("DashP1") == 1 && Input.GetAxis("HorizontalP1") == 1 : Input.GetAxis("DashP2") == 1 && Input.GetAxis("HorizontalP2") == -1;
+            bool bdash = P1 ? Input.GetAxis("DashP1") == 1 && Input.GetAxis("HorizontalP1") == -1 : Input.GetAxis("DashP2") == 1 && Input.GetAxis("HorizontalP2") == 1;
             //backdash code
 
-            if (Input.GetKeyDown(KeyCode.A) && P1 || Input.GetKeyDown(KeyCode.RightArrow) && !P1) //scuffed but works
+            if (Input.GetKeyDown(KeyCode.A) && P1 || Input.GetKeyDown(KeyCode.RightArrow) && !P1 || bdash) //scuffed but works
             {
                 if (backDashSec > 0 && !atCameraEdge)
                 {
@@ -161,8 +165,9 @@ public class PlayerController : MonoBehaviour
                     backDashSec = 0.25f;
                 }
             }
+            
             //forwardash code
-            else if (Input.GetKeyDown(KeyCode.D) && P1 || Input.GetKeyDown(KeyCode.LeftArrow) && !P1) //scuffed but works
+            else if (Input.GetKeyDown(KeyCode.D) && P1 || Input.GetKeyDown(KeyCode.LeftArrow) && !P1 || fdash)//scuffed but works
             {
                 if (forwarDashSec > 0)
                 {

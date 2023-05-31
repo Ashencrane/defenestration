@@ -171,6 +171,8 @@ public class GameController : MonoBehaviour
 
     public void TimeOut()
     {
+        P1m.actionable = false;
+        P2m.actionable = false;
         gameLive = false;
         coroutine = DisplayText("TIME OUT", 2f);
         StartCoroutine(coroutine);
