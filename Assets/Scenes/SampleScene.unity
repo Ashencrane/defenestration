@@ -8366,6 +8366,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8624012172028822588, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1845236869}
     - target: {fileID: 8624012172433152666, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
