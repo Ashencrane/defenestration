@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
                 {
                     isBlocking = true;
                     isParrying = false;
-                    Debug.Log("Blocking");
+                    //Debug.Log("Blocking");
                 }
                 else if (P1 ? leftright == 1 : leftright == -1)
                 {
@@ -356,7 +356,7 @@ public class PlayerController : MonoBehaviour
     public void OnHit(Hitbox hitbox, Hitbox colHitbox)
     {
         isHit = true;
-        Debug.Log("collide");
+        //Debug.Log("collide");
         if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun && colHitbox.isActive && !parryingAttack) 
         {
             if (isParrying)
@@ -370,7 +370,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (currentAttack == Attack.None || animationManager.frameTimeElapsed < otherPlayerController.animationManager.frameTimeElapsed || otherPlayerController.parryingAttack)
             {
-                Debug.Log("hit");
+                //Debug.Log("hit");
                 if (isDefenestratable)
                 {
                     health = 0;

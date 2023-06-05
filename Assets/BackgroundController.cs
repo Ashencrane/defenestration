@@ -47,7 +47,6 @@ public class BackgroundController : MonoBehaviour
             for (int j = 0; j < layers[i].Length(); ++j)
             {
                 offsetRow.Add(layers[i][j].transform.position.x);
-                Debug.Log(layers[i][j].transform.position.x);
             }
             initialOffsets.Add(offsetRow);
         }
