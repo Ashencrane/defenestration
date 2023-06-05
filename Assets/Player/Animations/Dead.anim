@@ -364,7 +364,7 @@ AnimationClip:
     classID: 114
     script: {fileID: 11500000, guid: 35aa84ab999e5684bb6af6d2dbc4bc30, type: 3}
   m_PPtrCurves: []
-  m_SampleRate: 60
+  m_SampleRate: 24
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -1727,7 +1727,37 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: sprite 1 but good this time i swear/pelvis/right thigh/right leg
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: sprite 1 but good this time i swear/pelvis/right thigh/right leg
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
+    path: sprite 1 but good this time i swear/pelvis/right thigh/right leg
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis
     classID: 4
     script: {fileID: 0}
@@ -1747,7 +1777,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis
     classID: 4
     script: {fileID: 0}
@@ -1757,7 +1787,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1
     classID: 4
     script: {fileID: 0}
@@ -1777,7 +1807,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1
     classID: 4
     script: {fileID: 0}
@@ -1787,7 +1817,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1
     classID: 4
     script: {fileID: 0}
@@ -1807,7 +1837,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1
     classID: 4
     script: {fileID: 0}
@@ -1817,7 +1847,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/head
     classID: 4
     script: {fileID: 0}
@@ -1837,7 +1867,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/head
     classID: 4
     script: {fileID: 0}
@@ -1847,7 +1877,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/left upper arm
     classID: 4
     script: {fileID: 0}
@@ -1867,7 +1897,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/left upper arm
     classID: 4
     script: {fileID: 0}
@@ -1877,7 +1907,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/left upper arm/left
       forearm
     classID: 4
@@ -1899,7 +1929,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/left upper arm/left
       forearm
     classID: 4
@@ -1910,7 +1940,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/left upper arm/left
       forearm/left hand
     classID: 4
@@ -1932,7 +1962,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/left upper arm/left
       forearm/left hand
     classID: 4
@@ -1943,7 +1973,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/right upper arm
     classID: 4
     script: {fileID: 0}
@@ -1963,7 +1993,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/right upper arm
     classID: 4
     script: {fileID: 0}
@@ -1973,7 +2003,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/right upper arm/right
       forearm
     classID: 4
@@ -1995,7 +2025,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/right upper arm/right
       forearm
     classID: 4
@@ -2006,7 +2036,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/right upper arm/right
       forearm/right hand
     classID: 4
@@ -2028,7 +2058,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/right upper arm/right
       forearm/right hand
     classID: 4
@@ -2039,7 +2069,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/right upper arm/right
       forearm/right hand/sword
     classID: 4
@@ -2061,7 +2091,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/chest_1/neck_1/right upper arm/right
       forearm/right hand/sword
     classID: 4
@@ -2072,7 +2102,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/left thigh
     classID: 4
     script: {fileID: 0}
@@ -2092,7 +2122,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/left thigh
     classID: 4
     script: {fileID: 0}
@@ -2102,7 +2132,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/left thigh/left leg
     classID: 4
     script: {fileID: 0}
@@ -2122,7 +2152,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/left thigh/left leg
     classID: 4
     script: {fileID: 0}
@@ -2132,7 +2162,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/left thigh/left leg/left foot
     classID: 4
     script: {fileID: 0}
@@ -2152,7 +2182,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
+    attribute: m_LocalEulerAngles.x
     path: sprite 1 but good this time i swear/pelvis/left thigh/left leg/left foot
     classID: 4
     script: {fileID: 0}
@@ -2162,7 +2192,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
+    attribute: m_LocalEulerAngles.z
     path: sprite 1 but good this time i swear/pelvis/right thigh
     classID: 4
     script: {fileID: 0}
@@ -2182,38 +2212,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: sprite 1 but good this time i swear/pelvis/right thigh
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: sprite 1 but good this time i swear/pelvis/right thigh/right leg
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: sprite 1 but good this time i swear/pelvis/right thigh/right leg
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: sprite 1 but good this time i swear/pelvis/right thigh/right leg
+    path: sprite 1 but good this time i swear/pelvis/right thigh
     classID: 4
     script: {fileID: 0}
   - curve:

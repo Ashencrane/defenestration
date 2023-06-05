@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
     float parryCooldownTimer;
     public bool parryingAttack = false;
 
-
+    int heldleftright = 0;
     double forwarDashSec = 0;
     double backDashSec = 0;
 
@@ -194,8 +194,9 @@ public class PlayerController : MonoBehaviour
                     isParrying = false;
                     //Debug.Log("Blocking");
                 }
-                else if (P1 ? leftright == 1 : leftright == -1)
+                else if (P1 ? leftright == 1 && heldleftright != 1 : leftright == -1 && heldleftright != -1)
                 {
+                    Debug.Log("Parry");
                     isBlocking = false;
                     if (parryCooldownTimer <= 0)
                     {
@@ -205,7 +206,6 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     isBlocking = false;
-                    isParrying = false;
                 }
 
                 if (leftright == -1 && !(P1 && atCameraEdge) && movable)
@@ -230,6 +230,7 @@ public class PlayerController : MonoBehaviour
 
         }
         animationManager.direction = P1 ? leftright : -leftright;
+        heldleftright = leftright;
     }
     public void NewRound()
     {
