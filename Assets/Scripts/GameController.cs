@@ -107,7 +107,8 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         P1m.NewRound();
         P2m.NewRound();
-        
+        Time.timeScale = 1;
+
 
         StartCoroutine("Countdown");
 
@@ -171,6 +172,8 @@ public class GameController : MonoBehaviour
 
     public void TimeOut()
     {
+        P1m.isInvuln = true;
+        P2m.isInvuln = true;
         P1m.actionable = false;
         P2m.actionable = false;
         gameLive = false;

@@ -15,11 +15,7 @@ public class PlayerController : MonoBehaviour
     GameController gameController;
 
 
-    double forwarDashSec = 0;
-    double backDashSec = 0;
 
-    public bool P1;
-    public int health;
 
     const int MAX_HEALTH = 8;
     const float MOVE_SPEED = 4.75f;
@@ -78,6 +74,8 @@ public class PlayerController : MonoBehaviour
     public Attack currentAttack;
 
 
+    public bool P1;
+    public int health;
     public bool actionable = true;
     public bool movable = true;
     bool atCameraEdge;
@@ -88,9 +86,16 @@ public class PlayerController : MonoBehaviour
     public bool isBlocking = false;
     public bool isParrying = false;
     public bool isDead = false;
+    public bool isInvuln = false;
+
+
     Color idleColor = new Color(1.0f, 1.0f, 1.0f);
     float parryCooldownTimer;
     public bool parryingAttack = false;
+
+
+    double forwarDashSec = 0;
+    double backDashSec = 0;
 
     [SerializeField]
     public AnimationManager animationManager;
@@ -238,6 +243,7 @@ public class PlayerController : MonoBehaviour
         actionable = false;
         inHitstun = false;
         isDead = false;
+        isInvuln = false;
     }
     
 
@@ -355,6 +361,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnHit(Hitbox hitbox, Hitbox colHitbox)
     {
+        if (isInvuln)
+        {
+            return;
+        }
         isHit = true;
         //Debug.Log("collide");
         if (colHitbox.GetBoxType() == Hitbox.BoxType.Hit && !inHitstun && colHitbox.isActive && !parryingAttack) 

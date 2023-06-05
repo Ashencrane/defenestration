@@ -9,6 +9,7 @@ public class TimerManager : MonoBehaviour
     float time;
     TMP_Text textDisplay;
     bool paused;
+    bool timeOut;
 
     [SerializeField]
     GameController gameController;
@@ -21,6 +22,7 @@ public class TimerManager : MonoBehaviour
     {
         MAX_TIME = 60;
         paused = true;
+        timeOut = false;
     }
 
     // Update is called once per frame
@@ -30,8 +32,10 @@ public class TimerManager : MonoBehaviour
         {
             time -= Time.deltaTime;
             textDisplay.text = ((int)time).ToString();
-            if (time <= 0)
+            if (time <= 0 && timeOut == false)
             {
+                Debug.Log("timed out!");
+                timeOut = true;
                 paused = true;
                 gameController.TimeOut();
             }
@@ -42,6 +46,7 @@ public class TimerManager : MonoBehaviour
     public void ResetTimer()
     {
         time = MAX_TIME;
+        timeOut = false;
     }
     public void ToggleTimer(bool play)
     {
