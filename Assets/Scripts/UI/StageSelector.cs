@@ -22,8 +22,8 @@ public class StageSelector : MonoBehaviour
 
     private readonly Dictionary<string, StageMap> _mapNameToStageMap = new Dictionary<string, StageMap>()
     {
-        { "Cathedral", StageMap.Cathedral },
-        { "Ballroom", StageMap.Ballroom }
+        { StageMap.Cathedral.ToString(), StageMap.Cathedral },
+        { StageMap.Ballroom.ToString(), StageMap.Ballroom }
     };
 
     public void UpdateSelectedName(string stage)

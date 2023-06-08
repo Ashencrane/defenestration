@@ -5450,7 +5450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Piss Baby
+  m_text: Pissanx Bebe
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2b6230305c7769c4db380b47c5d58ddc, type: 2}
   m_sharedMaterial: {fileID: -3966306578694809577, guid: 2b6230305c7769c4db380b47c5d58ddc, type: 2}
@@ -12980,7 +12980,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: PissanxBaby
+          m_StringArgument: PissanxBebe
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2126689774

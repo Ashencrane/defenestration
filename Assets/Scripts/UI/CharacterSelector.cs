@@ -8,7 +8,7 @@ using TMPro;
 public enum Character
 {
     Julie,
-    PissanxBaby
+    PissanxBebe
 }
 
 public class CharacterSelector : MonoBehaviour
@@ -26,7 +26,7 @@ public class CharacterSelector : MonoBehaviour
     private readonly Dictionary<string, Character> _characterNameDict = new Dictionary<string, Character>()
     {
         { Character.Julie.ToString(), Character.Julie },
-        { Character.PissanxBaby.ToString(), Character.PissanxBaby }
+        { Character.PissanxBebe.ToString(), Character.PissanxBebe }
     };
 
     public void SelectCharacter(Sprite charSprite)
