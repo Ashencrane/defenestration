@@ -17,8 +17,6 @@ public class Array
 public class BackgroundController : MonoBehaviour
 {
     [SerializeField]
-    GameObject cameraObject; // camera object
-    [SerializeField]
     Array[] layers;
     [SerializeField]
     GameObject[] rotatables; // sprites that span multiple layers must be rotated because daisy stinks
@@ -30,6 +28,7 @@ public class BackgroundController : MonoBehaviour
     [SerializeField]
     float[] rotatableOffsetsRot; // rotational coefficient
 
+    public GameObject cameraObject; // camera object
     public float centerX = 0;
     public float offset;
     List<List<float>> initialOffsets; // initial offsets of bg elements from center
