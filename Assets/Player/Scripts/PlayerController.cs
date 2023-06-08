@@ -44,12 +44,12 @@ public class PlayerController : MonoBehaviour
     const float HEAVY_ATTACK_BLOCK_KNOCKBACK = 20f;
     const float HEAVY_ATTACK_FREEZE_TIME = 0.02f;
 
-    const float FORWARDASH_SPEED = 8f;
-    const float FORWARDASH_ACTIVE = 0.25f;
+    const float FORWARDASH_SPEED = 10f;
+    const float FORWARDASH_ACTIVE = 0.35f;
     const float FORWARDASH_RECOVERY = 0.08f;
 
-    const float BACKDASH_SPEED = 8f;
-    const float BACKDASH_ACTIVE = 0.25f;
+    const float BACKDASH_SPEED = 10f;
+    const float BACKDASH_ACTIVE = 0.35f;
     const float BACKDASH_RECOVERY = 0.08f;
 
     const float CLASH_WINDOW = 0.02f;
@@ -291,13 +291,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(BACKDASH_ACTIVE);
         rb2d.velocity = new Vector3(0, 0, 0);
         rb2d.drag = 0.05f;
-        animationManager.StopDash();
         foreach (SpriteRenderer spr in spriteArray)
         {
             spr.color = idleColor;
         }
 
         yield return new WaitForSeconds(BACKDASH_RECOVERY);
+        animationManager.StopDash();
         
         //spr.color = new Color(200, 200, 200);
         actionable = true;
@@ -324,13 +324,13 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(FORWARDASH_ACTIVE);
         rb2d.drag = 0.05f;
         rb2d.velocity = new Vector3(0, 0, 0);
-        animationManager.StopDash();
         foreach (SpriteRenderer spr in spriteArray)
         {
             spr.color = idleColor;
         }
 
         yield return new WaitForSeconds(FORWARDASH_RECOVERY);
+        animationManager.StopDash();
 
         //spr.color = new Color(200, 200, 200);
         actionable = true;
