@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     const float HEAVY_ATTACK_ACTIVE = 0.3f;
     const float HEAVY_ATTACK_RECOVERY = 0.7f;
     const float HEAVY_ATTACK_DISTANCE = 1.6f;
-    const float HEAVY_ATTACK_STUN = 0.45f;
+    const float HEAVY_ATTACK_STUN = 0.6f;
     const float HEAVY_ATTACK_KNOCKBACK = 10f;
     const float HEAVY_ATTACK_BLOCK_KNOCKBACK = 20f;
     const float HEAVY_ATTACK_FREEZE_TIME = 0.02f;
