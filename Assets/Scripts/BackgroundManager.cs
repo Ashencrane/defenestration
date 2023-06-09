@@ -29,13 +29,13 @@ public class BackgroundManager : MonoBehaviour
         { StageMap.Ballroom, 1 }
     };
 
-    public int bgToDisplay = 0;
+    public int bgToDisplay = 1;
     GameObject bgObj;
 
     // Start is called before the first frame update
     void Start()
     {
-        bgToDisplay = stageIndices[StageSelector.SelectedStageMap];
+        //bgToDisplay = stageIndices[StageSelector.SelectedStageMap];
         bgObj = Instantiate(bgPrefabs[bgToDisplay], bgPosition, Quaternion.identity);
         BackgroundController bgController = bgObj.GetComponent<BackgroundController>();
         bgController.cameraObject = cameraObject;
