@@ -501,6 +501,7 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator Parry()
     {
+        audioMan.PlaySound(AudioManager.SFX.Parry);
         actionable = true;
         movable = false;
         animationManager.Parry();
@@ -641,7 +642,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator BlockLight()
     {
-        //audioMan.PlaySound(AudioManager.SFX.LightHit);
+        audioMan.PlaySound(AudioManager.SFX.BlockLight);
         animationManager.StartHitstun();
         animationManager.Block();
         inHitstun = true;
@@ -677,6 +678,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator BlockHeavy()
     {
+        audioMan.PlaySound(AudioManager.SFX.BlockHeavy);
         animationManager.StartHitstun();
         animationManager.Block();
         inHitstun = true;

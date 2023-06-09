@@ -176,6 +176,9 @@ MonoBehaviour:
   heavyHit: {fileID: 8300000, guid: 01935cdbdbd929f43b9458304ad4c3e1, type: 3}
   finalHit: {fileID: 8300000, guid: fce5a6a0c0e0f654c8fbf2078fb25216, type: 3}
   clash: {fileID: 8300000, guid: 01d816e283fa241429d6700dcaef59ca, type: 3}
+  parry: {fileID: 8300000, guid: 8a3ee90f80c52c94fa25afb9bf97d22c, type: 3}
+  blockLight: {fileID: 8300000, guid: 5d69122d2f2619c4d98434e800952fd5, type: 3}
+  blockHeavy: {fileID: 8300000, guid: 40abe34b442f99a4091b11b9a2e252aa, type: 3}
 --- !u!82 &25336878
 AudioSource:
   m_ObjectHideFlags: 0

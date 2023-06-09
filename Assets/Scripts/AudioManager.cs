@@ -13,9 +13,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip heavyHit;
     public AudioClip finalHit;
     public AudioClip clash;
+    public AudioClip parry;
+    public AudioClip blockLight;
+    public AudioClip blockHeavy;
+
     public enum SFX
     {
-        LightAtk, HeavyAtk, LightHit, HeavyHit, Clash, FinalHit
+        LightAtk, HeavyAtk, LightHit, HeavyHit, Clash, FinalHit, Parry, BlockLight, BlockHeavy
     }
     // Start is called before the first frame update
     void Start()
@@ -30,6 +34,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySound(SFX sfx)
     {
+        /*
         if(sfx == SFX.FinalHit)
         {
             sfxSource.PlayOneShot(finalHit);
@@ -53,6 +58,37 @@ public class AudioManager : MonoBehaviour
         else if (sfx == SFX.HeavyAtk)
         {
             sfxSource.PlayOneShot(heavyAttack);
+        }
+        */
+        switch (sfx)
+        {
+            case SFX.FinalHit:
+                sfxSource.PlayOneShot(finalHit);
+                break;
+            case SFX.LightHit:
+                sfxSource.PlayOneShot(lightHit);
+                break;
+            case SFX.HeavyHit:
+                sfxSource.PlayOneShot(heavyHit);
+                break;
+            case SFX.Clash:
+                sfxSource.PlayOneShot(clash);
+                break;
+            case SFX.LightAtk:
+                sfxSource.PlayOneShot(lightAttack);
+                break;
+            case SFX.HeavyAtk:
+                sfxSource.PlayOneShot(heavyAttack);
+                break;
+            case SFX.Parry:
+                sfxSource.PlayOneShot(parry);
+                break;
+            case SFX.BlockLight:
+                sfxSource.PlayOneShot(blockLight);
+                break;
+            case SFX.BlockHeavy:
+                sfxSource.PlayOneShot(blockHeavy);
+                break;
         }
 
     }
