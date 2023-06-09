@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
 
         if (actionable && !isDead)
         {
+            bool dashed = false;
             rb2d.velocity = new Vector2(0f, 0f);
             //temp fix for z3
             //rewrite this code later
@@ -164,6 +165,7 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine("Backdash");
                     backDashSec = 0;
+                    dashed = true;
                 }
                 else
                 {
@@ -178,13 +180,14 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine("Forwardash");
                     forwarDashSec = 0;
+                    dashed = true;
                 }
                 else
                 {
                     forwarDashSec = 0.25f;
                 }
             }
-            else
+            if (!dashed)
             {
 
                 if (P1 ? leftright == -1 : leftright == 1)
@@ -195,7 +198,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (P1 ? leftright == 1 && heldleftright != 1 : leftright == -1 && heldleftright != -1)
                 {
-                    //Debug.Log("Parry");
+                    Debug.Log("Parry");
                     isBlocking = false;
                     if (parryCooldownTimer <= 0)
                     {
