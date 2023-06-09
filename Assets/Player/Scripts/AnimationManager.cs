@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CharacterSelector;
 
 public class AnimationManager : MonoBehaviour
 {
@@ -12,16 +13,28 @@ public class AnimationManager : MonoBehaviour
     Hitbox swordHitBox;
     [SerializeField]
     PlayerController movementScript;
+    [SerializeField]
+    UnityEngine.U2D.Animation.SpriteLibraryAsset[] characterSpriteLibraries;
+    [SerializeField]
+    UnityEngine.U2D.Animation.SpriteLibrary spriteLibrary;
 
     public bool isSwordActive;
     public float frameTimeElapsed;
+    public Character currentCharacter = Character.Julie;
 
     public int direction; // 1 = forward, 0 = idle, -1 = backward
+    
+    private readonly Dictionary<Character, int> characterIndices = new Dictionary<Character, int>()
+    {
+        { Character.Julie, 0 },
+        { Character.PissanxBebe, 1 }
+    };
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentCharacter = CharacterSelector.PlayerCharacters[movementScript.P1 ? 0 : 1];
+        spriteLibrary.spriteLibraryAsset = characterSpriteLibraries[characterIndices[currentCharacter]];
     }
 
     // Update is called once per frame

@@ -23,7 +23,7 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField]
     GameObject rightWall;
 
-    private Dictionary<StageMap, int> stageIndices = new Dictionary<StageMap, int>()
+    private readonly Dictionary<StageMap, int> stageIndices = new Dictionary<StageMap, int>()
     {
         { StageMap.Cathedral, 0 },
         { StageMap.Ballroom, 1 }
