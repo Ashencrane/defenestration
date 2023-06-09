@@ -219,12 +219,12 @@ public class PlayerController : MonoBehaviour
                     gameObject.transform.Translate(new Vector2(MOVE_SPEED, 0) * Time.deltaTime);
                 }
 
-                if (P1 ? (int)Input.GetAxisRaw("LightP1") == 1 : (int)Input.GetAxisRaw("LightP2") == 1)
+                if (P1 ? Input.GetButtonDown("LightP1") : Input.GetButtonDown("LightP2"))
                 {
                     StartCoroutine("LightAttack");
                 }
 
-                if (P1 ? (int)Input.GetAxisRaw("HeavyP1") == 1 : (int)Input.GetAxisRaw("HeavyP2") == 1)
+                if (P1 ? Input.GetButtonDown("HeavyP1") : Input.GetButtonDown("HeavyP2"))
                 {
                     StartCoroutine("HeavyAttack");
                 }
