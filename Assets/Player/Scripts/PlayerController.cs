@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         atCameraEdge = Vector3.Distance(transform.position, otherPlayerController.transform.position) > 17;
-        int leftright = 0;
+        int leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
         if (backDashSec > 0)
         {
             backDashSec -= Time.deltaTime;
@@ -186,7 +186,6 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                leftright = P1 ? (int)Input.GetAxisRaw("HorizontalP1") : (int)Input.GetAxisRaw("HorizontalP2");
 
                 if (P1 ? leftright == -1 : leftright == 1)
                 {
@@ -196,7 +195,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (P1 ? leftright == 1 && heldleftright != 1 : leftright == -1 && heldleftright != -1)
                 {
-                    Debug.Log("Parry");
+                    //Debug.Log("Parry");
                     isBlocking = false;
                     if (parryCooldownTimer <= 0)
                     {
@@ -227,9 +226,8 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine("HeavyAttack");
                 }
             }
-
+            animationManager.direction = P1 ? leftright : -leftright;
         }
-        animationManager.direction = P1 ? leftright : -leftright;
         heldleftright = leftright;
     }
     public void NewRound()

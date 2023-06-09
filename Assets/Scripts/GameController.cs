@@ -200,6 +200,7 @@ public class GameController : MonoBehaviour
             else
             {
                 Time.timeScale = 0;
+                victoryMenu.GetComponent<VictoryMenu>().SetWinner(0);
                 victoryMenu.GetComponent<VictoryMenu>().SetVictoryText("P1 Wins!");
                 victoryMenu.SetActive(true);
             }
@@ -217,6 +218,7 @@ public class GameController : MonoBehaviour
             else
             {
                 Time.timeScale = 0;
+                victoryMenu.GetComponent<VictoryMenu>().SetWinner(1);
                 victoryMenu.GetComponent<VictoryMenu>().SetVictoryText("P2 Wins!");
                 victoryMenu.SetActive(true);
             }

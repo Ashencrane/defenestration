@@ -14,6 +14,12 @@ public enum Character
 public class CharacterSelector : MonoBehaviour
 {
     public static List<Character> PlayerCharacters = new List<Character>() { Character.Julie, Character.Julie };
+    public static Dictionary<Character, int> characterIndices = new Dictionary<Character, int>()
+    {
+        { Character.Julie, 0 },
+        { Character.PissanxBebe, 1 }
+    };
+
 
     [SerializeField] private List<Image> playerCharacterImages;
     [SerializeField] private TMP_Text selectingPlayerText;

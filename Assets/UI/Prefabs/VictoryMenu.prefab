@@ -1915,6 +1915,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuScene: Main Menu
   victoryText: {fileID: 8987301675593984977}
+  victoryImg: {fileID: 1644865657978462989}
+  defeatImg: {fileID: 5186739911055041954}
+  victoryArt:
+  - {fileID: 2800000, guid: c9dc2ece9c08f3d498c851a3d30a19c9, type: 3}
+  - {fileID: 2800000, guid: 592991fd25080ec408120d18e58a8b01, type: 3}
+  defeatArt:
+  - {fileID: 2800000, guid: e65c79a138347cf4f8dc0daf8b9c62ef, type: 3}
+  - {fileID: 2800000, guid: 388813594c5bd8243828d54eee4ed5f2, type: 3}
+  winner: 0
 --- !u!1 &8987301674589220256
 GameObject:
   m_ObjectHideFlags: 0
