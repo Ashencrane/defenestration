@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7611487813327241277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7611487813327241267}
+  - component: {fileID: 7611487813327241266}
+  m_Layer: 0
+  m_Name: ShardFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7611487813327241267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611487813327241277}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7611487813327241266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611487813327241277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc36ff7d231b57499234f3e713e59ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 1871048225, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: 438095168, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: -450471078, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: -1720880280, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: -1601350539, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: -897120284, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: 784599364, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: -959724855, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: 1069713258, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  - {fileID: 1069643003, guid: 9cfe83c01d8c06441aa32a1da6c4e533, type: 3}
+  shard: {fileID: 4306518532988393378, guid: 656392b560daf334592e0a159fa5eac2, type: 3}

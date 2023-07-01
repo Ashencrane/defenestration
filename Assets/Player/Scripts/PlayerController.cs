@@ -106,6 +106,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject strbloodFX;
     [SerializeField]
+    private GameObject glassFX;
+    [SerializeField]
     private AudioManager audioMan;
 
     private void Awake()
@@ -472,6 +474,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(DEATH_FREEZE_TIME);
         Time.timeScale = 1;
         gameController.SetTextDefenestration();
+        Instantiate(glassFX, new Vector3(0, 0, 0), Quaternion.identity);
         yield return new WaitForSeconds(2.0f);
         gameController.RoundEnd(!P1);
         yield return null;
