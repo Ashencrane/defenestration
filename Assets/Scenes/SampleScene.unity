@@ -179,6 +179,8 @@ MonoBehaviour:
   parry: {fileID: 8300000, guid: 82c52923d23424b4fa84a45dad322b3a, type: 3}
   blockLight: {fileID: 8300000, guid: 5d69122d2f2619c4d98434e800952fd5, type: 3}
   blockHeavy: {fileID: 8300000, guid: 40abe34b442f99a4091b11b9a2e252aa, type: 3}
+  cathedralMusic: {fileID: 8300000, guid: 7d0993e65f6d8db4ea233db0192bfa84, type: 3}
+  ballroomMusic: {fileID: 8300000, guid: 06a51eef22cb02249b5ad1c57114c2c9, type: 3}
 --- !u!82 &25336878
 AudioSource:
   m_ObjectHideFlags: 0
@@ -319,6 +321,7 @@ MonoBehaviour:
   bgPosition: {x: 0, y: -4.7, z: 0}
   leftWall: {fileID: 2091893677}
   rightWall: {fileID: 1243059162}
+  audioMan: {fileID: 25336877}
   bgToDisplay: 1
 --- !u!4 &264452084
 Transform:
