@@ -27,8 +27,8 @@ public class VictoryMenu : MonoBehaviour
         this.winner = winner;
         Character winnerCharacter = CharacterSelector.PlayerCharacters[winner];
         Character loserCharacter = CharacterSelector.PlayerCharacters[winner == 1 ? 0 : 1];
-        victoryImg.texture = victoryArt[CharacterSelector.characterIndices[winnerCharacter]];
-        defeatImg.texture = defeatArt[CharacterSelector.characterIndices[loserCharacter]];
+        victoryImg.texture = victoryArt[CharacterSelector.CharacterIndices[winnerCharacter]];
+        defeatImg.texture = defeatArt[CharacterSelector.CharacterIndices[loserCharacter]];
     }
     
     public void ReplayLevel()
