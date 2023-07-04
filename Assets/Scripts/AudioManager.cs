@@ -16,10 +16,16 @@ public class AudioManager : MonoBehaviour
     public AudioClip parry;
     public AudioClip blockLight;
     public AudioClip blockHeavy;
+    public AudioClip cathedralMusic;
+    public AudioClip ballroomMusic;
 
     public enum SFX
     {
         LightAtk, HeavyAtk, LightHit, HeavyHit, Clash, FinalHit, Parry, BlockLight, BlockHeavy
+    }
+    public enum MUSIC
+    {
+        Cathedral, Ballroom
     }
     // Start is called before the first frame update
     void Start()
@@ -28,38 +34,20 @@ public class AudioManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void PlayMusic(MUSIC mu)
     {
-        
+        if(mu == MUSIC.Cathedral)
+        {
+            musicSource.clip = cathedralMusic;
+        }
+        else if(mu == MUSIC.Ballroom)
+        {
+            musicSource.clip = ballroomMusic;
+            musicSource.Play();
+        }
     }
     public void PlaySound(SFX sfx)
     {
-        /*
-        if(sfx == SFX.FinalHit)
-        {
-            sfxSource.PlayOneShot(finalHit);
-        }
-        else if (sfx == SFX.LightHit)
-        {
-            sfxSource.PlayOneShot(lightHit);
-        }
-        else if (sfx == SFX.HeavyHit)
-        {
-            sfxSource.PlayOneShot(heavyHit);
-        }
-        else if (sfx == SFX.Clash)
-        {
-            sfxSource.PlayOneShot(clash);
-        }
-        else if (sfx == SFX.LightAtk)
-        {
-            sfxSource.PlayOneShot(lightAttack);
-        }
-        else if (sfx == SFX.HeavyAtk)
-        {
-            sfxSource.PlayOneShot(heavyAttack);
-        }
-        */
         switch (sfx)
         {
             case SFX.FinalHit:
@@ -92,4 +80,5 @@ public class AudioManager : MonoBehaviour
         }
 
     }
+    
 }
