@@ -322,6 +322,7 @@ MonoBehaviour:
   leftWall: {fileID: 2091893677}
   rightWall: {fileID: 1243059162}
   audioMan: {fileID: 25336877}
+  gc: {fileID: 1845236869}
   bgToDisplay: 1
 --- !u!4 &264452084
 Transform:
@@ -1708,6 +1709,7 @@ MonoBehaviour:
   scoreGemsP2:
   - {fileID: 8624012171370401215}
   - {fileID: 8624012171370401216}
+  currentBG: 0
 --- !u!114 &1845236870
 MonoBehaviour:
   m_ObjectHideFlags: 0

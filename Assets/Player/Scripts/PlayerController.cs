@@ -467,15 +467,21 @@ public class PlayerController : MonoBehaviour
         otherPlayerController.actionable = false;
         audioMan.PlaySound(AudioManager.SFX.FinalHit);
         Time.timeScale = 0.01f;
-        gameController.SetTextKO();
-        yield return new WaitForSeconds(0.03f);
-        Time.timeScale = 0.15f;
+        gameController.SetTextDefenestration();
+        yield return new WaitForSeconds(0.001f);
+        Time.timeScale = 0.25f;
         animationManager.Defenestrate();
         yield return new WaitForSeconds(DEATH_FREEZE_TIME);
         Time.timeScale = 1;
-        gameController.SetTextDefenestration();
-        Instantiate(glassFX, new Vector3(0, 0, 0), Quaternion.identity);
+
+        ShatterController sc = Instantiate(glassFX, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<ShatterController>();
+        sc.Setup(gameController.currentBG, P1);
+
+
+
+
         yield return new WaitForSeconds(2.0f);
+        sc.Destroy();
         gameController.RoundEnd(!P1);
         yield return null;
     }
@@ -591,7 +597,12 @@ public class PlayerController : MonoBehaviour
         health -= 2;
         healthDisplay.value = (float)health / MAX_HEALTH;
 
-        if (health <= 0)
+        if (isDefenestratable)
+        {
+            StartCoroutine("Defenestrate");
+            yield return null;
+        }
+        else if (health <= 0)
         {
             StartCoroutine("Die");
             yield return null;

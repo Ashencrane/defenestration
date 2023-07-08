@@ -10,9 +10,12 @@ public class ShardFX : MonoBehaviour
     [SerializeField]
     GameObject shard;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
+
         foreach(Sprite s in sprites)
         {
             GameObject newShard = Instantiate(shard, transform);

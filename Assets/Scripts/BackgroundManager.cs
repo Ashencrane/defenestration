@@ -26,6 +26,8 @@ public class BackgroundManager : MonoBehaviour
     GameObject rightWall;
     [SerializeField]
     AudioManager audioMan;
+    [SerializeField]
+    GameController gc;
 
     private readonly Dictionary<StageMap, int> stageIndices = new Dictionary<StageMap, int>()
     {
@@ -45,7 +47,7 @@ public class BackgroundManager : MonoBehaviour
         bgToDisplay = stageIndices[StageSelector.SelectedStageMap];
         bgObj = Instantiate(bgPrefabs[bgToDisplay], bgPosition, Quaternion.identity);
         audioMan.PlayMusic(musics[bgToDisplay]);
-        
+        gc.currentBG = bgToDisplay;
         BackgroundController bgController = bgObj.GetComponent<BackgroundController>();
         bgController.cameraObject = cameraObject;
         leftWall.transform.position = new Vector3(-stageWidths[bgToDisplay], 0, 0);

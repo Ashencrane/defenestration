@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private RawImage[] scoreGemsP2;
     private IEnumerator coroutine;
     bool gameLive = false;
-
+    public int currentBG;
 
     private void Awake()
     {
@@ -73,6 +73,8 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(time);
         Display.text = "";
         Display2.text = "";
+        Display.fontSize = 34;
+        Display2.fontSize = 34;
         yield return null;
     }
 
@@ -148,7 +150,9 @@ public class GameController : MonoBehaviour
 
     public void SetTextDefenestration()
     {
-        coroutine = DisplayText("Defenestration", 2.0f);
+        Display.fontSize = 20;
+        Display2.fontSize = 20;
+        coroutine = DisplayText("DEFENESTRATION", 2.0f);
         StartCoroutine(coroutine);
     }
 
