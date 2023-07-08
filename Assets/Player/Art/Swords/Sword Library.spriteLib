@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Default Sword
+    m_Hash: 990398692
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Blade
+      m_Hash: 549269228
+      m_Sprite: {fileID: -1595450830091045199, guid: 7c6b7025de47b56449a2997b64e38b2c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1595450830091045199, guid: 7c6b7025de47b56449a2997b64e38b2c, type: 3}
+    - m_Name: Hilt
+      m_Hash: 650301167
+      m_Sprite: {fileID: 1451065213848074323, guid: 7c6b7025de47b56449a2997b64e38b2c, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1451065213848074323, guid: 7c6b7025de47b56449a2997b64e38b2c, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Dios
+    m_Hash: 425572151
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Blade
+      m_Hash: 549269228
+      m_Sprite: {fileID: -7578393255861955411, guid: 0d5ae167b900f3840b7721381b2bcf60, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -7578393255861955411, guid: 0d5ae167b900f3840b7721381b2bcf60, type: 3}
+    - m_Name: Hilt
+      m_Hash: 650301167
+      m_Sprite: {fileID: -6428991654559253949, guid: 0d5ae167b900f3840b7721381b2bcf60, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -6428991654559253949, guid: 0d5ae167b900f3840b7721381b2bcf60, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Surtr
+    m_Hash: 123535988
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Blade
+      m_Hash: 549269228
+      m_Sprite: {fileID: 4941239360014041022, guid: e8ce42dfa70afb745bc461f6d1c76694, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4941239360014041022, guid: e8ce42dfa70afb745bc461f6d1c76694, type: 3}
+    - m_Name: Hilt
+      m_Hash: 650301167
+      m_Sprite: {fileID: 2229389693391491786, guid: e8ce42dfa70afb745bc461f6d1c76694, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2229389693391491786, guid: e8ce42dfa70afb745bc461f6d1c76694, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Rifle
+    m_Hash: 974509521
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Blade
+      m_Hash: 549269228
+      m_Sprite: {fileID: 4667815373869888270, guid: 38caca7c41fc6774597fe242309a352d, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4667815373869888270, guid: 38caca7c41fc6774597fe242309a352d, type: 3}
+    - m_Name: Hilt
+      m_Hash: 650301167
+      m_Sprite: {fileID: 2142820221567120719, guid: 38caca7c41fc6774597fe242309a352d, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2142820221567120719, guid: 38caca7c41fc6774597fe242309a352d, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Polish
+    m_Hash: 396571267
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Blade
+      m_Hash: 549269228
+      m_Sprite: {fileID: -5539627155004444084, guid: 0bcdb600f3404e9478ba230f12700fa6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5539627155004444084, guid: 0bcdb600f3404e9478ba230f12700fa6, type: 3}
+    - m_Name: Hilt
+      m_Hash: 650301167
+      m_Sprite: {fileID: 2846578811456418218, guid: 0bcdb600f3404e9478ba230f12700fa6, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2846578811456418218, guid: 0bcdb600f3404e9478ba230f12700fa6, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Hollow
+    m_Hash: 361898038
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Blade
+      m_Hash: 549269228
+      m_Sprite: {fileID: 8048813303769743994, guid: 4f7d6ff0406f3f24e8434cc1efd85c6d, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 0}
+    - m_Name: Hilt
+      m_Hash: 650301167
+      m_Sprite: {fileID: 8868628517887118243, guid: 4f7d6ff0406f3f24e8434cc1efd85c6d, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 0}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  - m_Name: Cup
+    m_Hash: 265295364
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Blade
+      m_Hash: 549269228
+      m_Sprite: {fileID: -2522374716887481791, guid: c42aa6b17d47fc64ba8c658e6e53d4b1, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2522374716887481791, guid: c42aa6b17d47fc64ba8c658e6e53d4b1, type: 3}
+    - m_Name: Hilt
+      m_Hash: 650301167
+      m_Sprite: {fileID: -6971166593573218427, guid: c42aa6b17d47fc64ba8c658e6e53d4b1, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -6971166593573218427, guid: c42aa6b17d47fc64ba8c658e6e53d4b1, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
+  m_PrimaryLibraryGUID: 
