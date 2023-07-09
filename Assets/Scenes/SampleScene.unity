@@ -171,7 +171,7 @@ MonoBehaviour:
   musicSource: {fileID: 1580073102}
   sfxSource: {fileID: 25336878}
   lightAttack: {fileID: 8300000, guid: 11eadcc0410417b4bbbbd278da5cc641, type: 3}
-  heavyAttack: {fileID: 0}
+  heavyAttack: {fileID: 8300000, guid: 11eadcc0410417b4bbbbd278da5cc641, type: 3}
   lightHit: {fileID: 8300000, guid: 01935cdbdbd929f43b9458304ad4c3e1, type: 3}
   heavyHit: {fileID: 8300000, guid: 01935cdbdbd929f43b9458304ad4c3e1, type: 3}
   finalHit: {fileID: 8300000, guid: fce5a6a0c0e0f654c8fbf2078fb25216, type: 3}
@@ -179,6 +179,7 @@ MonoBehaviour:
   parry: {fileID: 8300000, guid: 82c52923d23424b4fa84a45dad322b3a, type: 3}
   blockLight: {fileID: 8300000, guid: 5d69122d2f2619c4d98434e800952fd5, type: 3}
   blockHeavy: {fileID: 8300000, guid: 40abe34b442f99a4091b11b9a2e252aa, type: 3}
+  glassBreak: {fileID: 8300000, guid: 676de3d30f94399488b3abdeb5fb5e42, type: 3}
   cathedralMusic: {fileID: 8300000, guid: 7d0993e65f6d8db4ea233db0192bfa84, type: 3}
   ballroomMusic: {fileID: 8300000, guid: 06a51eef22cb02249b5ad1c57114c2c9, type: 3}
 --- !u!82 &25336878
@@ -1703,6 +1704,9 @@ MonoBehaviour:
   timer: {fileID: 1497483650}
   sfxMixer: {fileID: 24100000, guid: efc0b2595c5e8a3428620aadb6b494fa, type: 2}
   musicMixer: {fileID: 24100000, guid: e8c085bbb39342d419bf3a0f399dce85, type: 2}
+  warningBubble:
+  - {fileID: 8624012171370401220}
+  - {fileID: 8624012171370401219}
   scoreGemsP1:
   - {fileID: 8624012171370401218}
   - {fileID: 8624012171370401217}
@@ -2428,6 +2432,38 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4648343134794691136, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 197.0742
+      objectReference: {fileID: 0}
+    - target: {fileID: 4648343134794691136, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 193.292
+      objectReference: {fileID: 0}
+    - target: {fileID: 4648343134794691136, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 801
+      objectReference: {fileID: 0}
+    - target: {fileID: 4648343134794691136, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 100.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844818673770521793, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 193.292
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844818673770521793, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 197.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844818673770521793, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -807.6704
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844818673770521793, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 98.523
+      objectReference: {fileID: 0}
     - target: {fileID: 8624012171428055158, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2582,3 +2618,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8624012171370401219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1151831776275628985, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+  m_PrefabInstance: {fileID: 8624012171370401214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8624012171370401220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1262052189656307000, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+  m_PrefabInstance: {fileID: 8624012171370401214}
+  m_PrefabAsset: {fileID: 0}

@@ -16,12 +16,13 @@ public class AudioManager : MonoBehaviour
     public AudioClip parry;
     public AudioClip blockLight;
     public AudioClip blockHeavy;
+    public AudioClip glassBreak;
     public AudioClip cathedralMusic;
     public AudioClip ballroomMusic;
 
     public enum SFX
     {
-        LightAtk, HeavyAtk, LightHit, HeavyHit, Clash, FinalHit, Parry, BlockLight, BlockHeavy
+        LightAtk, HeavyAtk, LightHit, HeavyHit, Clash, FinalHit, Parry, BlockLight, BlockHeavy, GlassBreak
     }
     public enum MUSIC
     {
@@ -76,6 +77,9 @@ public class AudioManager : MonoBehaviour
                 break;
             case SFX.BlockHeavy:
                 sfxSource.PlayOneShot(blockHeavy);
+                break;
+            case SFX.GlassBreak:
+                sfxSource.PlayOneShot(glassBreak);
                 break;
         }
 

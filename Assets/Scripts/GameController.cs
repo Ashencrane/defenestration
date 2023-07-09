@@ -32,7 +32,10 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     AudioMixer musicMixer;
-    
+
+    [SerializeField]
+    private GameObject[] warningBubble;
+
 
     int SCORE_TO_GET = 2;
     int P1Score;
@@ -101,6 +104,23 @@ public class GameController : MonoBehaviour
             P1m.actionable = false;
             P2m.actionable = false;
         }
+
+        if (P1m.isDefenestratable && P1m.isDead == false)
+        {
+            warningBubble[0].SetActive(true);
+        }
+        else
+        {
+            warningBubble[0].SetActive(false);
+        }
+        if (P2m.isDefenestratable && P2m.isDead == false)
+        {
+            warningBubble[1].SetActive(true);
+        }
+        else
+        {
+            warningBubble[1].SetActive(false);
+        }
     }
 
     IEnumerator WaitAndStartNext() //called after someones dies
@@ -150,8 +170,8 @@ public class GameController : MonoBehaviour
 
     public void SetTextDefenestration()
     {
-        Display.fontSize = 20;
-        Display2.fontSize = 20;
+        Display.fontSize = 18;
+        Display2.fontSize = 18;
         coroutine = DisplayText("DEFENESTRATION", 2.0f);
         StartCoroutine(coroutine);
     }

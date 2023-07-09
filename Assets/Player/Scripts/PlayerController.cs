@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
     private GameObject strbloodFX;
     [SerializeField]
     private GameObject glassFX;
+
     [SerializeField]
     private AudioManager audioMan;
 
@@ -470,8 +471,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0.5f;
         animationManager.Defenestrate();
         yield return new WaitForSeconds(0.7f);
- 
-
+        audioMan.PlaySound(AudioManager.SFX.GlassBreak);
         ShatterController sc = Instantiate(glassFX, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<ShatterController>();
         sc.Setup(gameController.currentBG, P1);
 
