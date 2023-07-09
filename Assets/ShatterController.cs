@@ -19,7 +19,7 @@ public class ShatterController : MonoBehaviour
         spr = gameObject.GetComponent<SpriteRenderer>();
         if(bgNum == 0)
         {
-            transform.position = new Vector3(-18.75f, 1.5f, 0f);
+            transform.position = new Vector3(-19.25f, 1.25f, 0f);
         }
 
         if (!left)

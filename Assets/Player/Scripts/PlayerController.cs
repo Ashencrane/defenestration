@@ -466,20 +466,20 @@ public class PlayerController : MonoBehaviour
         actionable = false;
         otherPlayerController.actionable = false;
         audioMan.PlaySound(AudioManager.SFX.FinalHit);
-        Time.timeScale = 0.01f;
-        gameController.SetTextDefenestration();
-        yield return new WaitForSeconds(0.001f);
-        Time.timeScale = 0.25f;
+        
+        Time.timeScale = 0.5f;
         animationManager.Defenestrate();
-        yield return new WaitForSeconds(DEATH_FREEZE_TIME);
-        Time.timeScale = 1;
+        yield return new WaitForSeconds(0.7f);
+ 
 
         ShatterController sc = Instantiate(glassFX, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<ShatterController>();
         sc.Setup(gameController.currentBG, P1);
 
-
-
-
+ 
+        yield return new WaitForSeconds(0.3f);
+        gameController.SetTextDefenestration();
+        transform.position = new Vector3 (transform.position.x, -10, 0); //send below stage
+        Time.timeScale = 1;
         yield return new WaitForSeconds(2.0f);
         sc.Destroy();
         gameController.RoundEnd(!P1);
