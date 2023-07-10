@@ -99,14 +99,14 @@ MonoBehaviour:
     m_OverrideEntries:
     - m_Name: Blade
       m_Hash: 549269228
-      m_Sprite: {fileID: 8048813303769743994, guid: 4f7d6ff0406f3f24e8434cc1efd85c6d, type: 3}
+      m_Sprite: {fileID: 6765536380722120081, guid: 7abe6b31f4cf802428ecd7857a8dc27f, type: 3}
       m_FromMain: 0
-      m_SpriteOverride: {fileID: 0}
+      m_SpriteOverride: {fileID: 6765536380722120081, guid: 7abe6b31f4cf802428ecd7857a8dc27f, type: 3}
     - m_Name: Hilt
       m_Hash: 650301167
-      m_Sprite: {fileID: 8868628517887118243, guid: 4f7d6ff0406f3f24e8434cc1efd85c6d, type: 3}
+      m_Sprite: {fileID: 3662797992158670994, guid: 7abe6b31f4cf802428ecd7857a8dc27f, type: 3}
       m_FromMain: 0
-      m_SpriteOverride: {fileID: 0}
+      m_SpriteOverride: {fileID: 3662797992158670994, guid: 7abe6b31f4cf802428ecd7857a8dc27f, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 2
   - m_Name: Cup
