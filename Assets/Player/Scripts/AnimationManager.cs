@@ -17,10 +17,15 @@ public class AnimationManager : MonoBehaviour
     UnityEngine.U2D.Animation.SpriteLibraryAsset[] characterSpriteLibraries;
     [SerializeField]
     UnityEngine.U2D.Animation.SpriteLibrary spriteLibrary;
+    [SerializeField]
+    UnityEngine.U2D.Animation.SpriteResolver swordResolver;
+    [SerializeField]
+    UnityEngine.U2D.Animation.SpriteResolver hiltResolver;
 
     public bool isSwordActive;
     public float frameTimeElapsed;
     public Character currentCharacter = Character.Julie;
+    public Sword currentSword = Sword.Default;
 
     public int direction; // 1 = forward, 0 = idle, -1 = backward
     
@@ -30,11 +35,25 @@ public class AnimationManager : MonoBehaviour
         { Character.PissanxBebe, 1 }
     };
 
+    private readonly Dictionary<Sword, string> swordNames = new Dictionary<Sword, string>()
+    {
+        { Sword.Default, "Default Sword" },
+        { Sword.CupHiltRapier, "Cup" },
+        { Sword.HKNail, "Hollow" },
+        { Sword.PolishSaber, "Polish" },
+        { Sword.RifleBayonet, "Rifle" },
+        { Sword.SurtrSword, "Surtr" },
+        { Sword.SwordOfDios, "Dios" }
+    };
+
     // Start is called before the first frame update
     void Start()
     {
         currentCharacter = CharacterSelector.PlayerCharacters[movementScript.P1 ? 0 : 1];
         spriteLibrary.spriteLibraryAsset = characterSpriteLibraries[characterIndices[currentCharacter]];
+        currentSword = WeaponSelector.PlayerSwords[movementScript.P1 ? 0 : 1];
+        swordResolver.SetCategoryAndLabel(swordNames[currentSword], "Blade");
+        hiltResolver.SetCategoryAndLabel(swordNames[currentSword], "Hilt");
     }
 
     // Update is called once per frame
