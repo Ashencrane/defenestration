@@ -67,37 +67,55 @@ public class GameController : MonoBehaviour
         P1m.NewRound();
         P2m.NewRound();
         Time.timeScale = 1;
+        timer.ResetTimer();
         StartCoroutine("Countdown");
     }
-    IEnumerator DisplayText(string text, float time)
+    IEnumerator DisplayText(string text, float time, bool fadein = true)
     {
         
         Display.text = text;
         Display2.text = text;
-        Display.color = new Color(0f, 0f, 0f, 0f);
-        Display2.color = new Color(1f, 1f, 1f, 0f);
-        float fadeTime = 0f;
-        for(float alpha = 0f; alpha <= 1; alpha += Time.deltaTime * FADE_FACTOR)
+        if (fadein)
         {
-            Display.color = new Color(0f, 0f, 0f, alpha);
-            Display2.color = new Color(1f, 1f, 1f, alpha);
-            fadeTime += Time.deltaTime;
-            yield return null;
+            Display.color = new Color(0f, 0f, 0f, 0f);
+            Display2.color = new Color(1f, 1f, 1f, 0f);
+            float fadeTime = 0f;
+            for (float alpha = 0f; alpha <= 1; alpha += Time.deltaTime * FADE_FACTOR)
+            {
+                Display.color = new Color(0f, 0f, 0f, alpha);
+                Display2.color = new Color(1f, 1f, 1f, alpha);
+                fadeTime += Time.deltaTime;
+                yield return null;
 
+            }
+
+
+
+
+            yield return new WaitForSeconds(time - 2 * fadeTime);
+
+            for (float alpha2 = 1f; alpha2 >= 0; alpha2 -= Time.deltaTime * FADE_FACTOR)
+            {
+                Display.color = new Color(0f, 0f, 0f, alpha2);
+                Display2.color = new Color(1f, 1f, 1f, alpha2);
+                yield return null;
+
+            }
         }
-
-        
-
-
-        yield return new WaitForSeconds(time - 2*fadeTime);
-
-        for (float alpha2 = 1f; alpha2 >= 0; alpha2 -= Time.deltaTime * FADE_FACTOR)
+        else
         {
-            Display.color = new Color(0f, 0f, 0f, alpha2);
-            Display2.color = new Color(1f, 1f, 1f, alpha2);
-            yield return null;
+            yield return new WaitForSeconds(time);
 
+            for (float alpha2 = 1f; alpha2 >= 0; alpha2 -= Time.deltaTime * FADE_FACTOR)
+            {
+                Display.color = new Color(0f, 0f, 0f, alpha2);
+                Display2.color = new Color(1f, 1f, 1f, alpha2);
+                yield return null;
+
+            }
         }
+        Display.color = new Color(0f, 0f, 0f, 1f);
+        Display2.color = new Color(1f, 1f, 1f, 1f);
 
         Display.text = "";
         Display2.text = "";
@@ -147,6 +165,10 @@ public class GameController : MonoBehaviour
         {
             warningBubble[1].SetActive(false);
         }
+        if(P1m.isDead || P2m.isDead)
+        {
+            timer.ToggleTimer(false);
+        }
     }
 
     IEnumerator WaitAndStartNext() //called after someones dies
@@ -156,7 +178,7 @@ public class GameController : MonoBehaviour
         P1m.NewRound();
         P2m.NewRound();
         Time.timeScale = 1;
-
+        timer.ResetTimer();
 
         StartCoroutine("Countdown");
 
@@ -166,7 +188,7 @@ public class GameController : MonoBehaviour
     IEnumerator Countdown()
     {
         
-        timer.ResetTimer();
+        
         yield return new WaitForSeconds(1f);
         coroutine = DisplayText("3", 0.8f);
         StartCoroutine(coroutine);
@@ -192,7 +214,7 @@ public class GameController : MonoBehaviour
 
     public void SetTextKO()
     {
-        coroutine = DisplayText("K.O.", 2f);
+        coroutine = DisplayText("K.O.", 2f, false);
         StartCoroutine(coroutine);
     }
 
@@ -200,7 +222,7 @@ public class GameController : MonoBehaviour
     {
         Display.fontSize = 18;
         Display2.fontSize = 18;
-        coroutine = DisplayText("DEFENESTRATION", 2.7f);
+        coroutine = DisplayText("DEFENESTRATION", 2.7f, false);
         StartCoroutine(coroutine);
     }
 

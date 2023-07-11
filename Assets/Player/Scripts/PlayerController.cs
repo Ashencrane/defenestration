@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     const float CLASH_KNOCKBACK = 5f;
     const float CLASH_FREEZE_TIME = 0.001f;
 
-    const float DEATH_FREEZE_TIME = 0.75f;
+    const float DEATH_FREEZE_TIME = 2.5f;
 
     const float LUNGE_FORCE = 10f;
 
@@ -101,10 +101,11 @@ public class PlayerController : MonoBehaviour
     public AnimationManager animationManager;
     [SerializeField]
     SpriteRenderer[] spriteArray;
+
+
     [SerializeField]
-    private GameObject bloodFX;
-    [SerializeField]
-    private GameObject strbloodFX;
+    private GameObject[] bloodFX; //0 = weak, 1=strong, 2=death
+
     [SerializeField]
     private GameObject glassFX;
 
@@ -436,14 +437,16 @@ public class PlayerController : MonoBehaviour
         actionable = false;
         otherPlayerController.actionable = false;
         audioMan.PlaySound(AudioManager.SFX.FinalHit);
+        GameObject bfx = Instantiate(bloodFX[2], new Vector3(transform.position.x + 1 * -direction, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, -direction * 90, 0));
+        yield return new WaitForSeconds(0.1f);
+        //time freeze
         Time.timeScale = 0.01f;
-        
-        yield return new WaitForSeconds(0.001f);
-        Time.timeScale = 0.25f;
+        yield return new WaitForSeconds(0.005f);
+        Time.timeScale = 0.75f;
         
         animationManager.Die();
 
-        float KODELAY = 0.25f;
+        float KODELAY = 1.2f;
 
         yield return new WaitForSeconds(KODELAY);
         gameController.SetTextKO();
@@ -461,23 +464,24 @@ public class PlayerController : MonoBehaviour
         inHitstun = true;
         actionable = false;
         healthDisplay.value = (float)health / MAX_HEALTH;
-
+        GameObject bfx = Instantiate(bloodFX[1], new Vector3(transform.position.x + 1 * -direction, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, -direction * 90, 0));
         isDead = true;
         actionable = false;
         otherPlayerController.actionable = false;
         audioMan.PlaySound(AudioManager.SFX.FinalHit);
         
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0.75f;
         animationManager.Defenestrate();
         yield return new WaitForSeconds(0.55f);
         audioMan.PlaySound(AudioManager.SFX.GlassBreak);
         ShatterController sc = Instantiate(glassFX, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<ShatterController>();
         sc.Setup(gameController.currentBG, P1);
 
- 
-        yield return new WaitForSeconds(0.45f);
+        yield return new WaitForSeconds(0.15f);
+        transform.position = new Vector3(transform.position.x, -10, 0); //send below stage
+        yield return new WaitForSeconds(1f);
         gameController.SetTextDefenestration();
-        transform.position = new Vector3 (transform.position.x, -10, 0); //send below stage
+        
         Time.timeScale = 1;
         yield return new WaitForSeconds(3f);
         sc.Destroy();
@@ -556,7 +560,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            GameObject bfx = Instantiate(bloodFX, new Vector3(transform.position.x + 1 * -direction, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, -direction * 90, 0));
+            GameObject bfx = Instantiate(bloodFX[0], new Vector3(transform.position.x + 1 * -direction, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, -direction * 90, 0));
 
 
             foreach (SpriteRenderer spr in spriteArray)
@@ -608,7 +612,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            GameObject bfx = Instantiate(strbloodFX, new Vector3(transform.position.x + 1 * -direction, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, -direction * 90, 0));
+            GameObject bfx = Instantiate(bloodFX[1], new Vector3(transform.position.x + 1 * -direction, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(0, -direction * 90, 0));
             foreach (SpriteRenderer spr in spriteArray)
             {
                 spr.color = new Color(255, 0, 0);

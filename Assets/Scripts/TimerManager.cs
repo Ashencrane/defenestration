@@ -45,7 +45,9 @@ public class TimerManager : MonoBehaviour
     }
     public void ResetTimer()
     {
+        //Debug.Log("ResetTimer");
         time = MAX_TIME;
+        textDisplay.text = ((int)time).ToString();
         timeOut = false;
     }
     public void ToggleTimer(bool play)
