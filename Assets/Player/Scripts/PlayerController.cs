@@ -197,7 +197,6 @@ public class PlayerController : MonoBehaviour
                 {
                     isBlocking = true;
                     isParrying = false;
-                    //Debug.Log("Blocking");
                 }
                 else if (P1 ? leftright == 1 && heldleftright != 1 : leftright == -1 && heldleftright != -1)
                 {
@@ -470,17 +469,17 @@ public class PlayerController : MonoBehaviour
         
         Time.timeScale = 0.5f;
         animationManager.Defenestrate();
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.55f);
         audioMan.PlaySound(AudioManager.SFX.GlassBreak);
         ShatterController sc = Instantiate(glassFX, new Vector3(0, 0, 0), Quaternion.identity).GetComponent<ShatterController>();
         sc.Setup(gameController.currentBG, P1);
 
  
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.45f);
         gameController.SetTextDefenestration();
         transform.position = new Vector3 (transform.position.x, -10, 0); //send below stage
         Time.timeScale = 1;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3f);
         sc.Destroy();
         gameController.RoundEnd(!P1);
         yield return null;

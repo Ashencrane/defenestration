@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject[] warningBubble;
 
-
+    int FADE_FACTOR = 10;
     int SCORE_TO_GET = 2;
     int P1Score;
     int P2Score;
@@ -71,15 +71,41 @@ public class GameController : MonoBehaviour
     }
     IEnumerator DisplayText(string text, float time)
     {
+        
         Display.text = text;
         Display2.text = text;
-        yield return new WaitForSeconds(time);
+        Display.color = new Color(0f, 0f, 0f, 0f);
+        Display2.color = new Color(1f, 1f, 1f, 0f);
+        float fadeTime = 0f;
+        for(float alpha = 0f; alpha <= 1; alpha += Time.deltaTime * FADE_FACTOR)
+        {
+            Display.color = new Color(0f, 0f, 0f, alpha);
+            Display2.color = new Color(1f, 1f, 1f, alpha);
+            fadeTime += Time.deltaTime;
+            yield return null;
+
+        }
+
+        
+
+
+        yield return new WaitForSeconds(time - 2*fadeTime);
+
+        for (float alpha2 = 1f; alpha2 >= 0; alpha2 -= Time.deltaTime * FADE_FACTOR)
+        {
+            Display.color = new Color(0f, 0f, 0f, alpha2);
+            Display2.color = new Color(1f, 1f, 1f, alpha2);
+            yield return null;
+
+        }
+
         Display.text = "";
         Display2.text = "";
         Display.fontSize = 34;
         Display2.fontSize = 34;
-        yield return null;
+
     }
+
 
     // Update is called once per frame
     void Update()
@@ -139,25 +165,27 @@ public class GameController : MonoBehaviour
 
     IEnumerator Countdown()
     {
+        
         timer.ResetTimer();
-        coroutine = DisplayText("3", 0.7f);
+        yield return new WaitForSeconds(1f);
+        coroutine = DisplayText("3", 0.8f);
         StartCoroutine(coroutine);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.9f);
 
-        coroutine = DisplayText("2", 0.7f);
+        coroutine = DisplayText("2", 0.8f);
         StartCoroutine(coroutine);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.9f);
 
-        coroutine = DisplayText("1", 0.7f);
+        coroutine = DisplayText("1", 0.8f);
         StartCoroutine(coroutine);
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.9f);
 
         P1m.actionable = true;
         P2m.actionable = true;
         timer.ToggleTimer(true);
         gameLive = true;
 
-        coroutine = DisplayText("GO", 0.7f);
+        coroutine = DisplayText("GO", 0.8f);
         StartCoroutine(coroutine);
         
     }
@@ -172,7 +200,7 @@ public class GameController : MonoBehaviour
     {
         Display.fontSize = 18;
         Display2.fontSize = 18;
-        coroutine = DisplayText("DEFENESTRATION", 2.0f);
+        coroutine = DisplayText("DEFENESTRATION", 2.7f);
         StartCoroutine(coroutine);
     }
 

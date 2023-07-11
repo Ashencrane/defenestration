@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource sfxSource;
 
-    public AudioClip lightAttack;
+    public AudioClip[] lightAttack;
     public AudioClip heavyAttack;
     public AudioClip lightHit;
     public AudioClip heavyHit;
@@ -52,10 +52,10 @@ public class AudioManager : MonoBehaviour
         switch (sfx)
         {
             case SFX.FinalHit:
-                sfxSource.PlayOneShot(finalHit);
+                sfxSource.PlayOneShot(finalHit,0.8f);
                 break;
             case SFX.LightHit:
-                sfxSource.PlayOneShot(lightHit);
+                sfxSource.PlayOneShot(lightHit, 0.8f);
                 break;
             case SFX.HeavyHit:
                 sfxSource.PlayOneShot(heavyHit);
@@ -64,13 +64,15 @@ public class AudioManager : MonoBehaviour
                 sfxSource.PlayOneShot(clash);
                 break;
             case SFX.LightAtk:
-                sfxSource.PlayOneShot(lightAttack);
+                sfxSource.PlayOneShot(lightAttack[Random.Range(0, 3)], 1.4f);
                 break;
             case SFX.HeavyAtk:
-                sfxSource.PlayOneShot(heavyAttack);
+                StartCoroutine(PlaySFXAfterTime(heavyAttack, 0.2f, 2f));
+                //sfxSource.PlayOneShot(heavyAttack, 1.5f);
                 break;
             case SFX.Parry:
                 sfxSource.PlayOneShot(parry);
+                
                 break;
             case SFX.BlockLight:
                 sfxSource.PlayOneShot(blockLight);
@@ -79,10 +81,16 @@ public class AudioManager : MonoBehaviour
                 sfxSource.PlayOneShot(blockHeavy);
                 break;
             case SFX.GlassBreak:
-                sfxSource.PlayOneShot(glassBreak);
+                
+                sfxSource.PlayOneShot(glassBreak,2f);
                 break;
         }
 
+    }
+    IEnumerator PlaySFXAfterTime(AudioClip ac, float time, float volScale = 1)
+    {
+        yield return new WaitForSeconds(time);
+        sfxSource.PlayOneShot(ac, volScale);
     }
     
 }
