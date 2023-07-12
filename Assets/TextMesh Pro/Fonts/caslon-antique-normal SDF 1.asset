@@ -115,12 +115,12 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.183
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
     - _ScaleRatioB: 0.73125
-    - _ScaleRatioC: 0.46310955
+    - _ScaleRatioC: 0.73125
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -133,10 +133,10 @@ Material:
     - _StencilWriteMask: 255
     - _TextureHeight: 1024
     - _TextureWidth: 1024
-    - _UnderlayDilate: 0.69
-    - _UnderlayOffsetX: 0.39
-    - _UnderlayOffsetY: 0.41
-    - _UnderlaySoftness: 0.479
+    - _UnderlayDilate: -0.44
+    - _UnderlayOffsetX: 0.14
+    - _UnderlayOffsetY: 0.11
+    - _UnderlaySoftness: 1
     - _VertexOffsetX: 0
     - _VertexOffsetY: 0
     - _WeightBold: 0.75
@@ -163,11 +163,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: caslon-antique-normal SDF
+  m_Name: caslon-antique-normal SDF 1
   m_EditorClassIdentifier: 
-  hashCode: 634995565
+  hashCode: 20436732
   material: {fileID: -3966306578694809577}
-  materialHashCode: -174293075
+  materialHashCode: 858335964
   m_Version: 1.1.0
   m_SourceFontFileGUID: a11efe8957999f948ae1bf6ee802a37c
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: a11efe8957999f948ae1bf6ee802a37c, type: 3}

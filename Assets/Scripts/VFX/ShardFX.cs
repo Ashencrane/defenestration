@@ -15,16 +15,19 @@ public class ShardFX : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        foreach(Sprite s in sprites)
+        for(int i = 0; i < 2; ++i)
         {
-            GameObject newShard = Instantiate(shard, transform);
-            newShard.GetComponent<SpriteRenderer>().sprite = s;
+            foreach (Sprite s in sprites)
+            {
+                GameObject newShard = Instantiate(shard, transform);
+                newShard.GetComponent<SpriteRenderer>().sprite = s;
 
-            Vector2 randomForce = new Vector2(Random.Range(-300f, 300f), Random.Range(-300f, 300f));
+                Vector2 randomForce = new Vector2(Random.Range(-300f, 300f), Random.Range(-300f, 300f));
 
-            newShard.GetComponent<Rigidbody2D>().AddForce(randomForce);
+                newShard.GetComponent<Rigidbody2D>().AddForce(randomForce);
+            }
         }
+
 
         StartCoroutine("DeleteAfterTime");
     }

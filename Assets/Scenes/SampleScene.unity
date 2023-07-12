@@ -3371,12 +3371,24 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 8624012171442261030, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 1817fa0864977e64287acb8f6033400b, type: 2}
+    - target: {fileID: 8624012171442261030, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
       propertyPath: m_fontColor.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8624012171442261030, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3966306578694809577, guid: 1817fa0864977e64287acb8f6033400b, type: 2}
+    - target: {fileID: 8624012171442261030, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624012171442261033, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8624012171576100555, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3387,12 +3399,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8624012171611516510, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 1817fa0864977e64287acb8f6033400b, type: 2}
+    - target: {fileID: 8624012171611516510, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_fontColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624012171611516510, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3966306578694809577, guid: 1817fa0864977e64287acb8f6033400b, type: 2}
+    - target: {fileID: 8624012171611516510, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624012171611516510, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
       propertyPath: m_overrideHtmlColors
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8624012171611516510, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
       propertyPath: m_enableVertexGradient
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624012171611516512, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8624012172028822588, guid: 281b7e38786ba214a8328b5db0f8d884, type: 3}
       propertyPath: gameController

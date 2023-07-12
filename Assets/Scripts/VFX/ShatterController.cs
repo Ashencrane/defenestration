@@ -21,6 +21,11 @@ public class ShatterController : MonoBehaviour
         {
             transform.position = new Vector3(-19.25f, 1.25f, 0f);
         }
+        else if(bgNum == 1)
+        {
+            spr.enabled = false;
+            transform.position = new Vector3(-22f, 0.69f, 0f);
+        }
 
         if (!left)
         {
