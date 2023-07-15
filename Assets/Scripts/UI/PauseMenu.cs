@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField]
+    GameController gc;
     public void Unpause()
     {
         // add unpause code here before the following line
-        Time.timeScale = 1;
-        gameObject.SetActive(false);  // turn off pause menu
+        gc.TogglePause(false);
     }
     
     public void Quit()

@@ -135,15 +135,11 @@ public class GameController : MonoBehaviour
             
             if (!pauseMenu.activeInHierarchy)
             {
-                //timer.ToggleTimer(false);
-                pauseMenu.SetActive(true);
-                Time.timeScale = 0;
+                TogglePause(true);
             }
             else
             {
-                //timer.ToggleTimer(true);
-                pauseMenu.SetActive(false);
-                Time.timeScale = 1;
+                TogglePause(false);
             }
         }
         if (!gameLive)
@@ -333,6 +329,24 @@ public class GameController : MonoBehaviour
         {
             audioMan.PlayMusic(AudioManager.MUSIC.PBVicTheme);
         }
+    }
+    public void TogglePause(bool pausing)
+    {
+        if (pausing)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+            P1m.actionable = false;
+            P2m.actionable = false;
+        }
+        else
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1;
+            P1m.actionable = true;
+            P2m.actionable = true;
+        }
+
     }
 
 
