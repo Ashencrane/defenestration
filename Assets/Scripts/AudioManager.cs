@@ -19,6 +19,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip glassBreak;
     public AudioClip cathedralMusic;
     public AudioClip ballroomMusic;
+    public AudioClip julieVTheme;
+    public AudioClip pBabyVTheme;
 
     public enum SFX
     {
@@ -26,7 +28,7 @@ public class AudioManager : MonoBehaviour
     }
     public enum MUSIC
     {
-        Cathedral, Ballroom
+        Cathedral, Ballroom, JulieVicTheme, PBVicTheme
     }
     // Start is called before the first frame update
     void Start()
@@ -40,10 +42,21 @@ public class AudioManager : MonoBehaviour
         if(mu == MUSIC.Cathedral)
         {
             musicSource.clip = cathedralMusic;
+            musicSource.Play();
         }
         else if(mu == MUSIC.Ballroom)
         {
             musicSource.clip = ballroomMusic;
+            musicSource.Play();
+        }
+        else if(mu == MUSIC.JulieVicTheme)
+        {
+            musicSource.clip = julieVTheme;
+            musicSource.Play();
+        }
+        else if(mu == MUSIC.PBVicTheme)
+        {
+            musicSource.clip = pBabyVTheme;
             musicSource.Play();
         }
     }

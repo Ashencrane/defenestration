@@ -11,7 +11,10 @@ public class GameController : MonoBehaviour
     public GameObject P2;
     PlayerController P1m;
     PlayerController P2m;
-    
+
+    [SerializeField]
+    AudioManager audioMan;
+
     [SerializeField]
     TimerManager tm;
 
@@ -277,6 +280,8 @@ public class GameController : MonoBehaviour
                 victoryMenu.GetComponent<VictoryMenu>().SetWinner(0);
                 victoryMenu.GetComponent<VictoryMenu>().SetVictoryText("P1 Wins!");
                 victoryMenu.SetActive(true);
+                PlayVictoryMusic(0);
+
             }
         }
         else
@@ -295,6 +300,7 @@ public class GameController : MonoBehaviour
                 victoryMenu.GetComponent<VictoryMenu>().SetWinner(1);
                 victoryMenu.GetComponent<VictoryMenu>().SetVictoryText("P2 Wins!");
                 victoryMenu.SetActive(true);
+                PlayVictoryMusic(1);
             }
 
         }
@@ -316,6 +322,17 @@ public class GameController : MonoBehaviour
     public void SetSFXVol()
     {
         sfxMixer.SetFloat("SFX_Vol", convertToDb(OptionSettings.SfxSetting));
+    }
+    private void PlayVictoryMusic(int winner)
+    {
+        if (CharacterSelector.PlayerCharacters[winner] == Character.Julie)
+        {
+            audioMan.PlayMusic(AudioManager.MUSIC.JulieVicTheme);
+        }
+        else if (CharacterSelector.PlayerCharacters[winner] == Character.PissanxBebe)
+        {
+            audioMan.PlayMusic(AudioManager.MUSIC.PBVicTheme);
+        }
     }
 
 

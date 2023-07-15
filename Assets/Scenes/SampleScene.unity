@@ -186,6 +186,8 @@ MonoBehaviour:
   glassBreak: {fileID: 8300000, guid: 676de3d30f94399488b3abdeb5fb5e42, type: 3}
   cathedralMusic: {fileID: 8300000, guid: 7d0993e65f6d8db4ea233db0192bfa84, type: 3}
   ballroomMusic: {fileID: 8300000, guid: 06a51eef22cb02249b5ad1c57114c2c9, type: 3}
+  julieVTheme: {fileID: 8300000, guid: e7b3e4fe733f4184bbe269f2ece655b1, type: 3}
+  pBabyVTheme: {fileID: 8300000, guid: 594fdd4ba93441f45817e86b93e8d7a2, type: 3}
 --- !u!82 &25336878
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1710,7 +1712,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P1: {fileID: 1811751753}
   P2: {fileID: 246130312}
-  tm: {fileID: 0}
+  audioMan: {fileID: 25336877}
+  tm: {fileID: 1497483650}
   Display: {fileID: 1990271968}
   Display2: {fileID: 2086371736}
   pauseMenu: {fileID: 951183480}

@@ -26,19 +26,12 @@ public class PlayerController : MonoBehaviour
 
     const float FREEZE_FRAME_TIMESCALE = 0.2f;
 
-    const float LIGHT_ATTACK_STARTUP = 0.1f;
-    const float LIGHT_ATTACK_ACTIVE = 0.2f;
-    const float LIGHT_ATTACK_RECOVERY = 0.15f;
-    const float LIGHT_ATTACK_DISTANCE = 1.1f;
+
     const float LIGHT_ATTACK_STUN = 0.25f;
     const float LIGHT_ATTACK_KNOCKBACK = 5f;
     const float LIGHT_ATTACK_BLOCK_KNOCKBACK = 10f;
     const float LIGHT_ATTACK_FREEZE_TIME = 0.01f;
 
-    const float HEAVY_ATTACK_STARTUP = 0.3f;
-    const float HEAVY_ATTACK_ACTIVE = 0.3f;
-    const float HEAVY_ATTACK_RECOVERY = 0.7f;
-    const float HEAVY_ATTACK_DISTANCE = 1.6f;
     const float HEAVY_ATTACK_STUN = 0.6f;
     const float HEAVY_ATTACK_KNOCKBACK = 10f;
     const float HEAVY_ATTACK_BLOCK_KNOCKBACK = 20f;
@@ -153,7 +146,7 @@ public class PlayerController : MonoBehaviour
             parryCooldownTimer -= Time.deltaTime;
         }
 
-        if (actionable && !isDead)
+        if (actionable && !isDead && !otherPlayerController.isDead)
         {
             bool dashed = false;
             rb2d.velocity = new Vector2(0f, 0f);
@@ -232,8 +225,13 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine("HeavyAttack");
                 }
             }
-            animationManager.direction = P1 ? leftright : -leftright;
+            
         }
+        else
+        {
+            leftright = 0;
+        }
+        animationManager.direction = P1 ? leftright : -leftright;
         heldleftright = leftright;
     }
     public void NewRound()
@@ -442,7 +440,7 @@ public class PlayerController : MonoBehaviour
         //time freeze
         Time.timeScale = 0.01f;
         yield return new WaitForSeconds(0.005f);
-        Time.timeScale = 0.75f;
+        Time.timeScale = 0.6f;
         
         animationManager.Die();
 
